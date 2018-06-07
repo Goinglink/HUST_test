@@ -1,5 +1,4 @@
 ﻿using HUST_Com;
-using HUST_Univ;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,8 +11,8 @@ namespace HUST_Test
     {
         private string cfgFile = Application.StartupPath + "\\HUST_Config.xml", outPath = "";
         private DataSet cfgDS = new DataSet();
-        private UniChart chart;       // 表单输出结果
-        private List<UniChart> charts = new List<UniChart>(); // 表单输出结果集
+        private HUST_Univ.UniChart chart;       // 表单输出结果
+        private List<HUST_Univ.UniChart> charts = new List<HUST_Univ.UniChart>(); // 表单输出结果集
 
         public HUST_Test()
         { InitializeComponent(); }
@@ -43,7 +42,7 @@ namespace HUST_Test
                 // 下面添加 <表单输出程序（输出结果图表存储路径：outPath；输出数据集：List<UniChart> charts）>
                 DataTable[] dt = new DataTable[charts.Count];//需要将dataset数据集转化为datatable来处理数据
                 int i = 0;//定义datatable索引初始值
-                foreach (UniChart uc in charts)
+                foreach (HUST_Univ.UniChart uc in charts)
                 {
                     string[] titleName = uc.title.Split(' ');
                     if (!titleName[0].Contains(cmbSheet.SelectedItem.ToString())) continue;
@@ -78,18 +77,23 @@ namespace HUST_Test
                 //}
 
                 // 下面添加电站工作位置输出程序（输出结果图表存储路径：outPath；输出数据集：List<UniChart> charts）
-                DataTable[] dt = new DataTable[charts.Count];//需要将dataset数据集转化为datatable来处理数据
-                int i = 0;//定义datatable索引初始值
-                foreach (UniChart uc in charts)
+                int tableCount = charts[0].chart.Tables.Count;
+                DataTable[] dt = new DataTable[tableCount];//需要将dataset数据集转化为datatable来处理数据
+                for(int i = 0; i < tableCount; i++)
                 {
-                    string[] titleName = uc.title.Split(' ');
-                    if (!titleName[0].Contains(cmbPos.SelectedItem.ToString())) continue;
-                    dt[i] = uc.chart.Tables[0];
-                    //dt[i].TableName = titleName[0];
-                    string allStr = uc.title + "*" + uc.remark + "*" + uc.unit + "*" + uc.page;//将每张图的标题、备注、单位等信息传入到datatable里面供调用
-                    dt[i].TableName = allStr;
-                    i++;
+                    dt[i] = charts[0].chart.Tables[i].Clone();
                 }
+                //int i = 0;//定义datatable索引初始值
+                //foreach (HUST_Univ.UniChart uc in charts)
+                //{
+                //    string[] titleName = uc.title.Split(' ');
+                //    if (!titleName[0].Contains(cmbPos.SelectedItem.ToString())) continue;
+                //    dt[i] = uc.chart.Tables[0];
+                //    dt[i].TableName = titleName[0];
+                //    string allStr = uc.title + "*" + uc.remark + "*" + uc.unit + "*" + uc.page;//将每张图的标题、备注、单位等信息传入到datatable里面供调用
+                //    dt[i].TableName = allStr;
+                //    i++;
+                //}
                 HUST_OutPut.FigureView figureView = new HUST_OutPut.FigureView(true);
                 figureView.Text = "输出电站工作位置图";
                 figureView.newTab(dt);
@@ -133,7 +137,7 @@ namespace HUST_Test
                 foreach (DataRow row in rows)
                 {
                     if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
-                    chart = new UniChart();
+                    chart = new HUST_Univ.UniChart();
                     chart.title = row["Title"].ToString().Trim();
                     string file = outPath + chart.title.Substring(0, row["Title"].ToString().Trim().IndexOf(" ")).Trim() + ".xml";
                     if (!File.Exists(file)) continue;
@@ -159,14 +163,11 @@ namespace HUST_Test
             {
                 string[] str = cfgDS.Tables["TEST"].Rows[1]["Title"].ToString().Split(' ');//空格分割字符串
                 string openFile = txtPath + str[0] + ".xml";
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.FileName = openFile;
-                dlg.Title = "请指定一个 XML格式图表输出文件";
-                dlg.Filter = "XML文件|*.xml";
+                FolderBrowserDialog dlg = new FolderBrowserDialog();
+                dlg.Description = "请选择数据所在的文件夹";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    openFile = dlg.FileName;
-                    outPath = openFile.Substring(0, openFile.LastIndexOf("\\")) + "\\";
+                    outPath = dlg.SelectedPath + "\\";
                     txtPath.Text = outPath;
                     cfgDS.Tables["TEST"].Rows[0]["Title"] = outPath.Trim();
                     // 保存HUST_Config.xml
@@ -189,17 +190,16 @@ namespace HUST_Test
                 #region 打开cfgDS文件
 
                 if (!File.Exists(cfgFile))
-                { return false; }
-                cfgDS.ReadXml(cfgFile);
-                bool isOK = false;
-                foreach (DataTable tbl in cfgDS.Tables)
                 {
-                    if (tbl.TableName.Trim() != "TEST") continue;
-                    isOK = true;
-                    break;
+                    return false;
                 }
-                if (!isOK) return false;
 
+                cfgDS.ReadXml(cfgFile);
+
+                if (!cfgDS.Tables.Contains("TEST"))
+                {
+                    return false;
+                }
                 #endregion 打开cfgDS文件
 
                 #region 窗体选项初始化

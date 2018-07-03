@@ -1,5 +1,411 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/3 18:53:44">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图B-2 SubA系统 2010年枯水年8月1日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：万kW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:53:27">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-4 SubD系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:53:19">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-3 SubB系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:41:28">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:41:14">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:41:12">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 18:40:57">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 851</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 17:15:12">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 990
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 865</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:58:53">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>System.String WrapLogoString(System.String)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.WrapLogoString(String originalStr) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 906
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 989
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:58:38">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>System.String WrapLogoString(System.String)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.WrapLogoString(String originalStr) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 906
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 989
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:57:00">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:53:52">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 986
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:51:22">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:44:45">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:41:21">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:41:01">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:40:28">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:39:33">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>System.String WrapLogoString(System.String)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.WrapLogoString(String originalStr) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 906
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 986
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:39:31">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>System.String WrapLogoString(System.String)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.WrapLogoString(String originalStr) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 906
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 986
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:39:25">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>System.String WrapLogoString(System.String)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.WrapLogoString(String originalStr) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 906
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 986
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:35:45">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:35:43">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:35:36">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:34:01">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:34:00">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:33:58">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:33:57">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:33:53">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLogo(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 984
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 861</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 15:17:08">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 681
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 845</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/2 21:28:32">
     <LogContent>
       <ErrorModule>System.Data</ErrorModule>

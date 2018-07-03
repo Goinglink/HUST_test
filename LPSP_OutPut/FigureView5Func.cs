@@ -759,13 +759,13 @@ namespace HUST_OutPut
         {
             bool alreadyIn = false;
             foreach (LogoItem item in picture.LogoItems)
-                if (item.description == brushDescriptions[brushIndex])
+                if (item.name == brushDescriptions[brushIndex])
                     alreadyIn = true;
             if (!alreadyIn)
             {
                 LogoItem item = new LogoItem();
                 item.brush = fillBrushes[brushIndex].myBrush;
-                item.description = brushDescriptions[brushIndex];
+                item.name = brushDescriptions[brushIndex];
                 item.priority = fillBrushes[brushIndex].priority;
                 picture.LogoItems.Add(item);
             }
@@ -938,7 +938,7 @@ namespace HUST_OutPut
                     }
                 LogoItem item = new LogoItem();
                 item.brush = picture.LogoItems[index].brush;
-                item.description = picture.LogoItems[index].description;
+                item.name = picture.LogoItems[index].name;
                 item.priority = picture.LogoItems[index].priority;
                 picture.LogoItems.RemoveAt(index);
                 picture.LogoItems.Insert(i, item); ;
@@ -956,7 +956,7 @@ namespace HUST_OutPut
                 {
                     LogoItem item = new LogoItem();
                     item.brush = fillBrushes[brushIndex].myBrush;
-                    item.description = fillBrushes[brushIndex].describe;
+                    item.name = fillBrushes[brushIndex].describe;
                     item.priority = fillBrushes[brushIndex].priority;
                     picture.LogoItems.Add(item);
                 }
@@ -965,31 +965,31 @@ namespace HUST_OutPut
             LogoItem newItem = new LogoItem();
             newItem.priority = 0;
             newItem.brush = new SolidBrush(Color.SkyBlue);
-            newItem.description = "原始负荷";
+            newItem.name = "原始负荷";
             picture.LogoItems.Insert(0, newItem);
 
             //因为吴老师要求将部分图例合并，所以也在此处添加添加by孙凯 2016.1.19
             //抽蓄发电/抽蓄填谷合并、电力不足/调峰不足合并、新能源弃电/水电弃水合并
             newItem.brush = fillBrushes[myDrawHelper.getBrushArrayIndex(5)].myBrush;
             newItem.secondBrush = fillBrushes[myDrawHelper.getBrushArrayIndex(21)].myBrush;
-            newItem.description = "抽蓄发电/抽蓄填谷";
+            newItem.name = "抽蓄发电/抽蓄填谷";
             picture.LogoItems.Insert(1, newItem);
 
             newItem.brush = fillBrushes[myDrawHelper.getBrushArrayIndex(22)].myBrush;
             newItem.secondBrush = fillBrushes[myDrawHelper.getBrushArrayIndex(24)].myBrush;
-            newItem.description = "电力不足/调峰不足";
+            newItem.name = "电力不足/调峰不足";
             picture.LogoItems.Insert(2, newItem);
 
             newItem.brush = fillBrushes[myDrawHelper.getBrushArrayIndex(23)].myBrush;
             newItem.secondBrush = fillBrushes[myDrawHelper.getBrushArrayIndex(25)].myBrush;
-            newItem.description = "新能源弃电/水电弃水";
+            newItem.name = "新能源弃电/水电弃水";
             picture.LogoItems.Insert(3, newItem);
 
             //添加Flg = 27、28的Logo
             //添加by孙凯 2015.7.7
             //Logo 背景使用新能源 此处采用硬编码 为config文件中selectItems的Priority-1
             newItem.brush = fillBrushes[myDrawHelper.getBrushArrayIndex(23)].myBrush;
-            newItem.description = "新能源/风/光发电";
+            newItem.name = "新能源/风/光发电";
             picture.LogoItems.Insert(4, newItem);
 
             //newItem = new LogoItem();
@@ -1054,7 +1054,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height/2.0f)
                         };
                         g.DrawLines(dashPen, points);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                     //因为吴老师要求将部分图例合并，所以也在此处添加添加by孙凯 2016.1.19
                     //抽蓄发电/抽蓄填谷合并、电力不足/调峰不足合并、新能源弃电/水电弃水合并
@@ -1063,7 +1063,7 @@ namespace HUST_OutPut
                     case 3:
                         g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height);
                         g.FillRectangle(picture.LogoItems[i].secondBrush, point.X, point.Y + drawFont.Height, 40, drawFont.Height);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
 
                     case 4:
@@ -1089,7 +1089,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height*7/4.0f)
                         };
                         g.DrawLines(tmpPen1, points4);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                     //case 2:
                     //    g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y+drawFont.Height, 40, drawFont.Height );
@@ -1107,7 +1107,7 @@ namespace HUST_OutPut
                     //    break;
                     default:
                         g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height * 2);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                 }
                 g.DrawRectangle(framePen, point.X, point.Y, 40, drawFont.Height * 2);

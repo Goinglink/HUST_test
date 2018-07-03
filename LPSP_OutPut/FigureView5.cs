@@ -377,7 +377,7 @@ namespace HUST_OutPut
                 {
                     LogoItem item = new LogoItem();
                     item.brush = fillBrushes[i + fixedItemCount];
-                    item.description = brushDescriptions[i + fixedItemCount];
+                    item.name = brushDescriptions[i + fixedItemCount];
                     item.priority = priorities[fixedItemCount];
                     picture.LogoItems.Add(item);
                 }
@@ -741,13 +741,13 @@ namespace HUST_OutPut
         {
             bool alreadyIn = false;
             foreach (LogoItem item in picture.LogoItems)
-                if (item.description == brushDescriptions[brushIndex])
+                if (item.name == brushDescriptions[brushIndex])
                     alreadyIn = true;
             if (!alreadyIn)
             {
                 LogoItem item = new LogoItem();
                 item.brush = fillBrushes[brushIndex];
-                item.description = brushDescriptions[brushIndex];
+                item.name = brushDescriptions[brushIndex];
                 item.priority = priorities[brushIndex];
                 picture.LogoItems.Add(item);
             }
@@ -928,7 +928,7 @@ namespace HUST_OutPut
                     }
                 LogoItem item = new LogoItem();
                 item.brush = picture.LogoItems[index].brush;
-                item.description = picture.LogoItems[index].description;
+                item.name = picture.LogoItems[index].name;
                 item.priority = picture.LogoItems[index].priority;
                 picture.LogoItems.RemoveAt(index);
                 picture.LogoItems.Insert(i, item); ;
@@ -941,7 +941,7 @@ namespace HUST_OutPut
             LogoItem newItem = new LogoItem();
             newItem.priority = 0;
             newItem.brush = new SolidBrush(Color.SkyBlue);
-            newItem.description = "原始负荷";
+            newItem.name = "原始负荷";
             picture.LogoItems.Insert(0, newItem);
 
             //若没有Logo则不显示
@@ -950,7 +950,7 @@ namespace HUST_OutPut
             //添加Flg = 27、28的Logo
             //添加by孙凯 2015.7.7
             newItem = picture.LogoItems[1];
-            newItem.description = "新能源/风/光发电";
+            newItem.name = "新能源/风/光发电";
             picture.LogoItems.Insert(1, newItem);
 
             //newItem = new LogoItem();
@@ -1013,7 +1013,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height/2.0f)
                         };
                         g.DrawLines(dashPen, points);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
 
                     case 1:
@@ -1039,7 +1039,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height*7/4.0f)
                         };
                         g.DrawLines(tmpPen1, points2);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                     //case 2:
                     //    g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y+drawFont.Height, 40, drawFont.Height );
@@ -1057,7 +1057,7 @@ namespace HUST_OutPut
                     //    break;
                     default:
                         g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height * 2);
-                        g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
+                        g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                 }
                 g.DrawRectangle(framePen, point.X, point.Y, 40, drawFont.Height * 2);

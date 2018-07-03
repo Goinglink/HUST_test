@@ -562,10 +562,10 @@ namespace ExportTools
         /// </summary>
         /// <param name="sheetData"></param>
         /// <returns></returns>
-        private static Dictionary<int, int> GetMaxCharacterWidth(SheetData sheetData)
+        private static Dictionary<int,double> GetMaxCharacterWidth(SheetData sheetData)
         {
             //iterate over all cells getting a max char value for each column
-            Dictionary<int, int> maxColWidth = new Dictionary<int, int>();
+            Dictionary<int,double> maxColWidth = new Dictionary<int, double>();
             var rows = sheetData.Elements<Row>();
             UInt32[] numberStyles = new UInt32[] { 5, 6, 7, 8 }; //styles that will add extra chars
             UInt32[] boldStyles = new UInt32[] { 1, 2, 3, 4, 6, 7, 8 }; //styles that will bold
@@ -1457,20 +1457,20 @@ namespace ExportTools
         ///获取字符串的长度，这不是指字符串中字符的个数 
         /// 这里是要获取字符串要占位的单元数，英文字符占一位，中文字符占两位 
         /// </summary>
-        public static int GetStringLength(string input)
+        public static double GetStringLength(string input)
         {
             //中文字符 的 范围
             int chfrom = Convert.ToInt32("4e00", 16);    //范围（0x4e00～0x9fff）转换成int（chfrom～chend）
             int chend = Convert.ToInt32("9fff", 16);
 
-            int count = 0;
+            double count = 0;
             for (int i = 0; i < input.Length; i++)
             {
                 int code = Char.ConvertToUtf32(input, i);
                 if (code >= chfrom && code <= chend)
-                    count += 2;
+                    count += 1.31;
                 else
-                    count += 1;
+                    count += 0.68;
             }
             return count;
         }

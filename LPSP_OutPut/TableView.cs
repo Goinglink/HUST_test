@@ -349,7 +349,7 @@ namespace HUST_OutPut
                         string[] arrStr = ti.Tooltip.Split(new string[] { "\n" }, StringSplitOptions.None);
                         if (arrStr.Length > 2)
                         {
-                            prt.name = arrStr[0] + " " + arrStr[1] + "\n";
+                            prt.name = arrStr[0] + "\n" + arrStr[1] + "\n";
                             //if (arrStr[2].Trim() != "")
                             //    prt.name += "(" + arrStr[2] + ")";///dgv.Name;
                             /////prt.beizhu = arrStr[2];
@@ -490,6 +490,7 @@ namespace HUST_OutPut
                     //关闭进度条
                     this.myprogress.isOver = true;
                 }
+                System.Diagnostics.Process.Start("explorer.exe", "/select, " + saveFileDialog.FileName);
             }
         }
 
@@ -554,11 +555,11 @@ namespace HUST_OutPut
                 {
                     string description = "";
                     // set the unit string.
-                    string unitString = "";
+                    string unitString = " ";
                     if (arrString.Length > 2)
                     {
-                        if (arrString[1] != "")
-                            description = "(" + arrString[1] + ")";
+                        //if (arrString[1] != "")
+                        //    description = arrString[1];
                         unitString = arrString[2];
                     }
 
@@ -584,11 +585,12 @@ namespace HUST_OutPut
                 {
                     MessageBox.Show(ex.Message);
                 }
-                finally
-                {
-                    ////关闭进度条
-                    //this.myprogress.isOver = true;
-                }
+                //finally
+                //{
+                //    //关闭进度条
+                //    this.myprogress.isOver = true;
+                //}
+                System.Diagnostics.Process.Start("explorer.exe", "/select, " + saveFileDialog.FileName);
             }
         }
 
@@ -711,6 +713,11 @@ namespace HUST_OutPut
                     }
                 }
             }
+        }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
         }
     }
     

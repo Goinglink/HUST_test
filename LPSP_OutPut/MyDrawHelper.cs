@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Data;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
+
 namespace HUST_OutPut
 {
-    class MyDrawHelper
+    internal class MyDrawHelper
     {
         public double xInterval { get; set; }                               //保存x轴两点间的间隔
         public double yInterval { get; set; }                                //保存y轴两点间的间隔
@@ -19,16 +16,19 @@ namespace HUST_OutPut
         private Int32 maxValueOfData;                         //保存数据中最大的值
         private Int32 pictureHeight;                            //保存画图区域的高度
         private Int32 pictureWidth;                             //保存画图区域的宽度
+
         // public Point zeroPoint { get; set; }                            //保存画图的零点
-        private Int32 numOfDisPoint;                           //保存每行数据的点数 
+        private Int32 numOfDisPoint;                           //保存每行数据的点数
+
         private Point zeroPoint;                                             //保存画图的零点,即坐标左下角
         private bool isDefaultUnit;                               //保存是否以默认单位显示
         private bool isDisGird;                                  //是否显示网格
         private String pictureTip;                              //保存图片的一些信息
-        Dictionary<Int32, Int32> flgToPriority = null;         //Flg/100与priorities对应，即与画刷列表下标的对应
-     
+        private Dictionary<Int32, Int32> flgToPriority = null;         //Flg/100与priorities对应，即与画刷列表下标的对应
+
         //保存下标的常量
-        private const Int32 oneDayPoints = 12*24;                             //保存一天一个Flg数据的点数
+        private const Int32 oneDayPoints = 12 * 24;                             //保存一天一个Flg数据的点数
+
         private const Int32 oneRowPoints = 24;                                //保存一个Flg一行数据的点数
         private const Int32 oneDayRows = 12 * 14;                             //保存一天所含数据的行数12为每个Flg每天12行，14为共有14个Flg
         private const Int32 columnsOfOneRow = 27;                             //一行数据的列数
@@ -37,13 +37,13 @@ namespace HUST_OutPut
         private const Int32 rowsOfOneFlg = 12;                                //保存Flg下的行数
         private const Int32 oneYearPoints = 12 * 24 * 365;
 
-        public MyDrawHelper(Int32 curYear, Int32 curMonth, Int32 curDay, Int32 maxValueOfData, 
+        public MyDrawHelper(Int32 curYear, Int32 curMonth, Int32 curDay, Int32 maxValueOfData,
             bool isDefaultUnit, String pictureTip, Boolean isDisGird)
         {
             this.curDay = curDay;
             this.curMonth = curMonth;
             this.curYear = curYear;
-            this.maxValueOfData = maxValueOfData;           
+            this.maxValueOfData = maxValueOfData;
             this.xInterval = 0;
             this.disDays = 1;
             this.numOfDisPoint = disDays * oneDayPoints;
@@ -57,21 +57,25 @@ namespace HUST_OutPut
         {
             this.zeroPoint = new Point(x, y);
         }
+
         public void setDisDays(int days)
         {
             this.disDays = days;
-            this.numOfDisPoint = disDays * oneDayPoints; 
+            this.numOfDisPoint = disDays * oneDayPoints;
         }
+
         public void setXInterval(Int32 pictureWide)
         {
             this.pictureWidth = pictureWide;
             this.xInterval = pictureWide * 0.87 / (disDays * oneDayPoints);
         }
+
         public void setYInterval(Int32 pictureHeight)
         {
             this.pictureHeight = pictureHeight;
             this.yInterval = (maxValueOfData / (pictureHeight * 0.9 / 10.2 * 10));
         }
+
         public void setXYInterval(Int32 pictureWide, Int32 pictureHeight)
         {
             setXInterval(pictureWide);
@@ -93,6 +97,7 @@ namespace HUST_OutPut
             flgToPriority.Add(26, 3 - 1);
             return flgToPriority;
         }
+
         //返回各个Flg对应的画刷下标
         private int[] getBrushArray()
         {
@@ -101,18 +106,21 @@ namespace HUST_OutPut
             int index = 0;
             for (int i = 1; i <= 5; i++)
                 flgToPriority.TryGetValue(i, out result[index++]);
-            for (int i = 21; i <= 26; i++ )
+            for (int i = 21; i <= 26; i++)
                 flgToPriority.TryGetValue(i, out result[index++]);
             return result;
         }
+
         //根据Flg/100获得画刷下标
         public Int32 getBrushArrayIndex(Int32 flg)
         {
-            Int32 result=-1;
+            Int32 result = -1;
             flgToPriority.TryGetValue(flg, out result);
             return result;
         }
-# region 废弃代码
+
+        #region 废弃代码
+
         ///*
         // * 将一天的数据画出
         // * @para dayDrift 保存偏移最开始天的天数
@@ -123,12 +131,12 @@ namespace HUST_OutPut
         //{
         //    Int32 maxRight = 0;
 
-        //    //TODO 硬编码 12为LDC表中Flg以5分钟为间隔，每小时12个，14为LDC表中的不同Flg个数        
+        //    //TODO 硬编码 12为LDC表中Flg以5分钟为间隔，每小时12个，14为LDC表中的不同Flg个数
         //    int dayStartIndex = drawDay * 12 * 14;                         //保存当前天在源数据下的开始坐标
         //    int flgIndexDiff = 12;                                         //不同Flg的下标间隔
 
         //    ////保存上一个Flg的点，用于连接不同Flg，14为Flg的个数
-        //    //List<Point> prePoin = new List<Point>(14);                     
+        //    //List<Point> prePoin = new List<Point>(14);
         //    //因为对应Flg下有0,5,10.....55共12个，即每隔5分钟有一份数据
         //    for (int num = 0; num < flgIndexDiff; num++)
         //    {
@@ -140,7 +148,7 @@ namespace HUST_OutPut
         //        int flg = Int32.Parse(topLine["LDC.Flg"].ToString());
         //        int brushIndex = 0;
         //        if (num == 0 && flgToPriority.TryGetValue(flg / 100, out brushIndex))
-        //        { 
+        //        {
         //            g.FillPolygon(
         //            fillBrushes[brushIndex].myBrush,
         //            new Point[]{prePoints[1],
@@ -151,7 +159,7 @@ namespace HUST_OutPut
         //        }
         //        else if (num == flgIndexDiff - 1)
         //        {
-        //            prePoints[0] = new Point((int)(startPoint.X + 24 * xInterval * 12), 
+        //            prePoints[0] = new Point((int)(startPoint.X + 24 * xInterval * 12),
         //                Int32.Parse(bottomLine["LDC.H1"].ToString()));
         //            prePoints[1] = new Point((int)(startPoint.X + 24 * xInterval * 12),
         //                Int32.Parse(topLine["LDC.H1"].ToString()));
@@ -212,7 +220,7 @@ namespace HUST_OutPut
         //        {
         //            topRightLineVal = bottomLeftLineVal;
         //            topLine["LDC.H" + (i + 1)] = bottomLine["LDC.H" + (i + 1)];
-        //        }               
+        //        }
         //        if (flgToPriority.TryGetValue(flg/100, out brushIndex))
         //        {
         //            g.FillPolygon(
@@ -264,7 +272,6 @@ namespace HUST_OutPut
         //        rightPoints.Add(new Point(zeroPoint.X, zeroPoint.Y));
         //    }
 
-
         //    int numOfXInterval = 0;
         //    int[] indexOfBrush = new int[12];                   //保存画笔下标
         //    //每行数据确定画笔颜色下标
@@ -284,7 +291,7 @@ namespace HUST_OutPut
         //                for (int k = 1; k < rightPoints.Count; k++)
         //                {
         //                    Int32 yVal = zeroPoint.Y-(Int32)(float.Parse(picture.LevelLines[i].Rows[j * numOfFlg + k * rowsOfOneFlg][h + 1].ToString())/yInterval);
-                            
+
         //                    //用于确保Flg递增时其大小递增
         //                    if (yVal > preYVal)
         //                        yVal = preYVal;
@@ -292,7 +299,7 @@ namespace HUST_OutPut
         //                    rightPoints[k] = new Point(xVal, yVal);
         //                    g.FillPolygon(
         //                            fillBrushes[indexOfBrush[k-1]].myBrush,
-        //                            new Point[] { leftPoints[k], rightPoints[k], 
+        //                            new Point[] { leftPoints[k], rightPoints[k],
         //                        rightPoints[k - 1], leftPoints[k - 1] });
 
         //                    preYVal = yVal;
@@ -304,8 +311,8 @@ namespace HUST_OutPut
         //        }
         //    }
         //}
-#endregion
 
+        #endregion 废弃代码
 
         private int getDayNum(int year, int month)
         {
@@ -319,28 +326,33 @@ namespace HUST_OutPut
                 case 9:
                 case 11:
                     return 31;
+
                 case 1:
 
                     if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
                         return 29;
                     else
                         return 28;
+
                 default:
                     return 30;
             }
         }
-        private Int32 getStartIndex(Int32 curYear,Int32 curMonh, Int32 curDay)
+
+        private Int32 getStartIndex(Int32 curYear, Int32 curMonh, Int32 curDay)
         {
             Int32 result = 0;
             result += curDay;
             result *= oneDayRows;
             return result;
         }
+
         /*
          * 画出一天的数据
          * Flg = 0,27,28对应的点startPoint的下标为12,13,14
          * @return 衔接点
          */
+
         private List<MyPoint> drawOneDay(MyFunPictureBox picture, Graphics g, Pen thinPen,
             Pen fatPen, List<MyBrush> fillBrushes, Int32 drawMonth, Int32 startIndex, List<MyPoint> startPoint)
         {
@@ -363,7 +375,6 @@ namespace HUST_OutPut
             //打印各个Flg一行数据中所包含的点
             for (int curH = 0; curH < oneRowPoints; curH++)
             {
-
                 //打印一天的点
                 for (int curRow = 0; curRow < rowsOfOneFlg; curRow++)
                 {
@@ -373,13 +384,12 @@ namespace HUST_OutPut
                     //leftPoints保存rightPoints的值
                     leftPoints = new List<MyPoint>(rightPoints);
 
-
                     rightPoints[0] = new MyPoint(xVal, zeroPoint.Y);
                     //打印一个竖列的点
                     for (int curFlg = 1; curFlg < rightPoints.Count; curFlg++)
                     {
                         Int32 yVal = 0;
-                        
+
                         //curFlg = 12,13,14的虚线对应Flg=0,27,28
                         if (curFlg == 12)
                         {
@@ -390,17 +400,17 @@ namespace HUST_OutPut
                         }
                         else if (curFlg == 13 || curFlg == 14)
                         {
-                            yVal = zeroPoint.Y - (Int32)(float.Parse(picture.LevelLines[drawMonth].Rows[startIndex + curRow + (curFlg -1)* rowsOfOneFlg][curH + 1].ToString()) / yInterval); 
+                            yVal = zeroPoint.Y - (Int32)(float.Parse(picture.LevelLines[drawMonth].Rows[startIndex + curRow + (curFlg - 1) * rowsOfOneFlg][curH + 1].ToString()) / yInterval);
                             rightPoints[curFlg] = new MyPoint(xVal, yVal);
-                            if(curFlg == 13)
+                            if (curFlg == 13)
                                 g.DrawLine(dashPen27, leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint());
-                            else if(curFlg == 14)
+                            else if (curFlg == 14)
                                 g.DrawLine(dashPen28, leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint());
 
                             continue;
                         }
 
-                        yVal = zeroPoint.Y - (Int32)(float.Parse(picture.LevelLines[drawMonth].Rows[startIndex + curRow + curFlg * rowsOfOneFlg][curH + 1].ToString()) / yInterval); 
+                        yVal = zeroPoint.Y - (Int32)(float.Parse(picture.LevelLines[drawMonth].Rows[startIndex + curRow + curFlg * rowsOfOneFlg][curH + 1].ToString()) / yInterval);
                         ////用于确保Flg递增时其大小递增 Flg=21（对应于curFlg=6）时除外
                         if (yVal > preYVal && curFlg != 6)
                             yVal = preYVal;
@@ -410,33 +420,31 @@ namespace HUST_OutPut
                         //Flg为22和5的构成电力不足
                         if (curFlg == 7)
                         {
-                           // if (rightPoints[curFlg].yVal < rightPoints[curFlg-2].yVal)
+                            // if (rightPoints[curFlg].yVal < rightPoints[curFlg-2].yVal)
                             g.FillPolygon(
                                     fillBrushes[indexOfBrush[curFlg - 1]].myBrush,
-                                    new Point[] { leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint(), 
+                                    new Point[] { leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint(),
                                 rightPoints[curFlg - 2].getPoint(), leftPoints[curFlg - 2].getPoint() });
                         }
                         else if (curFlg == 6)
                         {
                             g.FillPolygon(
                                     fillBrushes[indexOfBrush[curFlg - 1]].myBrush,
-                                    new Point[] { leftPoints[curFlg-1].getPoint(), rightPoints[curFlg-1].getPoint(), 
+                                    new Point[] { leftPoints[curFlg-1].getPoint(), rightPoints[curFlg-1].getPoint(),
                                 rightPoints[curFlg].getPoint(), leftPoints[curFlg].getPoint() });
                         }
                         else
                         {
                             g.FillPolygon(
                                     fillBrushes[indexOfBrush[curFlg - 1]].myBrush,
-                                    new Point[] { leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint(), 
+                                    new Point[] { leftPoints[curFlg].getPoint(), rightPoints[curFlg].getPoint(),
                                 rightPoints[curFlg - 1].getPoint(), leftPoints[curFlg - 1].getPoint() });
                         }
-
 
                         preYVal = yVal;
                     }
                     numOfInterval++;
                 }
-
             }
             return rightPoints;
         }
@@ -445,6 +453,7 @@ namespace HUST_OutPut
          * 画出一段间隔的数据
          * @return 衔接点
          */
+
         public void drawPicture(MyFunPictureBox picture, Graphics g, Pen thinPen,
             Pen fatPen, List<MyBrush> fillBrushes)
         {
@@ -456,7 +465,7 @@ namespace HUST_OutPut
 
             Int32 startIndex = getStartIndex(curYear, curMonth, curDay);
             Int32 drawMonth = curMonth;
-            Int32 maxDayVal = getDayNum(curYear, curMonth)-1;
+            Int32 maxDayVal = getDayNum(curYear, curMonth) - 1;
             for (int drawDay = 0; drawDay < disDays; drawDay++)
             {
                 //判断用户所选天是否超过当月最多天数，添加by孙凯 2016.3.21
@@ -472,7 +481,7 @@ namespace HUST_OutPut
                         startIndex = 0;
                         for (int i = 0; i < numOfFlgToFill + 1; i++)
                         {
-                            startPoint[i]=new MyPoint(zeroPoint.X + xInterval * oneDayPoints, zeroPoint.Y);
+                            startPoint[i] = new MyPoint(zeroPoint.X + xInterval * oneDayPoints, zeroPoint.Y);
                         }
                     }
                     continue;
@@ -488,22 +497,21 @@ namespace HUST_OutPut
                     if (drawMonth > 11)
                         return;
                     startIndex = 0;
-                } 
-             
+                }
             }
         }
-
 
         /*
          * 绘制X轴、Y轴
          */
+
         public void drawAxes(MyFunPictureBox picture, Graphics g)
         {
             Pen Axes = new Pen(Brushes.Black, 3.5F);
             Pen drawLinePen = new Pen(Brushes.Black, 3F);
             Point yAxesPoint = new Point(zeroPoint.X, picture.drawArea.Top);
             Point xAxesPoint = new Point(picture.drawArea.Right, zeroPoint.Y);
-            
+
             //画出X轴横线
             g.DrawLine(Axes, zeroPoint, xAxesPoint);
             g.DrawLine(drawLinePen, xAxesPoint, new Point(xAxesPoint.X - 10, xAxesPoint.Y - 5));
@@ -517,12 +525,13 @@ namespace HUST_OutPut
 
             //画出X轴的标识
             drawXIdentity(picture, g, yStep);
-            
         }
+
         /*
          * 绘制Y轴的标注
          * 返回Y轴标注间隔距离
          */
+
         private double drawYIdentity(MyFunPictureBox picture, Graphics g)
         {
             Point yAxesPoint = new Point(zeroPoint.X, picture.drawArea.Top);
@@ -535,7 +544,7 @@ namespace HUST_OutPut
             double ystep = picture.drawArea.Height * 0.9 / 10.2;
             for (int i = 1; i < 11; i++)
             {
-               // g.DrawLine(drawAxisPen, zeroPoint.X, zeroPoint.Y - (int)(i * ystep), zeroPoint.X - 5, zeroPoint.Y - (int)(i * ystep));
+                // g.DrawLine(drawAxisPen, zeroPoint.X, zeroPoint.Y - (int)(i * ystep), zeroPoint.X - 5, zeroPoint.Y - (int)(i * ystep));
 
                 Rectangle rect = new Rectangle(
                     zeroPoint.X - 70, zeroPoint.Y - (int)(i * ystep) - drawFont.Height / 2, 60, drawFont.Height);
@@ -549,22 +558,23 @@ namespace HUST_OutPut
             else
                 g.DrawString("万kW", drawFont, drawBrush, zeroPoint.X - 4 * drawFont.SizeInPoints, yAxesPoint.Y - drawFont.Height / 2);
 
-
             Font nameFont = new Font("宋体", picture.largeFontSize + 1, FontStyle.Bold);
 
             String[] tips = pictureTip.Split('\n');
             for (int i = 0; i < tips.Length; i++)
             {
                 g.DrawString(tips[i], nameFont, drawBrush,
-                    (float)(picture.drawArea.Left + picture.drawArea.Width * 0.1 + (picture.drawArea.Width * 0.9 + (tips[i].Length*2) / 2 * 15) / 2)
+                    (float)(picture.drawArea.Left + picture.drawArea.Width * 0.1 + (picture.drawArea.Width * 0.9 + (tips[i].Length * 2) / 2 * 15) / 2)
                     , (float)(picture.drawArea.Top + picture.drawArea.Height * 0.93 + i * 15), stringFormat);
             }
             nameFont.Dispose();
             return ystep;
         }
+
         /************************************************************************/
         /* 画出X轴的标识                                                                     */
         /************************************************************************/
+
         private void drawXIdentity(MyFunPictureBox picture, Graphics g, double yStep)
         {
             //字符字体及颜色
@@ -587,9 +597,9 @@ namespace HUST_OutPut
             g.DrawString((month + 1) + "月" + (day + 1) + "日", drawFont, drawBrush,
                     zeroPoint.X - 2 * drawFont.SizeInPoints, zeroPoint.Y + 3, stringFormat);
             //绘制网格横线
-            for (int i = 1; isDisGird && i < 11; i++ )
+            for (int i = 1; isDisGird && i < 11; i++)
             {
-                g.DrawLine(girdPen, zeroPoint.X, zeroPoint.Y - (int)(yStep * i), 
+                g.DrawLine(girdPen, zeroPoint.X, zeroPoint.Y - (int)(yStep * i),
                     zeroPoint.X + (int)(disDays * dayStep), zeroPoint.Y - (int)(yStep * i));
             }
             if (minStep > 25)
@@ -614,7 +624,7 @@ namespace HUST_OutPut
                         month++;
                         day = 0;
                         //绘制网格
-                        if(isDisGird)
+                        if (isDisGird)
                             g.DrawLine(girdPen, zeroPoint.X + (int)(numOfDay * dayStep), zeroPoint.Y,
                                 zeroPoint.X + (int)(numOfDay * dayStep), zeroPoint.Y - (int)(yStep * 10));
 
@@ -635,21 +645,18 @@ namespace HUST_OutPut
                         g.DrawString((day + 1) + "日", drawFont, drawBrush,
                             zeroPoint.X + (int)(numOfDay * dayStep), zeroPoint.Y + 3, stringFormat);
                     }
-
-
                 }
-
             }
             else
             {
                 int numOfday;
-                for(numOfday = 1; numOfday <= disDays/2 && numOfday <= getDayNum(curYear, month)/2; numOfday++)
+                for (numOfday = 1; numOfday <= disDays / 2 && numOfday <= getDayNum(curYear, month) / 2; numOfday++)
                 {
-                    double xStep = numOfday*dayStep;
+                    double xStep = numOfday * dayStep;
                     int numOfxStep = 0;
-                    if(xStep > 30)
+                    if (xStep > 30)
                     {
-                        for (int i = 1; i <= disDays; i+=numOfday)
+                        for (int i = 1; i <= disDays; i += numOfday)
                         {
                             day += numOfday;
                             numOfxStep++;
@@ -660,34 +667,33 @@ namespace HUST_OutPut
                                 day = 0;
                                 //绘制网格
                                 if (isDisGird)
-                                    g.DrawLine(girdPen,  zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y,
-                                    zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y - (int)(yStep * 10));
+                                    g.DrawLine(girdPen, zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y,
+                                    zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y - (int)(yStep * 10));
 
-                                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y,
-                                    zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y - 10);
-                                if(month < 12)
+                                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y,
+                                    zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y - 10);
+                                if (month < 12)
                                     g.DrawString((month + 1) + "月" + (day + 1) + "日", drawFont, drawBrush,
-                                        zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y + 3, stringFormat);
+                                        zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y + 3, stringFormat);
                             }
                             else
                             {
                                 //绘制网格
                                 if (isDisGird)
-                                    g.DrawLine(girdPen, zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y,
-                                    zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y - (int)(yStep * 10));
+                                    g.DrawLine(girdPen, zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y,
+                                    zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y - (int)(yStep * 10));
 
-                                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y,
-                                    zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y - 10);
+                                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y,
+                                    zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y - 10);
                                 if (month < 12)
                                     g.DrawString((day + 1) + "日", drawFont, drawBrush,
-                                        zeroPoint.X + (int)(xStep*numOfxStep), zeroPoint.Y + 3, stringFormat);
+                                        zeroPoint.X + (int)(xStep * numOfxStep), zeroPoint.Y + 3, stringFormat);
                             }
-
                         }
                         break;
                     }
                 }
-                if (numOfday > disDays/2 || numOfday > getDayNum(curYear, month) / 2)
+                if (numOfday > disDays / 2 || numOfday > getDayNum(curYear, month) / 2)
                 {
                     Int32 startDay = -1;
                     for (int numOfDay = 0; numOfDay <= disDays && month < 11; numOfDay++)
@@ -711,10 +717,13 @@ namespace HUST_OutPut
                 }
             }
         }
-#region 按键事件用到的函数
+
+        #region 按键事件用到的函数
+
         /*
          * 左移一天
          */
+
         public Boolean dayLeftMove()
         {
             if (curDay > 0)
@@ -722,7 +731,7 @@ namespace HUST_OutPut
                 curDay--;
                 return true;
             }
-            else if(curDay == 0 && curMonth == 0)
+            else if (curDay == 0 && curMonth == 0)
                 return false;
             else
             {
@@ -731,9 +740,11 @@ namespace HUST_OutPut
                 return true;
             }
         }
+
         /*
          * 右移一天
          */
+
         public Boolean dayRightMove()
         {
             Int32 maxDay = getDayNum(curYear, curMonth);
@@ -751,9 +762,11 @@ namespace HUST_OutPut
             else
                 return false;
         }
+
         /*
          * 左移一月
          */
+
         public Boolean monthLeftMove()
         {
             if (curMonth > 0)
@@ -764,9 +777,11 @@ namespace HUST_OutPut
             else
                 return false;
         }
+
         /*
          * 右移一月
          */
+
         public Boolean monthRightMove()
         {
             if (curMonth < 11)
@@ -777,9 +792,11 @@ namespace HUST_OutPut
             else
                 return false;
         }
+
         /*
          * 增加X轴间距
          */
+
         public Boolean addDisDays()
         {
             disDays++;
@@ -794,12 +811,13 @@ namespace HUST_OutPut
                 return true;
             }
         }
+
         /*
          * 减少X轴间距
          */
+
         public Boolean redDisDays()
         {
-           
             disDays--;
             if (disDays < 1)
             {
@@ -812,17 +830,15 @@ namespace HUST_OutPut
                 return true;
             }
         }
-#endregion 按键事件用到的函数
 
-
+        #endregion 按键事件用到的函数
     }
 }
 
-class MyPoint
+internal class MyPoint
 {
     public double xVal { get; set; }
     public double yVal { get; set; }
-
 
     public MyPoint(double xVal, double yVal)
     {

@@ -1,33 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Xml;
-using LPSP_MergeDGV;
-using DevComponents.DotNetBar;
-using DevComponents.DotNetBar.Controls;
 using System.Threading;
-
+using System.Windows.Forms;
+using System.Xml;
 
 namespace HUST_OutPut
 {
     public partial class ReadUDT : Form
     {
-
         //自定义表路径
         public string FilePath = null;
+
         public string FileName = null;
+
         //public MergeDataGridView dgv_UDT = new MergeDataGridView();
         public progress myprogress;
+
         public int columnHeader_count = 0;
 
         //模拟计算结果表
-        DataSet OutDS = new DataSet();
+        private DataSet OutDS = new DataSet();
 
         public ReadUDT()
         {
@@ -55,6 +48,7 @@ namespace HUST_OutPut
                 this.dgv_UDT.Rows.Add(row);
             }
         }
+
         //线程函数  在构造函数.创建线程时被引用
         public void progressB()
         {
@@ -62,6 +56,7 @@ namespace HUST_OutPut
             this.myprogress.Start(); //开始进度，直至Form1_Loading()函数末尾，才停止进度
             myprogress.ShowDialog();
         }
+
         //选择用户自定义文件
         private void Choose_UDT_Click(object sender, EventArgs e)
         {
@@ -69,7 +64,7 @@ namespace HUST_OutPut
             thdSub.Start();
             Thread.Sleep(100);*/
             OpenFileDialog openFileDialog = null;
-            openFileDialog =new OpenFileDialog();
+            openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             FilePath = openFileDialog.FileName;
             FileName = openFileDialog.SafeFileName;
@@ -92,6 +87,7 @@ namespace HUST_OutPut
         public void ShowTable()
         {
             #region 前版本
+
             /*
             int Block_Start = 0 ,Block_End = 0;
             int row_count = 0;//记录新插入的行的数目
@@ -99,7 +95,7 @@ namespace HUST_OutPut
             int head_count = 0;//记录这类头的数目
             string is_ColumnHeaders = "ColumnHeaders"; //用来标识是否是新的块的第一个ColumnHeaders的第一个Row 这样可以决定是否进行行插入
             //dgv_UDT.DataSource = dt;
-            
+
             try
             {
                 XmlDocument xmldoc = new XmlDocument();
@@ -111,15 +107,17 @@ namespace HUST_OutPut
                     foreach (XmlNode nodeTable in topM)
                     {
                         DataTable dt = new DataTable();
+
                         #region 块的处理
+
                         if (nodeTable.Name.Equals("Block"))
                         {
                             Head h1 = new Head();
-                            
+
                             foreach (XmlNode node in nodeTable)
                             {
-                                
                                 #region ColumnHeaders的处理
+
                                 if (node.Name.Equals("ColumnHeaders"))
                                 {
                                     foreach (XmlNode sub_node in node)
@@ -141,7 +139,7 @@ namespace HUST_OutPut
                                             foreach (XmlNode ssub_node in sub_node)
                                             {
                                                 head_count++;
-                                               
+
                                                 h1.start_order = int.Parse(ssub_node.Attributes["startOrder"].Value);
                                                 h1.through_cells = int.Parse(ssub_node.Attributes["throughCells"].Value);
                                                 h1.value = ssub_node.Attributes["value"].Value;
@@ -155,13 +153,12 @@ namespace HUST_OutPut
                                                         DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
                                                         dgv_UDT.Columns.Add(column);
                                                     }
-                                                    
+
                                                     //当Row order从非0开始时，插入相应数量的行数
                                                     if (int.Parse(sub_node.Attributes["order"].Value) > 0)
                                                     {
                                                         row_index = dgv_UDT.Rows.Add(int.Parse(sub_node.Attributes["order"].Value)+1);
                                                         row_count += int.Parse(sub_node.Attributes["order"].Value);
-                                                        
                                                     }
 
                                                     //
@@ -172,11 +169,10 @@ namespace HUST_OutPut
                                                     }
                                                 }
 
+                                                #region 确定筛选条件
 
-                                                #region  确定筛选条件
                                                 if (ssub_node.Attributes["filter"] != null)
                                                 {
-                                                    
                                                     //当有了筛选条件，就可以在datatable中插入“列”和“行”了
                                                     h1.filter = ssub_node.Attributes["filter"].Value.ToString();
                                                     h1.id = ssub_node.Attributes["id"].Value.ToString();
@@ -188,7 +184,6 @@ namespace HUST_OutPut
                                                             {
                                                                 if (node_file.Attributes["name"].Value.ToString().Equals(h1.filter))
                                                                 {
-
                                                                     h1.filter_0 = node_file.Attributes["filter_0"].Value.ToString();
                                                                     h1.filter_1 = node_file.Attributes["filter_1"].Value.ToString();
                                                                     h1.filter_2 = node_file.Attributes["filter_2"].Value.ToString();
@@ -197,14 +192,13 @@ namespace HUST_OutPut
                                                                     foreach (XmlNode node_filter1 in topM)
                                                                     {
                                                                         if (node_filter1.Name.Equals("File"))
-                                                                        { 
+                                                                        {
                                                                             foreach(XmlNode node_file1 in node_filter1)
                                                                             {
                                                                                 if (node_file1.Attributes["name"].Value.ToString().Equals(node_file.Attributes["file"].Value.ToString()))
                                                                                 {
                                                                                     h1.file = node_file1.Attributes["file"].Value.ToString();
                                                                                     h1.table = node_file1.Attributes["table"].Value.ToString();
-
                                                                                 }
                                                                             }
                                                                         }
@@ -217,7 +211,7 @@ namespace HUST_OutPut
                                                     //读入数据到DataTable
                                                     this.ReadOutFiles(h1.file);
                                                     //dt = OutDS.Tables[h1.table].DefaultView.ToTable(true);
-                                                    
+
                                                     DataView dv = new DataView();
                                                     DataTable tmp = new DataTable();
                                                     int count = 0;
@@ -236,7 +230,6 @@ namespace HUST_OutPut
                                                             dt.Rows.Add(rw);
                                                         }
                                                     }
-
                                                     else
                                                     {
                                                         foreach (DataRow row1 in tmp.Rows)
@@ -257,25 +250,23 @@ namespace HUST_OutPut
                                                         }
                                                     }
                                                 }
-                                                #endregion
 
-                                                
+                                                #endregion 确定筛选条件
 
                                                 #region 加入一个Head
+
                                                 if (h1.through_cells > 1)
                                                 {
                                                     dgv_UDT.ClearSelection();
                                                     //dgv_UDT.Rows[row_index].Cells[0].Selected = false;
                                                     //dgv_UDT.Rows[0].Cells[0].Selected = false;//是当前选中的单元格为不选中状态
                                                     dgv_UDT.Rows[int.Parse(sub_node.Attributes["order"].Value)].Cells[h1.start_order].Value = h1.value;
-                                                    
+
                                                     for (int i = h1.start_order; i < h1.start_order + h1.through_cells; i++)
                                                     {
                                                         dgv_UDT.Rows[int.Parse(sub_node.Attributes["order"].Value) ].Cells[i].Selected = true;
-                                                        
                                                     }
                                                     dgv_UDT.MergeDataGridViewCell();
-                                                    
                                                 }
                                                 else if(h1.through_cells == 1)
                                                 {
@@ -289,24 +280,26 @@ namespace HUST_OutPut
                                                         this.dgv_UDT.Columns.Add(column);
                                                         dgv_UDT.Rows[int.Parse(sub_node.Attributes["order"].Value)].Cells[h1.start_order].Value = h1.value;
                                                     }
-                                                  
                                                 }
-                                                #endregion                                        
+                                                #endregion 加入一个Head
+
                                             }
+
                                         is_ColumnHeaders = "RowHeaders";
                                         DataGridViewRow row = new DataGridViewRow();
                                         row_index = dgv_UDT.Rows.Add(row);
                                         row_count++;
                                     }
                                 }
-                                #endregion
+
+                                #endregion ColumnHeaders的处理
+
                                 #region RowHeaders的处理
+
                                 else if (node.Name.Equals("RowHeaders"))
                                 {
                                     foreach (XmlNode sub_node in node)
                                     {
-                                        
-                                        
                                         //if (int.Parse(sub_node.Attributes["order"].Value) > 0)
                                         {
                                             //Head h1 = new Head();
@@ -321,6 +314,7 @@ namespace HUST_OutPut
                                                 dgv_UDT.Rows[h1.start_order].Cells[h1.through_cells].Value = h1.value;
 
                                                 #region 填入表格数据
+
                                                 //DataView  dv = new DataView();
                                                 //dv.Table = dt;
                                                 //dv.RowFilter = "Flg = " + h1.value;
@@ -341,20 +335,19 @@ namespace HUST_OutPut
                                                         }
                                                     }
                                                 }
-                                                
-                                                #endregion
+
+                                                #endregion 填入表格数据
                                             }
-                                            
                                         }
-                                        
-                                        
                                     }
                                     is_ColumnHeaders = "ColumnHeaders";
-
                                 }
-                                #endregion
+
+                                #endregion RowHeaders的处理
                             }
+
                             #region 合并第一列单元格形成块
+
                             Block_End = h1.start_order;
                             dgv_UDT.Rows[Block_Start].Cells[0].Value = nodeTable.Attributes["name"].Value.ToString();
                             dgv_UDT.ClearSelection();
@@ -364,13 +357,11 @@ namespace HUST_OutPut
                                 dgv_UDT.Rows[i].Cells[0].Selected = true;
                             }
                             dgv_UDT.MergeDataGridViewCell();
-                            #endregion
 
-                            
+                            #endregion 合并第一列单元格形成块
                         }
-                        
-                        #endregion
 
+                        #endregion 块的处理
                     }
                 }
                 else
@@ -378,15 +369,14 @@ namespace HUST_OutPut
                     MessageBox.Show("It is not a User Defined Table");
                 }
             }
-            
             catch (Exception exc)
             { MessageBox.Show(exc.Message); }
              * */
 
-            #endregion
+            #endregion 前版本
+
             #region 新版本
-            
-            
+
             //建立一个datatable来保存各列是否为合并列
             //bool is_SUM = false;//标记表格中是否有求和列，如果有，则置为TRUE，默认没有
             DataTable is_SUM = new DataTable();
@@ -397,9 +387,7 @@ namespace HUST_OutPut
             is_SUM.Columns.Add(ColumnIndex);
             is_SUM.Columns.Add(is_sum);
 
-
-
-            int Block_Start = 0,Block_End = 0;
+            int Block_Start = 0, Block_End = 0;
             DataTable dt = new DataTable();
             XmlDocument doc = new XmlDocument();
             doc.Load(FilePath);
@@ -413,9 +401,9 @@ namespace HUST_OutPut
                         if (nodeTable.Name.Equals("Block"))
                         {
                             Head h1 = new Head();
-                            foreach(XmlNode r_c_head in nodeTable)
+                            foreach (XmlNode r_c_head in nodeTable)
                             {
-                                if(r_c_head.Name.Equals("RowHeaders"))
+                                if (r_c_head.Name.Equals("RowHeaders"))
                                 {
                                     foreach (XmlNode column in r_c_head)
                                     {
@@ -428,16 +416,17 @@ namespace HUST_OutPut
                                             h1.through_cells = int.Parse(head.Attributes["throughCells"].Value);
                                             h1.value = head.Attributes["value"].Value;
                                             h1.id = head.Attributes["id"].Value;
-                                            if  (h1.start_order == this.dgv_UDT.Rows.Count-1)
+                                            if (h1.start_order == this.dgv_UDT.Rows.Count - 1)
                                             {
-                                                 this.dgv_UDT.Rows.Insert(this.dgv_UDT.Rows.Count-1,1);
+                                                this.dgv_UDT.Rows.Insert(this.dgv_UDT.Rows.Count - 1, 1);
                                             }
-                                            
+
                                             this.dgv_UDT[columnIndex, h1.start_order].Value = h1.value;
                                             //this.dgv_UDT[]
                                             if (h1.value != "")
                                             {
                                                 #region 填入表格数据
+
                                                 int j = 1, count = 0;
                                                 int start_index = columnIndex + 1, end_index = columnIndex + 1;
                                                 for (int i = columnIndex + 1; i < dgv_UDT.ColumnCount; i++)
@@ -452,7 +441,6 @@ namespace HUST_OutPut
                                                     //}
                                                     //else if(count<dt.Rows.Count && is_SUM == true)
                                                     //{
-
                                                     //}
                                                     //else if (count >= dt.Columns.Count && is_SUM != true)
                                                     //    break;
@@ -478,7 +466,6 @@ namespace HUST_OutPut
                                                         start_index = i;
                                                         end_index = i;
                                                         //break;
-
                                                     }
                                                     if (count >= dt.Columns.Count)
                                                         break;
@@ -498,25 +485,22 @@ namespace HUST_OutPut
                                                     }
                                                 }
 
-                                                #endregion
+                                                #endregion 填入表格数据
                                             }
-
                                         }
                                     }
                                 }
-                                else if(r_c_head.Name.Equals("ColumnHeaders"))
+                                else if (r_c_head.Name.Equals("ColumnHeaders"))
                                 {
-                                    
-                                    foreach(XmlNode row in r_c_head)
+                                    foreach (XmlNode row in r_c_head)
                                     {
-                                        if(r_c_head.FirstChild == row)
+                                        if (r_c_head.FirstChild == row)
                                             Block_Start = int.Parse(row.Attributes["order"].Value);
                                         int rowIndex = int.Parse(row.Attributes["order"].Value);
-                                        if (rowIndex == this.dgv_UDT.Rows.Count-1)
+                                        if (rowIndex == this.dgv_UDT.Rows.Count - 1)
                                         {
                                             //while(rowIndex>this.dgv_UDT.Rows.Count-1)
-                                                this.dgv_UDT.Rows.Add(1);
-                                            
+                                            this.dgv_UDT.Rows.Add(1);
                                         }
                                         //else
                                         {
@@ -532,11 +516,11 @@ namespace HUST_OutPut
                                                         if (h1.start_order + h1.through_cells > this.dgv_UDT.ColumnCount)
                                                         {
                                                             int temp = this.dgv_UDT.ColumnCount;
-                                                            for (int i = 0; i < h1.start_order + h1.through_cells - temp;i++ )
+                                                            for (int i = 0; i < h1.start_order + h1.through_cells - temp; i++)
                                                             {
                                                                 DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
                                                                 column.HeaderText = columnHeader_count.ToString();
-                                                                
+
                                                                 columnHeader_count++;
                                                                 column.ReadOnly = true;
                                                                 this.dgv_UDT.Columns.Add(column);
@@ -556,7 +540,7 @@ namespace HUST_OutPut
                                                         if (h1.start_order + h1.through_cells > this.dgv_UDT.ColumnCount)
                                                         {
                                                             int temp = this.dgv_UDT.ColumnCount;
-                                                            for (int i = 0; i < h1.start_order + h1.through_cells - temp ; i++)
+                                                            for (int i = 0; i < h1.start_order + h1.through_cells - temp; i++)
                                                             {
                                                                 DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
                                                                 column.ReadOnly = true;
@@ -564,11 +548,9 @@ namespace HUST_OutPut
                                                                 columnHeader_count++;
                                                                 this.dgv_UDT.Columns.Add(column);
                                                             }
-                                                            
                                                         }
                                                         //else
                                                         {
-
                                                             h1.id = head.Attributes["id"].Value;
                                                             h1.filter = head.Attributes["filter"].Value;
                                                             this.dgv_UDT[h1.start_order, rowIndex].Value = h1.value;
@@ -582,7 +564,6 @@ namespace HUST_OutPut
                                                         newrow["ColumnIndex"] = h1.start_order;
                                                         newrow["is_sum"] = false;
                                                         is_SUM.Rows.Add(newrow);
-                                                        
                                                     }
                                                     else if (h1.through_cells == 1 && head.Attributes["id"].Value == "__SUM__")
                                                     {
@@ -599,7 +580,6 @@ namespace HUST_OutPut
                                                                 columnHeader_count++;
                                                                 this.dgv_UDT.Columns.Add(column);
                                                             }
-
                                                         }
                                                         this.dgv_UDT[h1.start_order, rowIndex].Value = h1.value;
                                                         DataRow newrow = is_SUM.NewRow();
@@ -630,7 +610,6 @@ namespace HUST_OutPut
                     {
                         item.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
-
                 }
                 catch (Exception e)
                 {
@@ -641,8 +620,10 @@ namespace HUST_OutPut
             {
                 MessageBox.Show("非用户自定义表格！");
             }
-            #endregion
+
+            #endregion 新版本
         }
+
         public void SetFilter(Head h1)
         {
             XmlDocument xmldoc = new XmlDocument();
@@ -656,7 +637,6 @@ namespace HUST_OutPut
                     {
                         if (node_file.Attributes["name"].Value.ToString().Equals(h1.filter))
                         {
-
                             h1.filter_0 = node_file.Attributes["filter_0"].Value.ToString();
                             h1.filter_1 = node_file.Attributes["filter_1"].Value.ToString();
                             h1.filter_2 = node_file.Attributes["filter_2"].Value.ToString();
@@ -672,7 +652,6 @@ namespace HUST_OutPut
                                         {
                                             h1.file = node_file1.Attributes["file"].Value.ToString();
                                             h1.table = node_file1.Attributes["table"].Value.ToString();
-
                                         }
                                     }
                                 }
@@ -682,9 +661,9 @@ namespace HUST_OutPut
                 }
             }
         }
-        public void CreateDataTable(DataTable dt , Head h1)
-        {
 
+        public void CreateDataTable(DataTable dt, Head h1)
+        {
             this.ReadOutFiles(h1.file);
             //dt = OutDS.Tables[h1.table].DefaultView.ToTable(true);
 
@@ -699,18 +678,16 @@ namespace HUST_OutPut
             string str = h1.id;
             if (!str.StartsWith("MAX_(") && !str.StartsWith("MIN_("))
             {
-
                 if (dt.Columns.Count <= 2)
                 {
                     foreach (DataRow row1 in tmp.Rows)
                     {
                         DataRow rw = dt.NewRow();
-                        rw["Flg" + h1.value+h1.filter] = row1["Flg"];
+                        rw["Flg" + h1.value + h1.filter] = row1["Flg"];
                         rw[h1.value + h1.filter] = row1[h1.id];
                         dt.Rows.Add(rw);
                     }
                 }
-
                 else
                 {
                     foreach (DataRow row1 in tmp.Rows)
@@ -731,7 +708,7 @@ namespace HUST_OutPut
                     }
                 }
             }
-            else if(str.StartsWith("MAX_("))
+            else if (str.StartsWith("MAX_("))
             {
                 string substring = str.Substring(5, str.Length - 4 - 2);
                 string[] temp = substring.Split(',');
@@ -752,7 +729,6 @@ namespace HUST_OutPut
                         dt.Rows.Add(rw);
                     }
                 }
-
                 else
                 {
                     foreach (DataRow row1 in tmp.Rows)
@@ -766,7 +742,6 @@ namespace HUST_OutPut
                                 double tempValue = double.Parse(row1[i].ToString());
                                 if (tempValue > max)
                                     max = tempValue;
-
                             }
                             dt.Rows[count][h1.value + h1.filter] = max;
                             count++;
@@ -780,14 +755,12 @@ namespace HUST_OutPut
                                 double tempValue = double.Parse(row1[i].ToString());
                                 if (tempValue > max)
                                     max = tempValue;
-
                             }
                             rw[h1.value + h1.filter] = max;
                             dt.Rows.Add(rw);
                         }
                     }
                 }
-
             }
             else if (str.StartsWith("MIN_("))
             {
@@ -805,13 +778,11 @@ namespace HUST_OutPut
                             double tempValue = double.Parse(row1[i].ToString());
                             if (tempValue < min)
                                 min = tempValue;
-
                         }
                         rw[h1.value + h1.filter] = min;
                         dt.Rows.Add(rw);
                     }
                 }
-
                 else
                 {
                     foreach (DataRow row1 in tmp.Rows)
@@ -825,7 +796,6 @@ namespace HUST_OutPut
                                 double tempValue = double.Parse(row1[i].ToString());
                                 if (tempValue < min)
                                     min = tempValue;
-
                             }
                             dt.Rows[count][h1.value + h1.filter] = min;
                             count++;
@@ -839,7 +809,6 @@ namespace HUST_OutPut
                                 double tempValue = double.Parse(row1[i].ToString());
                                 if (tempValue < min)
                                     min = tempValue;
-
                             }
                             rw[h1.value + h1.filter] = min;
                             dt.Rows.Add(rw);
@@ -855,7 +824,7 @@ namespace HUST_OutPut
             try
             {
                 DataSet ds1 = new DataSet();
-                ds1.ReadXml(filename); 
+                ds1.ReadXml(filename);
                 OutDS.Merge(ds1, true);
 
                 return true;
@@ -865,7 +834,7 @@ namespace HUST_OutPut
                 MessageBox.Show(exc.Message + "\n获取文件数据失败！");
                 return false;
             }
-        } 
+        }
 
         public int DoNothing()
         {
@@ -881,7 +850,6 @@ namespace HUST_OutPut
             this.Text = this.FileName;
             this.inidgv_UDT();
             this.Close();
-
         }
 
         //private void 重置条件ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -890,13 +858,12 @@ namespace HUST_OutPut
         //    rf.Text = FileName;
         //    rf.labelX1.Text =FilePath;
         //    rf.Init();
-            
+
         //    rf.ShowDialog();
         //}
 
         private void 打印ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
             //dgVprint1.Print(this.dgv_UDT,true);
             //PrintUDT prt = new PrintUDT();
             //Print prt = new Print();
@@ -915,7 +882,6 @@ namespace HUST_OutPut
             //vB2008Print1.EndDoc(this.Text + "打印");
             //vB2008Print1.Dispose();
 
-
             VBprinter40.DGVprint DgVprint1 = new VBprinter40.DGVprint();
             DgVprint1.PrintType = VBprinter40.DGVprint.mytype.GeneralPrint;
             DgVprint1.Alignment = StringAlignment.Center;//'表格居中
@@ -927,11 +893,6 @@ namespace HUST_OutPut
 
             //在此还可以设置其他属性，当然，也可以DGVPRINT1的悔改窗口中进行设置，效果完全一样的
             DgVprint1.Print(dgv_UDT, false, "", dgv_UDT.ColHeaderTreeView);
-            
         }
-
     }
-
-
-    
 }

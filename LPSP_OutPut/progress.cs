@@ -5,8 +5,8 @@
 *  Modified by Jiming Yin
 **************************************/
 
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace HUST_OutPut
 {

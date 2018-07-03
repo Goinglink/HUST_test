@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HUST_OutPut
@@ -9,8 +6,6 @@ namespace HUST_OutPut
     //公用到的操作
     public class MyTools
     {
-
-
         /// <summary>
         /// 判断testFile是否比targetFile更早生成
         /// </summary>
@@ -29,18 +24,17 @@ namespace HUST_OutPut
                 System.IO.FileInfo targetFileInfo =
                     new System.IO.FileInfo(targetFile);
 
-                result = testFileInfo.LastWriteTime 
+                result = testFileInfo.LastWriteTime
                     < targetFileInfo.LastWriteTime;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return false;
             }
 
-
-
             return result;
         }
+
         /// <summary>
         /// 判断小时级输出文件是否较输入文件旧，
         /// 若较新的话提示用户可能修改输入文件后没有重新生成输出文件
@@ -100,7 +94,6 @@ namespace HUST_OutPut
             }
             return false;
         }
-
 
         /// <summary>
         /// 判断分钟级输出文件是否较输入文件旧，

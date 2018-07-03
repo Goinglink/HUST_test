@@ -1,26 +1,16 @@
-﻿using System;
+﻿using DevComponents.DotNetBar;
+using HUST_Com;
+using ProS_Assm;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-
-using System.Runtime.InteropServices;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
+using System.Runtime.InteropServices;
 using System.Threading;
-using DevComponents.DotNetBar;
-using DevComponents.DotNetBar.Controls;
-using Excel = Microsoft.Office.Interop.Excel;
-using ProS_Assm;
+using System.Windows.Forms;
 using System.Xml;
-using HUST_Aux;
-using HUST_Com;
-
 
 namespace HUST_OutPut
 {
@@ -28,10 +18,13 @@ namespace HUST_OutPut
     {
         //public Form parentForm; //不再使用这个参数，不需要对父窗口进行操作了
         private progress myprogress;
-        List<MyBrush> fillBrushes = null;
-        List<string> brushDescriptions = null;
-       // List<int> priorities = null;
-        bool defaultUnit = true;
+
+        private List<MyBrush> fillBrushes = null;
+        private List<string> brushDescriptions = null;
+
+        // List<int> priorities = null;
+        private bool defaultUnit = true;
+
         private const int COLUMNSCOUNT = 25;
         private const int WINDPOWERLOCATION = 12;             //用于标记LDC表中Flg=27的数据所在下标
         private const int PHOTOVOLTAICPOERLOCATION = 13;      //用于标记LDC表中Flg=28的数据所在下标
@@ -39,11 +32,11 @@ namespace HUST_OutPut
 
         //添加by孙凯 2015.12.17
         private MyDrawHelper myDrawHelper = null;                    //保存绘图时需要使用的信息
+
         private MyFunPictureBox myFunPictureBox = null;              //保存图片框控件
         private Boolean isMyButtonsPanelDrag = false;                        //标识是否拖动按键
         private Point buttonsPanelPreStation;                        //标记buttonsPanel先前位置
         private bool isVertical = true;                              //图片是否为竖着显示
-        
 
         public void progressB()
         {
@@ -51,6 +44,7 @@ namespace HUST_OutPut
             myprogress.Start();
             myprogress.ShowDialog();
         }
+
         public FigureView5Func(bool unitFlg, bool isVertical)
         {
             defaultUnit = unitFlg;
@@ -61,17 +55,17 @@ namespace HUST_OutPut
             fillBrushes = GenerateFillBrushed();
             selectGenIDs = GenerateSelectGenIDs();
         }
-        public void newTab(List<DataTable> d, Int32 maxValueOfData, Int32 curYear, 
+
+        public void newTab(List<DataTable> d, Int32 maxValueOfData, Int32 curYear,
             Int32 curMonth, Int32 curDay, String pictureInfo, bool isDisGird)
         {
-
             //TODO 暂时修改为如下
             //for (int dtIndex = 0; dtIndex < d.Length / 2;dtIndex++ )
             for (int dtIndex = 0; dtIndex < 1; dtIndex++)
             {
-                string[] arrStr = d[2*dtIndex].TableName.Split(new string[] { "^" }, StringSplitOptions.None);
+                string[] arrStr = d[2 * dtIndex].TableName.Split(new string[] { "^" }, StringSplitOptions.None);
 
-          //      string tpName = "图" + arrStr[0].Substring(1);  //默认的  表 换成 图
+                //      string tpName = "图" + arrStr[0].Substring(1);  //默认的  表 换成 图
 
                 TabItem tp = this.tabControl1.CreateTab("图1");//+ arrStr[2] + arrStr[3] + arrStr[4] + arrStr[5]);
                 //tp.Tooltip = tableName;
@@ -86,7 +80,6 @@ namespace HUST_OutPut
 
                 myFunPictureBox = new MyFunPictureBox();
 
-                
                 tcp.Controls.Add(myFunPictureBox);
 
                 //TODO 暂时注释by孙凯
@@ -94,27 +87,27 @@ namespace HUST_OutPut
                 myFunPictureBox.AutoScrollOffset = new Point(0, 0);
 
                 tcp.ScrollControlIntoView(myFunPictureBox);
-                
+
                 //属性设置
                 myFunPictureBox.LevelLines = d;
-               //TODO 注释by孙凯 2015.12.17 pictureBox.genPos=d[2*dtIndex+1];
+                //TODO 注释by孙凯 2015.12.17 pictureBox.genPos=d[2*dtIndex+1];
                 myFunPictureBox.pageSettings = new System.Drawing.Printing.PageSettings();
-                PageSettings pageSettings=myFunPictureBox.pageSettings;
+                PageSettings pageSettings = myFunPictureBox.pageSettings;
                 //TODO 暂时修改by孙凯 2016.1.6
 
                 myFunPictureBox.Width = (int)(pageSettings.PaperSize.Width / 100.0 * 96);
                 myFunPictureBox.Height = (int)(pageSettings.PaperSize.Height / 100.0 * 96);
-                
-                int xDraw = (int)(pageSettings.Margins.Left/254.0 * 96);
+
+                int xDraw = (int)(pageSettings.Margins.Left / 254.0 * 96);
                 int yDraw = (int)(pageSettings.Margins.Top / 254.0 * 96);
-                int widthDraw = (int)(pageSettings.PaperSize.Width/100.0*96) - 
+                int widthDraw = (int)(pageSettings.PaperSize.Width / 100.0 * 96) -
                     (int)((pageSettings.Margins.Left + pageSettings.Margins.Right) / 254.0 * 96);
-                int heightDraw = (int)(pageSettings.PaperSize.Height / 100.0 * 96) - 
+                int heightDraw = (int)(pageSettings.PaperSize.Height / 100.0 * 96) -
                     (int)((pageSettings.Margins.Top + pageSettings.Margins.Bottom) / 254.0 * 96);
-                myFunPictureBox.drawArea = new Rectangle(xDraw,yDraw,widthDraw,heightDraw);
+                myFunPictureBox.drawArea = new Rectangle(xDraw, yDraw, widthDraw, heightDraw);
 
                 myFunPictureBox.logoPos = new Rectangle(myFunPictureBox.drawArea.Left + (int)(myFunPictureBox.drawArea.Width * 0.5)
-                    , myFunPictureBox.drawArea.Bottom -(int)(myFunPictureBox.drawArea.Height*0.4)
+                    , myFunPictureBox.drawArea.Bottom - (int)(myFunPictureBox.drawArea.Height * 0.4)
                     , 300
                     , (myFunPictureBox.LogoItems.Count + 1) / 2 * 50);
 
@@ -123,8 +116,8 @@ namespace HUST_OutPut
                     myFunPictureBox.drawArea = new Rectangle(yDraw, xDraw, heightDraw, widthDraw);
                     myFunPictureBox.Height = (int)(pageSettings.PaperSize.Width / 100.0 * 96);
                     myFunPictureBox.Width = (int)(pageSettings.PaperSize.Height / 100.0 * 96);
-                    myFunPictureBox.logoPos = new Rectangle(myFunPictureBox.drawArea.Left + (int)(myFunPictureBox.drawArea.Width * 0.5)+150
-                        , myFunPictureBox.drawArea.Bottom - (int)(myFunPictureBox.drawArea.Height * 0.4) -30
+                    myFunPictureBox.logoPos = new Rectangle(myFunPictureBox.drawArea.Left + (int)(myFunPictureBox.drawArea.Width * 0.5) + 150
+                        , myFunPictureBox.drawArea.Bottom - (int)(myFunPictureBox.drawArea.Height * 0.4) - 30
                         , (myFunPictureBox.LogoItems.Count + 1) / 2 * 50
                         , 300);
                 }
@@ -157,13 +150,10 @@ namespace HUST_OutPut
 
                 //添加by孙凯 2015.12.17 TODO简化
                 myDrawHelper = new MyDrawHelper(curYear, curMonth, curDay,
-                    maxValueOfData, defaultUnit, pictureInfo, isDisGird);           
+                    maxValueOfData, defaultUnit, pictureInfo, isDisGird);
             }
-
         }
 
-
-     
         private double GenerateMaxValue(DataTable dt)
         {
             double max = 0.0;
@@ -173,13 +163,14 @@ namespace HUST_OutPut
                     max = Convert.ToDouble(dt.Rows[0][i]);
 
             for (int i = 1; i < dt.Columns.Count; i++)
-                if (max < Convert.ToDouble(dt.Rows[dt.Rows.Count-1][i]))
+                if (max < Convert.ToDouble(dt.Rows[dt.Rows.Count - 1][i]))
                     max = Convert.ToDouble(dt.Rows[dt.Rows.Count - 1][i]);
 
             max += 200;
             int tmp = (int)Math.Floor(max / 100);
-            return tmp*100;
+            return tmp * 100;
         }
+
         private Point[] GeneratePoints(MyPictureBox picture, int rowIndex)
         {
             DataRow row = picture.LevelLines.Rows[rowIndex];
@@ -191,14 +182,15 @@ namespace HUST_OutPut
             {
                 double val = Convert.ToDouble(row[i]);
                 if (step == 0)
-                    points[i * 2 - 2].Y=0;
+                    points[i * 2 - 2].Y = 0;
                 else
                     points[i * 2 - 2].Y = (int)(val / step);
-                        
+
                 points[i * 2 - 1].Y = points[2 * i - 2].Y;
             }
             return points;
         }
+
         private string GenerateGenIDs(List<int> types)
         {
             DataView dv = UniVars.InDS.Tables["系统表"].DefaultView;
@@ -216,13 +208,14 @@ namespace HUST_OutPut
             result += ")";
             return result;
         }
+
         private List<double> GenerateIntervals(DataView dv)
         {
             List<double> result = new List<double>();
-            double up=-10000,low=-1;
+            double up = -10000, low = -1;
 
             for (int i = 0; i < dv.Count; i++)
-                if (Convert.ToDouble(dv[i]["Yn"])-10 <= up)
+                if (Convert.ToDouble(dv[i]["Yn"]) - 10 <= up)
                     up = Convert.ToDouble(dv[i]["Yx"]);
                 else
                 {
@@ -234,11 +227,11 @@ namespace HUST_OutPut
             result.Add(up);
             result.RemoveAt(0);
             return result;
-
         }
-        private void DrawIntervals(List<double> intervals, MyPictureBox picture, Graphics g,Brush brush)
+
+        private void DrawIntervals(List<double> intervals, MyPictureBox picture, Graphics g, Brush brush)
         {
-            DataRow row=null;
+            DataRow row = null;
             int variableItemCount = GetBrushCountByType(0);
             int commonItemCount = GetBrushCountByType(1);
             //获取电力不足曲线对应的行
@@ -249,10 +242,10 @@ namespace HUST_OutPut
             string tmp = row[0].ToString();
             double max = GenerateMaxValue(picture.LevelLines);
             int h = (int)Math.Floor(max);
-            
+
             double ystep = h / (picture.drawArea.Height * 0.9 / 10.2 * 10);
-            int  xstep = (int)(picture.drawArea.Width * 0.87 / 24);
-            
+            int xstep = (int)(picture.drawArea.Width * 0.87 / 24);
+
             if (ystep == 0)
                 return;
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
@@ -262,17 +255,16 @@ namespace HUST_OutPut
                 List<Point> polygen = new List<Point>();
                 for (int j = 1; j < COLUMNSCOUNT; j++)
                 {
-
                     Point firstPoint = new Point(zeroPoint.X, zeroPoint.Y);
                     firstPoint.X += (int)((j - 1) * xstep);
                     firstPoint.Y -= (int)(intervals[2 * i] / ystep);
                     polygen.Add(firstPoint);
 
-                    while(j < COLUMNSCOUNT)
+                    while (j < COLUMNSCOUNT)
                     {
                         double top = Convert.ToDouble(row[j]);
                         if (intervals[2 * i] > top)
-                        {                           
+                        {
                             break;
                         }
                         else
@@ -295,14 +287,15 @@ namespace HUST_OutPut
                     Point lastPoint = new Point(zeroPoint.X, zeroPoint.Y);
                     lastPoint.X += (int)((j - 1) * xstep);
                     lastPoint.Y -= (int)(intervals[2 * i] / ystep);
-                    polygen.Add(lastPoint); 
-                    
+                    polygen.Add(lastPoint);
+
                     if (polygen.Count >= 4)
                         g.FillPolygon(brush, polygen.ToArray());
                     polygen.Clear();
                 }
-            }           
+            }
         }
+
         private void DrawGenAreas(MyPictureBox picture, Graphics g)
         {
             DataView dv = new DataView();
@@ -310,10 +303,10 @@ namespace HUST_OutPut
             dv.Sort = "Yn ASC";
 
             int brushIndex = 0;
-            
+
             //水电
             dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 307 });
-            List<double> intervals = GenerateIntervals(dv);      
+            List<double> intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex].myBrush);
             if (intervals.Count > 0)
             {
@@ -323,7 +316,7 @@ namespace HUST_OutPut
 
             //核电
             dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 306 });
-            intervals = GenerateIntervals(dv);           
+            intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex].myBrush);
             if (intervals.Count > 0)
             {
@@ -333,7 +326,7 @@ namespace HUST_OutPut
 
             //火电
             dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 300, 301, 302 });
-            intervals = GenerateIntervals(dv);           
+            intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex].myBrush);
             if (intervals.Count > 0)
             {
@@ -349,18 +342,18 @@ namespace HUST_OutPut
             if (intervals.Count > 0)
             {
                 AddLogoItemWithCheck(picture, brushIndex);
-                
+
                 LogoItem item=new LogoItem();
                 item.brush = fillBrushes[brushIndex].myBrush;
                 item.description = brushDescriptions[brushIndex];
                              item.priority = priorities[brushIndex];
    picture.LogoItems.Add(item);
-                
+
                 if (!bDelete)
                     bDelete = CheckToOverlapped(picture, intervals[intervals.Count - 1]);
             }*/
             brushIndex++;
-            
+
             //抽蓄
             dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 308 });
             intervals = GenerateIntervals(dv);
@@ -377,7 +370,7 @@ namespace HUST_OutPut
             string[] genItems = GetBackColorAndHatchStyle();
             int recordLength = 4;
             //添加注释by孙凯2015.8.10  此处11为硬编码需根据config文件中selectItems下子节点
-            //(在不选电站情况下)数目确定   
+            //(在不选电站情况下)数目确定
             int count = genItems.Length / recordLength - 11;
             List<int> indexes = new List<int>();
             for (int i = 0; i < count; i++)
@@ -385,7 +378,7 @@ namespace HUST_OutPut
                 DataRow[] gens = ProS_Assm.UniVars.InDS.Tables["系统表"].Select("节点类型>=300 and 节点类型<400", "节点ID ASC");
                 for (int j = 0; j < gens.Length; j++)
                     //添加注释by孙凯2015.8.10  此处11为硬编码需根据config文件中selectItems下子节点
-                    //(在不选电站情况下)数目确定                   
+                    //(在不选电站情况下)数目确定
                     if (gens[j]["节点名称"].ToString() == genItems[(11 + i) * recordLength + 2])
                     {
                         //注释by孙凯 2015.8.10 j为其机组ID（电站ID-最开始电站ID）
@@ -395,17 +388,19 @@ namespace HUST_OutPut
             }
             return indexes;
         }
+
         private List<int> selectGenIDs = null;
+
         private void DrawCoordinates(MyPictureBox picture, Graphics g)
         {
             Pen coordinatePen = new Pen(Brushes.Black, 3.5F);
 
-            Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1),picture.drawArea.Top+ (int)(picture.drawArea.Height * 0.9));
+            Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
             Point xAxisEnd = new Point(picture.drawArea.Right, zeroPoint.Y);
             Point yAxisEnd = new Point(zeroPoint.X, picture.drawArea.Top);
-           
-            g.DrawLine(coordinatePen, zeroPoint,xAxisEnd);
-            g.DrawLine(coordinatePen, zeroPoint,yAxisEnd);
+
+            g.DrawLine(coordinatePen, zeroPoint, xAxisEnd);
+            g.DrawLine(coordinatePen, zeroPoint, yAxisEnd);
 
             coordinatePen.Dispose();
 
@@ -421,7 +416,7 @@ namespace HUST_OutPut
             for (int i = 0; i < 24; i++)
             {
                 g.DrawLine(drawAxisPen, zeroPoint.X + (int)(i * step), zeroPoint.Y, zeroPoint.X + (int)(i * step), zeroPoint.Y - 10);
-                g.DrawString(i.ToString() , drawFont, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3,stringFormat);
+                g.DrawString(i.ToString(), drawFont, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3, stringFormat);
             }
             g.DrawLine(drawLinePen, zeroPoint.X + (int)(24 * step), zeroPoint.Y, zeroPoint.X + (int)(24 * step), zeroPoint.Y - 10);
 
@@ -437,7 +432,7 @@ namespace HUST_OutPut
             //绘制Y轴
             double ystep = picture.drawArea.Height * 0.9 / 10.2;
             double max = 0;
-            
+
             max = GenerateMaxValue(picture.LevelLines);
             if (!defaultUnit)
                 max = max / 10;
@@ -451,10 +446,10 @@ namespace HUST_OutPut
                 if (chars >= 4)
                     delta = 2;
 
-                int strWidth=(int)((unit*i).ToString().Trim().Length*(drawFont.SizeInPoints-delta));
-                Rectangle rect=new Rectangle(
-                    zeroPoint.X - strWidth, zeroPoint.Y - (int)(i * ystep) - drawFont.Height/2, strWidth, drawFont.Height);
-                g.DrawString((unit * i).ToString(), drawFont, drawBrush,rect, stringFormat);
+                int strWidth = (int)((unit * i).ToString().Trim().Length * (drawFont.SizeInPoints - delta));
+                Rectangle rect = new Rectangle(
+                    zeroPoint.X - strWidth, zeroPoint.Y - (int)(i * ystep) - drawFont.Height / 2, strWidth, drawFont.Height);
+                g.DrawString((unit * i).ToString(), drawFont, drawBrush, rect, stringFormat);
             }
             arrow = new Point[]{
                 new Point(yAxisEnd.X-5,yAxisEnd.Y+10),
@@ -462,23 +457,23 @@ namespace HUST_OutPut
             };
             g.DrawLine(drawLinePen, yAxisEnd, arrow[0]);
             g.DrawLine(drawLinePen, yAxisEnd, arrow[1]);
-            
-            if(defaultUnit)
-                g.DrawString("MW", drawFont, drawBrush, zeroPoint.X - 2 * drawFont.SizeInPoints, yAxisEnd.Y-drawFont.Height/2);
+
+            if (defaultUnit)
+                g.DrawString("MW", drawFont, drawBrush, zeroPoint.X - 2 * drawFont.SizeInPoints, yAxisEnd.Y - drawFont.Height / 2);
             else
                 g.DrawString("万kW", drawFont, drawBrush, zeroPoint.X - 4 * drawFont.SizeInPoints, yAxisEnd.Y - drawFont.Height / 2);
 
-            foreach(TabItem ti in tabControl1.Tabs)
+            foreach (TabItem ti in tabControl1.Tabs)
                 if (ti.IsSelected)
                 {
-                    Font nameFont = new Font("宋体", picture.largeFontSize,FontStyle.Bold);
+                    Font nameFont = new Font("宋体", picture.largeFontSize, FontStyle.Bold);
                     string[] arrStr = ti.Tooltip.Split(new string[] { "\n" }, StringSplitOptions.None);
-                    string name = "图"+arrStr[0].Substring(1) + " " + arrStr[1] + "\n";
-                    if(arrStr[2].Trim()!="")
-                        name+="(" + arrStr[2] + ")";
+                    string name = "图" + arrStr[0].Substring(1) + " " + arrStr[1] + "\n";
+                    if (arrStr[2].Trim() != "")
+                        name += "(" + arrStr[2] + ")";
                     g.DrawString(name, nameFont, drawBrush,
-                        picture.drawArea.Left +(int)(picture.drawArea.Width * 0.1)+ (int)(picture.drawArea.Width * 0.9 - arrStr[0].Length * nameFont.SizeInPoints)/2
-                        , picture.drawArea.Top + (int)(picture.drawArea.Height * 0.93),stringFormat);
+                        picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1) + (int)(picture.drawArea.Width * 0.9 - arrStr[0].Length * nameFont.SizeInPoints) / 2
+                        , picture.drawArea.Top + (int)(picture.drawArea.Height * 0.93), stringFormat);
                     nameFont.Dispose();
                 }
 
@@ -487,11 +482,12 @@ namespace HUST_OutPut
             drawBrush.Dispose();
             drawAxisPen.Dispose();
         }
-        
+
         /* 获取不同类型画刷的个数，其中
          * type=0:VariableItems
          * type=1:CommonItems
          */
+
         private int GetBrushCountByType(int type)
         {
             int result = 0;
@@ -504,9 +500,9 @@ namespace HUST_OutPut
                 if (element.Name.ToLower() == "output")
                 {
                     XmlNodeList nodelist = element.ChildNodes;
-                    
+
                     foreach (XmlNode items in nodelist)
-                    {                        
+                    {
                         if (items.Name != "fixedItems")
                             continue;
 
@@ -529,13 +525,14 @@ namespace HUST_OutPut
                         }
                     }
                 }
-            } 
+            }
             return result;
         }
+
         private string[] GetBackColorAndHatchStyle()
         {
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -563,19 +560,20 @@ namespace HUST_OutPut
                                 i += el.Attributes.Count;
                             }
                         }
-                        return returnStr;                        
+                        return returnStr;
                     }
                 }
             }
             return null;
         }
+
         private List<MyBrush> GenerateFillBrushed()
         {
             List<MyBrush> brushes = new List<MyBrush>();
             brushDescriptions = new List<string>();
             //priorities = new List<int>();
-            
-            string[] colorAndHatchStyle=GetBackColorAndHatchStyle();
+
+            string[] colorAndHatchStyle = GetBackColorAndHatchStyle();
             int recordLength = 4;
             int count = colorAndHatchStyle.Length / recordLength;
             for (int i = 0; i < count; i++)
@@ -603,6 +601,7 @@ namespace HUST_OutPut
             brushes.Sort();
             return brushes;
         }
+
         private void DrawLevelLinesAndFill(MyPictureBox picture, Graphics g)
         {
             Pen thinPen = new Pen(Brushes.Black, 1.5F);
@@ -638,7 +637,7 @@ namespace HUST_OutPut
 
                 DataRow upLine = picture.LevelLines.Rows[picture.LevelLines.Rows.Count - 2 - i];
                 DataRow downLine = picture.LevelLines.Rows[picture.LevelLines.Rows.Count - 2 - i - 1];
-                
+
                 //Flg为0行，直接保存0值 添加注释by孙凯 2015.7.7
                 if (picture.LevelLines.Rows.Count - 2 - i - 1 == 0)
                 {
@@ -667,7 +666,7 @@ namespace HUST_OutPut
                 //    }
                 //}
                 //修改为下
-                if(newLogoItem)
+                if (newLogoItem)
                     AddLogoItemWithCheck(picture, brushIndex);
 
                 Point[] points = GeneratePoints(picture, i);
@@ -687,12 +686,12 @@ namespace HUST_OutPut
             //brushOffset用于确定画刷的其实位置，
             //在绘制分区时，brushOffset应为VariableItems的个数
             //绘制系统时，brushOffset为0.
-            for (int i = lineList.Count-1; i > 0; i--)
+            for (int i = lineList.Count - 1; i > 0; i--)
             {
                 Point[] upLine = lineList[i];
                 Point[] downLine = lineList[i - 1];
 
-                int brushIndex = i - 1+brushOffset;
+                int brushIndex = i - 1 + brushOffset;
                 if (brushIndex >= fillBrushes.Count)
                     brushIndex = brushIndex % fillBrushes.Count;
 
@@ -732,14 +731,16 @@ namespace HUST_OutPut
                 g.DrawLines(drawPen, upLine);
                 g.DrawLine(drawPen, upLine[47], new Point(upLine[47].X, zeroPoint.Y));
             }
-            
+
             thinPen.Dispose();
             fatPen.Dispose();
         }
+
         /*
          * 绘制要显示的图片
          * 编写by孙凯 2015.12.17
          */
+
         private void DrawShowPicture(MyFunPictureBox picture, Graphics g)
         {
             Pen thinPen = new Pen(Brushes.Black, 1.5F);
@@ -747,15 +748,14 @@ namespace HUST_OutPut
 
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
             myDrawHelper.setXYInterval(this.myFunPictureBox.drawArea.Width, this.myFunPictureBox.drawArea.Height);
-            myDrawHelper.setZeroPoint(zeroPoint.X,  zeroPoint.Y);
+            myDrawHelper.setZeroPoint(zeroPoint.X, zeroPoint.Y);
             myDrawHelper.drawPicture(picture, g, thinPen, fatPen, fillBrushes);
 
             thinPen.Dispose();
             fatPen.Dispose();
         }
 
-
-        private void AddLogoItemWithCheck(MyPictureBox picture,int brushIndex)
+        private void AddLogoItemWithCheck(MyPictureBox picture, int brushIndex)
         {
             bool alreadyIn = false;
             foreach (LogoItem item in picture.LogoItems)
@@ -791,7 +791,7 @@ namespace HUST_OutPut
             //通过 picture.LevelLines.Rows.Count - 2
             //将FLg in (2700, 2800)排除
             //修改添加注释by孙凯
-            for (int j = 1; j < picture.LevelLines.Rows.Count-2; j++)
+            for (int j = 1; j < picture.LevelLines.Rows.Count - 2; j++)
             {
                 Point[] points = GeneratePoints(picture, j);
                 if (points != null)
@@ -834,8 +834,8 @@ namespace HUST_OutPut
                         points[2 * i + 1].Y = (int)(zeroPoint.Y - points[2 * i + 1].Y);
                     }
                     g.DrawLines(dashPen, points);
-                   // if (points[47].Y < maxRectangleY)
-                        g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY)); 
+                    // if (points[47].Y < maxRectangleY)
+                    g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY));
                 }
             }
             //绘制Flg 为 2700 的线 添加by孙凯 2015.7.7
@@ -852,8 +852,8 @@ namespace HUST_OutPut
                         points[2 * i + 1].Y = (int)(zeroPoint.Y - points[2 * i + 1].Y);
                     }
                     g.DrawLines(dashPen, points);
-                   // if (points[47].Y < maxRectangleY)
-                        g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY));  
+                    // if (points[47].Y < maxRectangleY)
+                    g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY));
                 }
             }
             //绘制Flg 为 2800 的线 添加by孙凯 2015.7.7
@@ -870,8 +870,8 @@ namespace HUST_OutPut
                         points[2 * i + 1].Y = (int)(zeroPoint.Y - points[2 * i + 1].Y);
                     }
                     g.DrawLines(dashPen, points);
-                   // if (points[47].Y < maxRectangleY)
-                        g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY));  
+                    // if (points[47].Y < maxRectangleY)
+                    g.DrawLine(dashPen, points[47], new Point(points[47].X, maxRectangleY));
                 }
             }
 
@@ -879,7 +879,6 @@ namespace HUST_OutPut
             fatPen.Dispose();
             dashPen.Dispose();
         }
-
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
@@ -895,26 +894,26 @@ namespace HUST_OutPut
                 DrawShowPicture(picture, g);
 
                 myDrawHelper.drawAxes(picture, g);
-               
+
                 DrawLogo(picture, g);
 
                 picture.drawed = true;
-               // picture.Image = memImage;
+                // picture.Image = memImage;
             }
             catch (Exception ex)
             {
                 ex.WriteLog();
                 MessageBox.Show(ex.ToString());
             }
-
         }
+
         private string WrapLogoString(string originalStr)
-        {           
-            int j=0;
+        {
+            int j = 0;
             string result = "";
             for (int i = 0; i < originalStr.Length; i++)
             {
-                result+=originalStr[i];
+                result += originalStr[i];
                 j++;
                 if (j == 5)
                 {
@@ -922,8 +921,9 @@ namespace HUST_OutPut
                     j = 0;
                 }
             }
-            return result; 
+            return result;
         }
+
         private void SortLogo(MyPictureBox picture)
         {
             for (int i = 0; i < picture.LogoItems.Count; i++)
@@ -944,6 +944,7 @@ namespace HUST_OutPut
                 picture.LogoItems.Insert(i, item); ;
             }
         }
+
         private void DrawLogo(MyPictureBox picture, Graphics g)
         {
             //修改如下 直接将所有的图标画出
@@ -961,11 +962,11 @@ namespace HUST_OutPut
                 }
             }
 
-            LogoItem newItem=new LogoItem();
-            newItem.priority=0;
-            newItem.brush=new SolidBrush(Color.SkyBlue);
-            newItem.description="原始负荷";
-            picture.LogoItems.Insert(0,newItem);
+            LogoItem newItem = new LogoItem();
+            newItem.priority = 0;
+            newItem.brush = new SolidBrush(Color.SkyBlue);
+            newItem.description = "原始负荷";
+            picture.LogoItems.Insert(0, newItem);
 
             //因为吴老师要求将部分图例合并，所以也在此处添加添加by孙凯 2016.1.19
             //抽蓄发电/抽蓄填谷合并、电力不足/调峰不足合并、新能源弃电/水电弃水合并
@@ -999,11 +1000,11 @@ namespace HUST_OutPut
             //添加结束 by 孙凯
 
             SolidBrush backBrush = new SolidBrush(Color.White);
-            
+
             Font drawFont = new Font("宋体", picture.smallFontSize);
             SolidBrush drawBrush = new SolidBrush(Color.Black);
-            Pen framePen=new Pen(Color.Black,1.0f);
-            Pen dashPen=new Pen(Color.Black,1.0f);
+            Pen framePen = new Pen(Color.Black, 1.0f);
+            Pen dashPen = new Pen(Color.Black, 1.0f);
             dashPen.DashStyle = DashStyle.Dash;
             //用于绘制Flg=27的图标
             Pen tmpPen1 = new Pen(Color.Orange, 1.0f);
@@ -1021,19 +1022,17 @@ namespace HUST_OutPut
                 , (picture.LogoItems.Count + 1) / 2 * (drawFont.Height * 2 + vacant) +
                 vacant + titleFont.Height + vacant + 3);
 
-            
             g.FillRectangle(backBrush, picture.logoPos);
-            StringFormat stringFormat=new StringFormat();
+            StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
 
-            int itemWidth = picture.logoPos.Width/2;
+            int itemWidth = picture.logoPos.Width / 2;
 
             g.DrawString("图例", titleFont, drawBrush, picture.logoPos.Left + picture.logoPos.Width / 2, picture.logoPos.Top + vacant, stringFormat);
             Pen pen = new Pen(Color.Black);
             g.DrawLine(pen, picture.logoPos.Left, picture.logoPos.Top + vacant + titleFont.Height + 3,
                 picture.logoPos.Right, picture.logoPos.Top + vacant + titleFont.Height + 3);
             Point startPoint = new Point(picture.logoPos.Left, picture.logoPos.Top + vacant + titleFont.Height + 3);
-
 
             for (int i = 0; i < picture.LogoItems.Count; i++)
             {
@@ -1054,18 +1053,21 @@ namespace HUST_OutPut
                             new PointF(point.X + 20, point.Y+(float)drawFont.Height/2.0f),
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height/2.0f)
                         };
-                        g.DrawLines(dashPen,points);
+                        g.DrawLines(dashPen, points);
                         g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                     //因为吴老师要求将部分图例合并，所以也在此处添加添加by孙凯 2016.1.19
                     //抽蓄发电/抽蓄填谷合并、电力不足/调峰不足合并、新能源弃电/水电弃水合并
-                    case 1: case 2: case 3:
-                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height );
+                    case 1:
+                    case 2:
+                    case 3:
+                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height);
                         g.FillRectangle(picture.LogoItems[i].secondBrush, point.X, point.Y + drawFont.Height, 40, drawFont.Height);
                         g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
+
                     case 4:
-                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height*2 );
+                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height * 2);
                         //g.DrawLine(framePen, point.X, point.Y + drawFont.Height, point.X + 40, point.Y + drawFont.Height);
 
                         PointF[] points3 = new PointF[]
@@ -1075,7 +1077,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 20, point.Y+(float)drawFont.Height/4.0f),
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height/4.0f)
                         };
-                        g.DrawLines(tmpPen1,points3);
+                        g.DrawLines(tmpPen1, points3);
 
                         PointF[] points4 = new PointF[]
                         {
@@ -1086,7 +1088,7 @@ namespace HUST_OutPut
                             new PointF(point.X + 28, point.Y+(float)drawFont.Height*7/4.0f),
                             new PointF(point.X + 40, point.Y+(float)drawFont.Height*7/4.0f)
                         };
-                        g.DrawLines(tmpPen1,points4);
+                        g.DrawLines(tmpPen1, points4);
                         g.DrawString(WrapLogoString(picture.LogoItems[i].description), drawFont, drawBrush, point.X + 45, point.Y);
                         break;
                     //case 2:
@@ -1190,44 +1192,49 @@ namespace HUST_OutPut
                 picture.Invalidate();
             }
         }
+
         private void pictureBox_MouseEnter(object sender, System.EventArgs e)
         {
             //((sender as PictureBox).Parent as Panel).Focus();
             (sender as PictureBox).Focus();
         }
+
         private void pictureBox_MouseLeave(object sender, System.EventArgs e)
         {
-           // this.Focus();
+            // this.Focus();
         }
+
         //指示是否正在进行图例拖动
         private bool isDragPic = false;
+
         private void pictureBox_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                MyPictureBox picture= sender as MyPictureBox;
+                MyPictureBox picture = sender as MyPictureBox;
                 Point mousePoint = new Point(e.X, e.Y);
-                if(isDragPic==true) //2013-9-22 刘水兵：当鼠标拖离图例的时候，应该也是要进行移动的.所以 用一个变量指示 是否正在拖动
+                if (isDragPic == true) //2013-9-22 刘水兵：当鼠标拖离图例的时候，应该也是要进行移动的.所以 用一个变量指示 是否正在拖动
                 {//if(picture.logoPos.Countains(mousePoint))
                     Point topleft = new Point(picture.logoPos.Left, picture.logoPos.Top);
                     picture.logoPos = new Rectangle(
-                        picture.logoPos.Left+e.X-picture.previousPos.X,
-                        picture.logoPos.Top+e.Y-picture.previousPos.Y,
+                        picture.logoPos.Left + e.X - picture.previousPos.X,
+                        picture.logoPos.Top + e.Y - picture.previousPos.Y,
                         picture.logoPos.Width,
                         picture.logoPos.Height);
-                    picture.previousPos=mousePoint;
+                    picture.previousPos = mousePoint;
                     picture.Invalidate(new Rectangle(topleft.X, topleft.Y,
                         picture.Width + e.X - picture.previousPos.X, picture.logoPos.Height + e.Y - picture.previousPos.Y));
                 }
             }
         }
+
         private void pictureBox_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            MyPictureBox picture = sender as MyPictureBox; 
+            MyPictureBox picture = sender as MyPictureBox;
             picture.previousPos = new Point(e.X, e.Y);
 
             //指示开始图例拖动
-            if(e.Button==MouseButtons.Left && picture.logoPos.Contains(new Point(e.X,e.Y)))
+            if (e.Button == MouseButtons.Left && picture.logoPos.Contains(new Point(e.X, e.Y)))
                 this.isDragPic = true;
         }
 
@@ -1240,7 +1247,8 @@ namespace HUST_OutPut
                 this.isDragPic = false;
         }
 
-        bool ctrl = false;
+        private bool ctrl = false;
+
         private void tabControl1_KeyDown(object sender, KeyEventArgs e)
         {
             ctrl = e.Control;
@@ -1269,8 +1277,7 @@ namespace HUST_OutPut
                 }
                 int x = picture.Width < parent.Width ? (parent.Width - picture.Width) / 2 : 0;
                 int y = picture.Height < parent.Height ? (parent.Height - picture.Height) / 2 : 0;
-                picture.Location=new Point(x,y);
-            
+                picture.Location = new Point(x, y);
             }
         }
 
@@ -1286,8 +1293,10 @@ namespace HUST_OutPut
         int nYSrc, // y-coordinate of source upper-left corner
         System.Int32 dwRop // raster operation code
         );
+
         private const Int32 SRCCOPY = 0xCC0020;
-        private void SavePicture(MyFunPictureBox picture,string filename)
+
+        private void SavePicture(MyFunPictureBox picture, string filename)
         {
             /*
             Graphics graphic = picture.CreateGraphics();
@@ -1316,16 +1325,14 @@ namespace HUST_OutPut
             //DrawCoordinates(imagePic, g);
 
             //DrawSpecialLines(picBox, g);
-            
-            //DrawLogo(imagePic, g);
 
+            //DrawLogo(imagePic, g);
 
             DrawShowPicture(imagePic, g);
 
             myDrawHelper.drawAxes(imagePic, g);
 
             DrawLogo(imagePic, g);
-
 
             String picPath = "";
             if (filename == "")
@@ -1363,14 +1370,14 @@ namespace HUST_OutPut
         private void 页面设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MyPictureBox picture = ((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as MyPictureBox;
-  
+
             PageSetupDialog setupDialog = new PageSetupDialog();
-            setupDialog.PageSettings =picture.pageSettings;
+            setupDialog.PageSettings = picture.pageSettings;
             setupDialog.PrinterSettings =
                 new System.Drawing.Printing.PrinterSettings();
             if (setupDialog.ShowDialog() == DialogResult.OK)
             {
-                PageSettings pageSettings=setupDialog.PageSettings;
+                PageSettings pageSettings = setupDialog.PageSettings;
                 picture.pageSettings = pageSettings;
                 isVertical = !(picture.pageSettings.Landscape);
                 int xDraw = (int)(pageSettings.Margins.Left / 254.0 * 96);
@@ -1406,6 +1413,7 @@ namespace HUST_OutPut
             }
             setupDialog.Dispose();
         }
+
         private void Print_Click(object sender, EventArgs e)
         {
             MyPictureBox picture = ((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as MyPictureBox;
@@ -1425,22 +1433,23 @@ namespace HUST_OutPut
             // Show the help button.
             printDialog1.ShowHelp = true;
 
-            // Set the Document property to the PrintDocument for 
+            // Set the Document property to the PrintDocument for
             // which the PrintPage Event has been handled. To display the
-            // dialog, either this property or the PrinterSettings property 
-            // must be set 
+            // dialog, either this property or the PrinterSettings property
+            // must be set
             printDialog1.Document = pd;
 
             DialogResult result = printDialog1.ShowDialog();
 
             // If the result is OK then print the document.
-            if (result == DialogResult.OK && printDialog1.Document!=null)
+            if (result == DialogResult.OK && printDialog1.Document != null)
             {
                 pd.Print();
             }
             pd.Dispose();
             printDialog1.Document = null;
         }
+
         private MyFunPictureBox CreatePictureFromSource(MyFunPictureBox source)
         {
             MyFunPictureBox picture = new MyFunPictureBox();
@@ -1460,7 +1469,7 @@ namespace HUST_OutPut
             int heightDraw = (int)(pageSettings.PaperSize.Height / 100.0 * 96) -
                 (int)((pageSettings.Margins.Top + pageSettings.Margins.Bottom) / 254.0 * 96);
             picture.drawArea = new Rectangle(xDraw, yDraw, widthDraw, heightDraw);
-            picture.logoPos = new Rectangle((int)(picture.Width*source.logoPos.Left/1.0/source.Width)
+            picture.logoPos = new Rectangle((int)(picture.Width * source.logoPos.Left / 1.0 / source.Width)
                 , (int)(picture.Height * source.logoPos.Top / 1.0 / source.Height)
                 , 300
                 , (picture.LogoItems.Count + 1) / 2 * 50);
@@ -1473,6 +1482,7 @@ namespace HUST_OutPut
             }
             return picture;
         }
+
         //打印事件处理
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -1499,7 +1509,7 @@ namespace HUST_OutPut
             //DrawCoordinates(imagePic, g);
 
             //DrawSpecialLines(picBox, g);
-           
+
             //DrawLogo(imagePic, g);
 
             DrawShowPicture(imagePic, g);
@@ -1549,7 +1559,6 @@ namespace HUST_OutPut
 
         private void dayLeftMove_MouseHover(object sender, EventArgs e)
         {
-  
         }
 
         private void buttonsPanel_MouseDown(object sender, MouseEventArgs e)
@@ -1566,7 +1575,7 @@ namespace HUST_OutPut
             if (e.Button == MouseButtons.Left)
             {
                 this.isMyButtonsPanelDrag = false;
-            }          
+            }
         }
 
         private void buttonsPanel_MouseMove(object sender, MouseEventArgs e)
@@ -1597,9 +1606,9 @@ namespace HUST_OutPut
         {
             shrinkPicture(myFunPictureBox, myFunPictureBox.Parent as Panel);
         }
-
     }
-    public class MyFunPictureBox:MyPictureBox
+
+    public class MyFunPictureBox : MyPictureBox
     {
         new public List<DataTable> LevelLines { get; set; }
     }

@@ -1,41 +1,35 @@
-﻿using System;
+﻿using ProS_Assm;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using System.Threading;
-using ProS_Assm;
-using LPSP_MergeDGV;
 
 namespace HUST_OutPut
 {
     public partial class SelectUserDefinedTableForm : Form
     {
-        DataSet OutDS = new DataSet(); //数据源
+        private DataSet OutDS = new DataSet(); //数据源
 
         //所有自定义表格键值对  表格名，组合类型
-        Dictionary<string, string> table=null;
+        private Dictionary<string, string> table = null;
 
         //保存用户所选择自定义表的所有信息
-        UserDefinedTable curTable = null;
-
+        private UserDefinedTable curTable = null;
 
         public progress myprogress;
+
         public void progressB()
         {
             this.myprogress = new progress();
             this.myprogress.Start(); //开始进度，直至Form1_Loading()函数末尾，才停止进度
             myprogress.ShowDialog();
-
         }
 
         public SelectUserDefinedTableForm()
         {
-            Control.CheckForIllegalCrossThreadCalls = false; 
+            Control.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
 
             //创建一个进程显示-加载数据-进度条
@@ -92,7 +86,6 @@ namespace HUST_OutPut
                 MessageBox.Show("无法读取模拟计算数据！" + exc.Message);
                 this.btnOK.Enabled = false;
             }
-
         }
 
         //获取所有的用户自定义表格
@@ -112,12 +105,11 @@ namespace HUST_OutPut
                 {
                     if (element.Name.ToLower() == "table")
                     {
-                        table.Add(element.Attributes["name"].Value + ",id=" +element.Attributes["id"].Value, element.Attributes["restructType"].Value);
+                        table.Add(element.Attributes["name"].Value + ",id=" + element.Attributes["id"].Value, element.Attributes["restructType"].Value);
                     }
                 }
             }
             catch (Exception e) { MessageBox.Show(e.Message); }
-            
         }
 
         //选择相应的表格
@@ -155,7 +147,7 @@ namespace HUST_OutPut
 
             this.myprogress.isOver = true;
 
-            tableView.newTab(mytable,curTable.listMergLink);  //第二个参数表示要合并的表格序列合集
+            tableView.newTab(mytable, curTable.listMergLink);  //第二个参数表示要合并的表格序列合集
             tableView.Text = "自定义表格";
             tableView.Owner = this;
             tableView.StartPosition = FormStartPosition.CenterScreen;
@@ -218,11 +210,11 @@ namespace HUST_OutPut
                                     //添加数据列 ,先全部添加到内存中，顺便排序
                                     foreach (XmlNode nodeColumn in node)
                                     {
-                                        //获取列的筛选 条件 
+                                        //获取列的筛选 条件
                                         Column c = new Column();
-                                        c.order=int.Parse(nodeColumn.Attributes["order"].Value);
+                                        c.order = int.Parse(nodeColumn.Attributes["order"].Value);
                                         c.refid = nodeColumn.Attributes["refid"].Value;
-                                        c.scheme=nodeColumn.Attributes["scheme"].Value;
+                                        c.scheme = nodeColumn.Attributes["scheme"].Value;
                                         c.partition = nodeColumn.Attributes["partition"].Value;
                                         c.yearLevel = nodeColumn.Attributes["yearLevel"].Value;
                                         c.dayType = nodeColumn.Attributes["dayType"].Value;
@@ -273,9 +265,9 @@ namespace HUST_OutPut
                                             MergeLink mLink = new MergeLink();
                                             mLink.rowIndex = int.Parse(nodeRow.Attributes["order"].Value);
                                             mLink.columnIndex = int.Parse(nodeHead.Attributes["startOrder"].Value);
-                                            mLink.value=nodeHead.Attributes["value"].Value;
+                                            mLink.value = nodeHead.Attributes["value"].Value;
                                             mLink.count = int.Parse(nodeHead.Attributes["throughCell"].Value);
-                                            if(nodeTable.Attributes["restructType"].Value == "column")
+                                            if (nodeTable.Attributes["restructType"].Value == "column")
                                                 mLink.mergeDir = LPSP_MergeDGV.MergeDirector.Row;
                                             else if (nodeTable.Attributes["restructType"].Value == "row")
                                                 mLink.mergeDir = LPSP_MergeDGV.MergeDirector.Column;
@@ -284,7 +276,7 @@ namespace HUST_OutPut
 
                                             row[mLink.columnIndex + 1] = mLink.value;
                                         }
-                                        dt.Rows.InsertAt(row,int.Parse(nodeRow.Attributes["order"].Value));//添加列头行
+                                        dt.Rows.InsertAt(row, int.Parse(nodeRow.Attributes["order"].Value));//添加列头行
                                     }
                                 }
                             }
@@ -321,15 +313,12 @@ namespace HUST_OutPut
                 }
             }
         }
-
-
-
     }//end of class
 
     //用户自定义表格类
-    class UserDefinedTable
+    internal class UserDefinedTable
     {
-        public string name = "";      //表格名字   
+        public string name = "";      //表格名字
         public string id = "";        //表格ID号
         public string belongTableId = "";  //表格源所属的ID号
         public string restructType = "";   //重组类型
@@ -340,7 +329,7 @@ namespace HUST_OutPut
     }
 
     //定义列
-    class Column
+    internal class Column
     {
         public int order = 0;                //列序号
         public string refid = "";            //列ID
@@ -353,16 +342,15 @@ namespace HUST_OutPut
         //获取筛选条件
         public string GetFilterString()
         {
-            return "Prj = "+scheme+" and Yrs = "+yearLevel+" and Hyd = "+hydrateCondition+" and sID = "+partition+ " and dID = "+dayType;
+            return "Prj = " + scheme + " and Yrs = " + yearLevel + " and Hyd = " + hydrateCondition + " and sID = " + partition + " and dID = " + dayType;
         }
     }
 
     //定义行
-    class Row
+    internal class Row
     {
         public int order = 0;            //行序号
         public string refcodeId = "";    //行头标志ID
-
     }
 
     //定义合并序列
@@ -370,6 +358,7 @@ namespace HUST_OutPut
     {
         //其实单元格 位置
         public int rowIndex = 0;
+
         public int columnIndex = 0;
 
         public string value = "";     //序列值

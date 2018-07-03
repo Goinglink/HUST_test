@@ -476,8 +476,8 @@ namespace ExportTools
                     for (int i = 0, sz = dts.Length; i < sz; i++)
                     {
                         CustomSheetTable dt = dts[i];
-                        string unitString = dt.unitString == null ? "" : dt.unitString;
-                        string desc = dt.desc == null ? "" : dt.desc;
+                        string unitString = dt.unitString == null ? " " : dt.unitString;
+                        string desc = dt.desc == null ? " " : dt.desc;
 
                         //  For each worksheet you want to create
                         string workSheetID = "rId" + worksheetNumber.ToString();
@@ -488,7 +488,7 @@ namespace ExportTools
 
                         // for merge the first three rows in sheetData.
                         MergeCells mergeCells;
-
+                        
                         // create sheet data
                         SheetData sheetData =
                             CreateSheetData(dt, workbookStylesPart, out mergeCells);
@@ -672,24 +672,39 @@ namespace ExportTools
                 #endregion
 
                 #region 生成数字单位说明行
-                if (unitString != null && unitString.Length > 0)
-                {
-                    Row unitStringRow = new Row();
-                    unitStringRow.RowIndex = (uint)index;
-                    cell = new TitleCell(colIndexName, unitString, index,
-                        stylesPart.Stylesheet, fillColor, 12, false, 
-                        new Alignment() { Horizontal = HorizontalAlignmentValues.Center });
-                    unitStringRow.AppendChild(cell);
-                    sheetData.AppendChild(unitStringRow);
+                //if (unitString != null && unitString.Length > 0)
+                //{
+                //    Row unitStringRow = new Row();
+                //    unitStringRow.RowIndex = (uint)index;
+                //    cell = new TitleCell(colIndexName, unitString, index,
+                //        stylesPart.Stylesheet, fillColor, 12, false, 
+                //        new Alignment() { Horizontal = HorizontalAlignmentValues.Center });
+                //    unitStringRow.AppendChild(cell);
+                //    sheetData.AppendChild(unitStringRow);
 
-                    // merge all of cells in the second row.
-                    mergeCells.Append(new MergeCell()
-                    {
-                        Reference =
-                        new StringValue(colIndexName + index + ":" + getColumnName(numCols) + index)
-                    });
-                    index++;
-                }
+                //    // merge all of cells in the second row.
+                //    mergeCells.Append(new MergeCell()
+                //    {
+                //        Reference =
+                //        new StringValue(colIndexName + index + ":" + getColumnName(numCols) + index)
+                //    });
+                //    index++;
+                //}
+                Row unitStringRow = new Row();
+                unitStringRow.RowIndex = (uint)index;
+                cell = new TitleCell(colIndexName, unitString, index,
+                     stylesPart.Stylesheet, fillColor, 12, false, 
+                     new Alignment() { Horizontal = HorizontalAlignmentValues.Center });
+                unitStringRow.AppendChild(cell);
+                sheetData.AppendChild(unitStringRow);
+
+                // merge all of cells in the second row.
+                mergeCells.Append(new MergeCell()
+                {
+                     Reference =
+                     new StringValue(colIndexName + index + ":" + getColumnName(numCols) + index)
+                });
+                index++;
                 #endregion
 
                 #region 生成描述信息行
@@ -723,7 +738,12 @@ namespace ExportTools
                     HeaderCell c = new HeaderCell(getColumnName(col + 1),
                         headerNames[col], index, stylesPart.Stylesheet,
                        color, 12, true);
-
+                    CellFormat cellFormat = new CellFormat();
+                    cellFormat.Alignment = new Alignment { Horizontal = HorizontalAlignmentValues.Center };
+                    stylesPart.Stylesheet.CellFormats.Append(cellFormat);
+                    UInt32Value cindex = stylesPart.Stylesheet.CellFormats.Count;
+                    c.StyleIndex = cindex;
+                    stylesPart.Stylesheet.CellFormats.Count++;
                     header.AppendChild(c);
                 }
                 sheetData.AppendChild(header);
@@ -734,7 +754,6 @@ namespace ExportTools
                 {
                     index++;
                     object[] dr = datas[i];
-                    continue;
                     var r = new Row { RowIndex = (uint)index };
 
                     for (int col = 0; col < numCols; col++)
@@ -744,8 +763,22 @@ namespace ExportTools
                         {
                             if (obj.GetType() == typeof(string))
                             {
-
+                                string str = obj.ToString();
+                                int num = 0;
+                                while(str[num]==' ')
+                                {
+                                    num++;
+                                }
                                 TextCell c = new TextCell(getColumnName(col + 1), obj.ToString(), index);
+                                if (num != 0)
+                                {
+                                    CellFormat cellFormat = new CellFormat();
+                                    cellFormat.Alignment = new Alignment { Indent = Convert.ToUInt32(num / 2 + 1) };
+                                    stylesPart.Stylesheet.CellFormats.Append(cellFormat);
+                                    UInt32Value cindex = stylesPart.Stylesheet.CellFormats.Count;
+                                    c.StyleIndex = cindex;
+                                    stylesPart.Stylesheet.CellFormats.Count++;
+                                }
                                 r.AppendChild(c);
 
                             }
@@ -770,8 +803,14 @@ namespace ExportTools
                                 //FormatedNumberCell c = new FormatedNumberCell(getColumnName(col + 1), obj.ToString(), index);
                                 //r.AppendChild(c);
                                 string str = obj.ToString();
-                                if (str.Length > 6) str = str.Substring(0, 6);
+                                //if (str.Length > 6) str = str.Substring(0, 6);
                                 TextCell c = new TextCell(getColumnName(col + 1), str, index);
+                                CellFormat cellFormat = new CellFormat();
+                                cellFormat.Alignment = new Alignment { Horizontal = HorizontalAlignmentValues.Center };
+                                stylesPart.Stylesheet.CellFormats.Append(cellFormat);
+                                UInt32Value cindex = stylesPart.Stylesheet.CellFormats.Count;
+                                c.StyleIndex = cindex;
+                                stylesPart.Stylesheet.CellFormats.Count++;
                                 r.AppendChild(c);
                             }
                             else

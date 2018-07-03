@@ -13,6 +13,7 @@ namespace HUST_Test
         private DataSet cfgDS = new DataSet();
         private HUST_Univ.UniChart chart;       // 表单输出结果
         private List<HUST_Univ.UniChart> charts = new List<HUST_Univ.UniChart>(); // 表单输出结果集
+        public string PosTableName = null; 
 
         public HUST_Test()
         { InitializeComponent(); }
@@ -70,33 +71,26 @@ namespace HUST_Test
             {
                 // 生成电站工作位置输出结果集List<UniChart> charts
                 if (!GetListUniCharts("位置", cmbPos.Text.Trim())) return;
-                //foreach (UniChart cht in charts)  // 调试
-                //{
-                //  foreach (DataTable tbl in cht.chart.Tables)
-                //  { if (tbl.Rows.Count > 5) txtPath.Text += "  " + tbl.Rows[4][2].ToString(); }
-                //}
-
                 // 下面添加电站工作位置输出程序（输出结果图表存储路径：outPath；输出数据集：List<UniChart> charts）
                 int tableCount = charts[0].chart.Tables.Count;
                 DataTable[] dt = new DataTable[tableCount];//需要将dataset数据集转化为datatable来处理数据
-                for(int i = 0; i < tableCount; i++)
+                string Allstr = charts[0].title + "*" + charts[0].remark + "*" + charts[0].unit + "*" + charts[0].page;
+                for (int i = 0; i < tableCount; i++)
                 {
-                    dt[i] = charts[0].chart.Tables[i].Clone();
+                    string[] titleName = charts[0].title.Split(' ');
+                    if (!titleName[0].Contains(cmbPos.SelectedItem.ToString())) continue;
+                    dt[i] = charts[0].chart.Tables[i];
+                    dt[i].TableName = dt[i].TableName+"*"+Allstr;
+                   // Console.WriteLine("dt[" + i + "].TableName:" + dt[i].TableName);
                 }
-                //int i = 0;//定义datatable索引初始值
-                //foreach (HUST_Univ.UniChart uc in charts)
-                //{
-                //    string[] titleName = uc.title.Split(' ');
-                //    if (!titleName[0].Contains(cmbPos.SelectedItem.ToString())) continue;
-                //    dt[i] = uc.chart.Tables[0];
-                //    dt[i].TableName = titleName[0];
-                //    string allStr = uc.title + "*" + uc.remark + "*" + uc.unit + "*" + uc.page;//将每张图的标题、备注、单位等信息传入到datatable里面供调用
-                //    dt[i].TableName = allStr;
-                //    i++;
-                //}
-                HUST_OutPut.FigureView figureView = new HUST_OutPut.FigureView(true);
+                if (dt.Length != 3)
+                {
+                    return;
+                }
+
+                HUST_OutPut.FigureView figureView = new HUST_OutPut.FigureView(true, dt);
                 figureView.Text = "输出电站工作位置图";
-                figureView.newTab(dt);
+                figureView.newTab(Allstr);
                 //figureView.Owner = this;
                 figureView.StartPosition = FormStartPosition.CenterScreen;
                 figureView.Show();
@@ -136,18 +130,16 @@ namespace HUST_Test
                 DataRow[] rows = cfgDS.Tables["TEST"].Select("Flag = '" + flag + "'");
                 foreach (DataRow row in rows)
                 {
-<<<<<<< HEAD
-                    if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
                     chart = new HUST_Univ.UniChart();
-=======
-                    if(flag=="表单")
-                      {
-                         if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
-                      }
+                    if (flag == "表单")
+                    {
+                        if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
+                    }
                     else
-                        if (row["Title"].ToString().Trim().Substring(0, 4) != ttl) continue;
-                    chart = new UniChart();
->>>>>>> e16dab60dd8ee5c3633cd4306fb91790b61f2984
+                    {
+                        if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf(" ")) != ttl) continue;
+                    }
+
                     chart.title = row["Title"].ToString().Trim();
                     string file = outPath + chart.title.Substring(0, row["Title"].ToString().Trim().IndexOf(" ")).Trim() + ".xml";
                     if (!File.Exists(file)) continue;
@@ -210,6 +202,7 @@ namespace HUST_Test
                 {
                     return false;
                 }
+
                 #endregion 打开cfgDS文件
 
                 #region 窗体选项初始化

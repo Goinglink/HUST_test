@@ -34,10 +34,10 @@
             this.保存图片ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.页面设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.dlgSavePic = new System.Windows.Forms.SaveFileDialog();
             this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.dlgSavePic = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,18 +53,21 @@
             this.tabControl1.CloseButtonVisible = true;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = -1;
-            this.tabControl1.Size = new System.Drawing.Size(839, 531);
+            this.tabControl1.Size = new System.Drawing.Size(1119, 664);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl1.Text = "tabControl1";
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyDown);
             this.tabControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyUp);
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.保存图片ToolStripMenuItem,
             this.页面设置ToolStripMenuItem,
@@ -72,28 +75,43 @@
             this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem,
             this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(283, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(337, 124);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 保存图片ToolStripMenuItem
             // 
             this.保存图片ToolStripMenuItem.Name = "保存图片ToolStripMenuItem";
-            this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.保存图片ToolStripMenuItem.Size = new System.Drawing.Size(336, 24);
             this.保存图片ToolStripMenuItem.Text = "保存图片";
             this.保存图片ToolStripMenuItem.Click += new System.EventHandler(this.保存图片ToolStripMenuItem_Click);
             // 
             // 页面设置ToolStripMenuItem
             // 
             this.页面设置ToolStripMenuItem.Name = "页面设置ToolStripMenuItem";
-            this.页面设置ToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.页面设置ToolStripMenuItem.Size = new System.Drawing.Size(336, 24);
             this.页面设置ToolStripMenuItem.Text = "页面设置";
             this.页面设置ToolStripMenuItem.Click += new System.EventHandler(this.页面设置ToolStripMenuItem_Click);
             // 
             // 打印ToolStripMenuItem
             // 
             this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
-            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(336, 24);
             this.打印ToolStripMenuItem.Text = "打印";
             this.打印ToolStripMenuItem.Click += new System.EventHandler(this.Print_Click);
+            // 
+            // 放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem
+            // 
+            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Name = "放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem";
+            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Size = new System.Drawing.Size(336, 24);
+            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Text = "放大图片（Ctrl+鼠标左键+向上滚轮）";
+            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Click += new System.EventHandler(this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem_Click);
+            // 
+            // 缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem
+            // 
+            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Name = "缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem";
+            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Size = new System.Drawing.Size(336, 24);
+            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Text = "缩小图片（Ctrl+鼠标左键+向下滚轮）";
+            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Click += new System.EventHandler(this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem_Click);
             // 
             // printDialog1
             // 
@@ -103,27 +121,14 @@
             // 
             this.dlgSavePic.Filter = "*.bmp|*.bmp|*.png|*.png|*.jpg|*.jpg|*.gif|*.gif";
             // 
-            // 放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem
-            // 
-            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Name = "放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem";
-            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Text = "放大图片（Ctrl+鼠标左键+向上滚轮）";
-            this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem.Click += new System.EventHandler(this.放大图片Ctrl鼠标左键向上滚轮ToolStripMenuItem_Click);
-            // 
-            // 缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem
-            // 
-            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Name = "缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem";
-            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Text = "缩小图片（Ctrl+鼠标左键+向下滚轮）";
-            this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem.Click += new System.EventHandler(this.缩小图片Ctrl鼠标左键向下滚轮ToolStripMenuItem_Click);
-            // 
             // FigureView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 531);
+            this.ClientSize = new System.Drawing.Size(1119, 664);
             this.Controls.Add(this.tabControl1);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FigureView";
             this.Text = "FigureView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

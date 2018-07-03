@@ -117,7 +117,7 @@
     </Reference>
     <Reference Include="LPSP_HUST, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\电力系统程序\CSPS_ProS\bin\Debug\LPSP_HUST.dll</HintPath>
+      <HintPath>D:\Hust_Test\LPSP_OutPut\bin\Debug\LPSP_HUST.dll</HintPath>
     </Reference>
     <Reference Include="LPSP_MergeDGV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

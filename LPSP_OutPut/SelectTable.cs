@@ -1,30 +1,30 @@
 ﻿/*************************************
-*  电力平衡模拟功能 
+*  电力平衡模拟功能
 *  Balance of power simulate function
 *  Time:2016-3-30
 *  Modified by Jiming Yin
 **************************************/
 
+using DevComponents.DotNetBar.Controls;
+using ProS_Assm;
 using System;
 using System.Data;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using System.Threading;
-using LPSP_MergeDGV;
-using ProS_Assm;
-using DevComponents.DotNetBar.Controls;
 
 namespace HUST_OutPut
 {
     public partial class SelectTable : DevComponents.DotNetBar.Office2007Form
     {
-        DataSet OutDS = new DataSet();
-        DataSet InDS = new DataSet();
+        private DataSet OutDS = new DataSet();
+        private DataSet InDS = new DataSet();
         public progress myprogress;
         private TemplateInfo templateInfo = new TemplateInfo();
         private DataTable formDescription = new DataTable();
         private int deciNum;//保存小数位数，只在生成表格的时候使用
         private bool isClosed = false; //保存用户是否要关闭窗口
+
         /// <summary>
         /// Default initialize function
         /// </summary>
@@ -90,7 +90,6 @@ namespace HUST_OutPut
                     this.myprogress.isOver = true;
                 MessageBox.Show("无法读取模拟计算数据！" + exc.Message);
             }
-
         }
 
         /// <summary>
@@ -130,7 +129,8 @@ namespace HUST_OutPut
                 dataGridViewX1.Columns[2].FillWeight = 400;
                 dataGridViewX1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 dataGridViewX1.AllowUserToAddRows = false;
-            }catch(Exception){}
+            }
+            catch (Exception) { }
         }
 
         /// <summary>
@@ -162,11 +162,11 @@ namespace HUST_OutPut
         /// </summary>
         /// <param name="cb"></param>
         /// <param name="itemIndex"></param>
-        private void AddRowToFormDescription(ComboBox cb,int itemIndex)
+        private void AddRowToFormDescription(ComboBox cb, int itemIndex)
         {
-            DataRow row=formDescription.NewRow();
+            DataRow row = formDescription.NewRow();
             formDescription.Rows.Add(row);
-            row["编号"] = GenFormNo(formDescription.Rows.Count-1);
+            row["编号"] = GenFormNo(formDescription.Rows.Count - 1);
 
             string formName = "";//To get forms name
 
@@ -192,7 +192,7 @@ namespace HUST_OutPut
             subStrs = comboBoxEx2.Text.Split(new char[] { '-' });
             if (cb == comboBoxEx2)
                 subStrs = comboBoxEx2.Items[itemIndex].ToString().Split(new char[] { '-' });
-            additionalDescription +="方案"+ subStrs[subStrs.Length - 1]+",";
+            additionalDescription += "方案" + subStrs[subStrs.Length - 1] + ",";
 
             subStrs = comboBoxEx5.Text.Split(new char[] { '-' });
             if (cb == comboBoxEx5)
@@ -200,7 +200,6 @@ namespace HUST_OutPut
             additionalDescription += subStrs[subStrs.Length - 1];
 
             row["备注"] = additionalDescription;
-
         }
 
         /// <summary>
@@ -221,7 +220,7 @@ namespace HUST_OutPut
             {
                 string subStr = str.Substring(index);
                 int j = 0;
-                while (j<subStr.Length-1 && subStr[j] == '0') j++;
+                while (j < subStr.Length - 1 && subStr[j] == '0') j++;
                 if (Int32.TryParse(subStr.Substring(j), out val) == false)
                     break;
                 else
@@ -247,14 +246,13 @@ namespace HUST_OutPut
             this.myprogress = new progress();
             this.myprogress.Start(); //开始进度，直至Form1_Loading()函数末尾，才停止进度
             myprogress.ShowDialog();
-            
         }
 
         private string GetSysNameByID(string id)
         {
-            DataTable dt=UniVars.InDS.Tables["系统表"];
-            foreach(DataRow row in dt.Rows)
-                if(row["节点ID"].ToString()==id)
+            DataTable dt = UniVars.InDS.Tables["系统表"];
+            foreach (DataRow row in dt.Rows)
+                if (row["节点ID"].ToString() == id)
                     return row["节点名称"].ToString();
             return null;
         }
@@ -266,9 +264,8 @@ namespace HUST_OutPut
         /// <param name="s"></param>
         private void GetTemplateInformation(string s)
         {
-
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -279,8 +276,8 @@ namespace HUST_OutPut
                     if (nodelist.Count > 0)
                     {
                         foreach (XmlNode el in nodelist)//读元素值
-                        {                            
-                            if (el.Name.ToLower().Equals("item") && 
+                        {
+                            if (el.Name.ToLower().Equals("item") &&
                                 el.Attributes["id"].Value.ToString().Trim().Equals(s)
                                 && el.Attributes["isFixedTemplate"] != null)
                             {
@@ -302,7 +299,7 @@ namespace HUST_OutPut
                                         if (ell.Name.ToLower().Equals("unittype"))
                                         {
                                             templateInfo.UnitTypeString1 = ell.ChildNodes[0].InnerText;
-                                            templateInfo.UnitTypeString2 = ell.ChildNodes[1].InnerText;                                            
+                                            templateInfo.UnitTypeString2 = ell.ChildNodes[1].InnerText;
                                         }
                                         // Columns
                                         if (ell.Name.ToLower().Equals("columns"))
@@ -320,7 +317,6 @@ namespace HUST_OutPut
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
@@ -351,7 +347,7 @@ namespace HUST_OutPut
                             this.comboBoxEx1.Items.Clear();
                             foreach (XmlNode el in nodelist)//读元素值
                             {
-                                if (el.Name.ToLower() == "item" && el.Attributes["isFixedTemplate"]!=null)
+                                if (el.Name.ToLower() == "item" && el.Attributes["isFixedTemplate"] != null)
                                     this.comboBoxEx1.Items.Add(el.Attributes["id"].Value.ToString().Trim() +
                                         "-" + el.Attributes["name"].Value.ToString());
                             }
@@ -365,8 +361,8 @@ namespace HUST_OutPut
             {
                 return false;
             }
-
         }
+
         //重置combobox
         private void ComboboxReset()
         {
@@ -376,6 +372,7 @@ namespace HUST_OutPut
             comboBoxEx5.SelectedIndex = -1;
             comboBoxEx6.SelectedIndex = -1;
         }
+
         //让下拉列表框联动函数
         /// <summary>
         /// when combox changed ,reset comboBoxEx2/3/5
@@ -385,7 +382,8 @@ namespace HUST_OutPut
         {
             ComboboxReset();
 
-            #region initial comboBoxEx2 
+            #region initial comboBoxEx2
+
             comboBoxEx2.Items.Clear();
             DataTable distinctValues = OutDS.Tables[s].DefaultView.ToTable(true, "Prj");
             DataTable dt = InDS.Tables["方案表"];
@@ -400,21 +398,20 @@ namespace HUST_OutPut
                         comboBoxEx2.Items.Add(str);
                         break;
                     }
-                    else if(r[2].ToString() == "无")
+                    else if (r[2].ToString() == "无")
                     {
                         comboBoxEx2.Items.Add(row[0].ToString());
                         break;
                     }
-                    
                 }
-                
             }
             if (comboBoxEx2.Items.Count > 0)
             {
                 comboBoxEx2.Items.Add("ALL");
-               // comboBoxEx2.SelectedIndex = 0;
+                // comboBoxEx2.SelectedIndex = 0;
             }
-            #endregion
+
+            #endregion initial comboBoxEx2
 
             //initial comboBoxEx3 about system and partition
             switch (templateInfo.SysIDType)
@@ -424,20 +421,23 @@ namespace HUST_OutPut
                     //系统及分区
                     SysPart();//initial comboBoxEx3
                     break;
+
                 case "2":
                     labelX6.Text = "  电站名称：";
                     //get power station list to ininial comboBoxEx3
                     genPart(comboBoxEx3);
                     break;
+
                 case "3":
                     labelX6.Text = "联络线名称：";
                     //get contact line name list to ininial comboBoxEx3
-                    linePart(comboBoxEx3,3);
+                    linePart(comboBoxEx3, 3);
                     break;
+
                 case "4":
                     labelX6.Text = "输电线名称：";
                     //get power line name list to ininial comboBoxEx3
-                    linePart(comboBoxEx3,4);
+                    linePart(comboBoxEx3, 4);
                     break;
             }
 
@@ -447,12 +447,13 @@ namespace HUST_OutPut
                 case "1":
                     dayPart1(comboBoxEx5);
                     break;
+
                 case "2":
                     dayPart2(comboBoxEx5);
                     break;
             }
         }
-        
+
         //加载方案描述
         private void prjPart()
         {
@@ -477,14 +478,16 @@ namespace HUST_OutPut
                             StringSplitOptions.None);
                         if (columnPartNames[0] == "项  目")
                             continue;
-                        if (dt.Rows[rowIndex][x].ToString().Trim()!="")
-                            dt.Rows[rowIndex][x] = Convert.ToDouble(dt.Rows[rowIndex][x])*Convert.ToDouble(factor);
+                        if (dt.Rows[rowIndex][x].ToString().Trim() != "")
+                            dt.Rows[rowIndex][x] = Convert.ToDouble(dt.Rows[rowIndex][x]) * Convert.ToDouble(factor);
                     }
                     break;
+
                 default:
                     break;
             }
         }
+
         //修改表的行名和列名
         private void changeName(DataTable dt, int x)
         {
@@ -504,7 +507,7 @@ namespace HUST_OutPut
                     if (!this.rb0.Checked)
                         if (columnNameAndFactor[1] != "1")
                             foreach (DataRow row in dt.Rows)
-                                if(row[i].ToString().Trim()!="")
+                                if (row[i].ToString().Trim() != "")
                                     row[i] = Convert.ToDouble(row[i]) * Convert.ToDouble(columnNameAndFactor[1]);
                 }
             }
@@ -514,7 +517,6 @@ namespace HUST_OutPut
             {
                 string cName1 = dt.Rows[j][x].ToString();
                 string[] arrStr11 = cName1.Split(new string[] { "-" }, StringSplitOptions.None);
-
 
                 if (arrStr11[0] == "自定义")
                     dt.Rows[j][x] = arrStr11[1].ToString();
@@ -543,7 +545,7 @@ namespace HUST_OutPut
                         string[] rowAndFactor = getRowNameAndFactor(arrStr11[0], arrStr11[1]);
                         dt.Rows[j][x] = "  " + n.ToString() + "." + rowAndFactor[0];
                         if (!this.rb0.Checked)
-                            updateRowWithFactor(dt, j, rowAndFactor[1]); 
+                            updateRowWithFactor(dt, j, rowAndFactor[1]);
                     }
                     else if (name.Length == 3)
                     {
@@ -555,11 +557,12 @@ namespace HUST_OutPut
                 }
             }
         }
+
         private string[] getColName(string a, string b)
         {
             string[] returnStr = new string[2];
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -577,7 +580,6 @@ namespace HUST_OutPut
                                 XmlNodeList nl = el.ChildNodes;
                                 foreach (XmlNode ex in nl)
                                 {
-
                                     if (ex.Name.ToLower() == "columns")
                                     {
                                         XmlNodeList nx = ex.ChildNodes;
@@ -601,12 +603,13 @@ namespace HUST_OutPut
             }
             return returnStr;
         }
+
         private string[] getRowNameAndFactor(string a, string b)
         {
-            string[] returnStr =new string[2];
+            string[] returnStr = new string[2];
             returnStr[1] = "1";
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -624,7 +627,6 @@ namespace HUST_OutPut
                                 XmlNodeList nl = el.ChildNodes;
                                 foreach (XmlNode ex in nl)
                                 {
-
                                     if (ex.Name.ToLower() == "rows")
                                     {
                                         XmlNodeList nx = ex.ChildNodes;
@@ -633,7 +635,7 @@ namespace HUST_OutPut
                                             if (b.Equals(xx.Attributes["code"].Value.ToString()))
                                             {
                                                 returnStr[0] = xx.Attributes["content"].Value.ToString();
-                                                if(xx.Attributes["Factor"]!=null)
+                                                if (xx.Attributes["Factor"] != null)
                                                     returnStr[1] = xx.Attributes["Factor"].Value.ToString();
                                             }
                                         }
@@ -646,6 +648,7 @@ namespace HUST_OutPut
             }
             return returnStr;
         }
+
         private string convertInt(int d)
         {
             string tem = "";
@@ -669,10 +672,8 @@ namespace HUST_OutPut
             return tem;
         }
 
-
         private string PrepareFilterString(string itemValue)
         {
-
             string str = "";
 
             //方案
@@ -698,7 +699,7 @@ namespace HUST_OutPut
                 str += " and sID=" + itemValue;
             else
                 str += " and sID=" + comboBoxEx3.Text.Split(new string[] { "-" }, StringSplitOptions.None)[0];
-                    
+
             //日类型
             if (comboBoxEx5.Text == "ALL")
                 str += " and dID=" + itemValue;
@@ -707,7 +708,7 @@ namespace HUST_OutPut
 
             return str;
         }
-      
+
         //GEN数据写入, 这个函数好像没有用到
         private void writeDataForHST(ref DataTable dt, string combox)
         {
@@ -716,7 +717,7 @@ namespace HUST_OutPut
             dv.RowFilter = PrepareFilterString(combox);
             for (int k = 0; k < dv.Count; k++)
             {
-                DataRow row=dt.NewRow();
+                DataRow row = dt.NewRow();
                 for (int x = 0; x < dt.Columns.Count; x++)
                 {
                     string[] columnPartNames = dt.Columns[x].ColumnName.Split(new string[] { "." }, StringSplitOptions.None);
@@ -724,7 +725,6 @@ namespace HUST_OutPut
                 }
                 dt.Rows.Add(row);
             }
-
         }
 
         //往表格里填充数据
@@ -773,11 +773,12 @@ namespace HUST_OutPut
                             }
                         }
                         break;
+
                     default:
                         MessageBox.Show("default!!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
-            }        
+            }
             return dt;
         }
 
@@ -796,7 +797,7 @@ namespace HUST_OutPut
                 i++;
             }
             comboBoxEx3.Items.Add("ALL");
-            
+
             //if (comboBoxEx3.Items.Count > 0)
             //    comboBoxEx3.SelectedIndex = 0;
         }
@@ -805,8 +806,8 @@ namespace HUST_OutPut
         private int sysPart1()
         {
             foreach (object item in comboBoxEx3.Items)
-                if (item.ToString()!="ALL")
-                    this.comboBoxEx5.Items.Add(item.ToString()+"最大负荷日");
+                if (item.ToString() != "ALL")
+                    this.comboBoxEx5.Items.Add(item.ToString() + "最大负荷日");
             return comboBoxEx3.Items.Count;
         }
 
@@ -834,7 +835,7 @@ namespace HUST_OutPut
             comboBox.Items.Add(i++ + "-周六");
             comboBox.Items.Add(i++ + "-周日");
             comboBox.Items.Add("ALL");
-           // comboBox.SelectedIndex = 0;
+            // comboBox.SelectedIndex = 0;
         }
 
         //读日类型，有2种的
@@ -844,7 +845,7 @@ namespace HUST_OutPut
             comboBox.Items.Add("0-最大负荷日合计");
             comboBox.Items.Add("1-年总计");
             comboBox.Items.Add("ALL");
-          //  comboBox.SelectedIndex = 0;
+            //  comboBox.SelectedIndex = 0;
         }
 
         //读电站名称
@@ -852,9 +853,9 @@ namespace HUST_OutPut
         {
             comboBox.Items.Clear();
             DataView rows = UniVars.InDS.Tables["系统表"].DefaultView;
-            rows.RowFilter="节点类型 >=300 and 节点类型 <400";
+            rows.RowFilter = "节点类型 >=300 and 节点类型 <400";
             int i = 0;
-            for (int index=0;index<rows.Count;index++)
+            for (int index = 0; index < rows.Count; index++)
             {
                 comboBox.Items.Add(i + "-" + rows[index]["节点名称"].ToString());
                 i++;
@@ -863,15 +864,16 @@ namespace HUST_OutPut
             if (comboBox.Items.Count > 0)
                 comboBox.SelectedIndex = 0;
         }
+
         //读线路名称
-        private void linePart(ComboBox comboBox,int index)
+        private void linePart(ComboBox comboBox, int index)
         {
             comboBox.Items.Clear();
             DataView rows = UniVars.InDS.Tables["系统表"].DefaultView;
             rows.RowFilter = "节点类型 >=300 and 节点类型 <400";
             if (index == 3)
                 rows.RowFilter = "节点类型 in (400,401) and IT01 = 0";
-            else if(index==4)
+            else if (index == 4)
                 rows.RowFilter = "节点类型 in (400,401) and IT01 <> 0";
             else
                 rows.RowFilter = "节点类型 >=100 and 节点类型 <200";
@@ -886,6 +888,7 @@ namespace HUST_OutPut
             if (comboBox.Items.Count > 0)
                 comboBox.SelectedIndex = 0;
         }
+
         private DataTable[] selectTable()
         {
             string fName = "";
@@ -921,7 +924,7 @@ namespace HUST_OutPut
                 return d;
             }
 
-                //d为所有水文条件表
+            //d为所有水文条件表
             else if (comboBoxEx6.Text == "ALL")
             {
                 int count = comboBoxEx6.Items.Count - 1;
@@ -975,14 +978,14 @@ namespace HUST_OutPut
                 int cc = dt.Rows.Count;
                 int x = 0;
                 dt = writeData(fName, ref dt, ref x, null, 0);
-                dt.TableName = readTabname1(0);   
+                dt.TableName = readTabname1(0);
                 d[0] = dt;
                 DeleteNullRows(d[0]);
                 changeName(d[0], x);
                 return d;
             }
-
         }
+
         private void DeleteNullRows(DataTable dt)
         {
             for (int rowIndex = 0; rowIndex < dt.Rows.Count;)
@@ -997,6 +1000,7 @@ namespace HUST_OutPut
                     rowIndex++;
             }
         }
+
         //创建c个相同格式的数据表
         private DataTable[] readAll(int c)
         {
@@ -1016,8 +1020,8 @@ namespace HUST_OutPut
 
             DataTable dt = new DataTable();
             XmlDocument xmldoc = new XmlDocument();
-            String a = Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+"";
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            String a = Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + "";
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -1027,7 +1031,7 @@ namespace HUST_OutPut
                     XmlNodeList nodelist = element.ChildNodes;
                     foreach (XmlNode el in nodelist)//读元素值
                     {
-                        if (el.Name.ToLower() == "item" && el.Attributes["isFixedTemplate"]!=null &&
+                        if (el.Name.ToLower() == "item" && el.Attributes["isFixedTemplate"] != null &&
                             el.Attributes["id"].Value.ToString().Equals(arrStr1[0]))
                         {
                             XmlNodeList nl = el.ChildNodes;
@@ -1042,7 +1046,6 @@ namespace HUST_OutPut
                                         myDataColumn = new DataColumn();
                                         if (xx.Attributes["belongTableId"].Value.ToString() == "自定义")
                                         {
-
                                         }
                                         else
                                         {
@@ -1073,10 +1076,9 @@ namespace HUST_OutPut
                                         dr = dt.NewRow();
                                         if (xx.Attributes["belongTableId"].Value.ToString() == "自定义")
                                         {
-
                                         }
                                         else
-                                            dr[sign] = xx.Attributes["belongTableId"].Value.ToString() + 
+                                            dr[sign] = xx.Attributes["belongTableId"].Value.ToString() +
                                                 "-" + xx.Attributes["refcodeId"].Value.ToString();
                                         dt.Rows.Add(dr);
                                     }
@@ -1087,7 +1089,6 @@ namespace HUST_OutPut
                 }
             }
 
-
             return dt;
         }
 
@@ -1096,10 +1097,10 @@ namespace HUST_OutPut
         {
             string s = "";
             s += "表" + formDescription.Rows[index]["编号"].ToString() + "^";
-            s +=  formDescription.Rows[index]["表格名称"].ToString() + "^";
-            if(this.checkBox2.Checked)
+            s += formDescription.Rows[index]["表格名称"].ToString() + "^";
+            if (this.checkBox2.Checked)
                 s += formDescription.Rows[index]["备注"].ToString();
-            s+="^";
+            s += "^";
             s += labelX11.Text;
             return s;
         }
@@ -1129,7 +1130,7 @@ namespace HUST_OutPut
             this.rb0.Enabled = enable;
             if (enable)
             {
-                //enable to add rows number 
+                //enable to add rows number
                 this.checkBox1.Checked = enable;
             }
             this.rb0.Checked = true;
@@ -1157,16 +1158,17 @@ namespace HUST_OutPut
                 this.GetTemplateInformation(arrStr1[0].Trim());
                 //enable combox can be changed
                 EnableConditionSelect(true);
-                //change other combox when one conbox selection had changed 
+                //change other combox when one conbox selection had changed
                 this.combChange(templateInfo.SourceTableName);
-                
+
                 this.ReadHistory(arrStr1[0]);
             }
         }
+
         // two function have the same usage,why?
         private void ReadHistory(string templateID)
         {
-            readHistoryByTemplateID(templateID,1);
+            readHistoryByTemplateID(templateID, 1);
         }
 
         /// <summary>
@@ -1176,31 +1178,32 @@ namespace HUST_OutPut
         {
             if (this.comboBoxEx2.Items.Count > 0)
                 this.comboBoxEx2.SelectedIndex = 0;
-            
+
             if (this.comboBoxEx4.Items.Count > 0)
                 this.comboBoxEx4.SelectedIndex = 0;
-            
+
             if (this.comboBoxEx6.Items.Count > 0)
                 this.comboBoxEx6.SelectedIndex = 0;
-            
+
             if (this.comboBoxEx3.Items.Count > 0)
                 this.comboBoxEx3.SelectedIndex = 0;
-            
+
             if (this.comboBoxEx5.Items.Count > 0)
                 this.comboBoxEx5.SelectedIndex = 0;
 
-            this.rb0.Checked = true;            
+            this.rb0.Checked = true;
         }
+
         //initial comboBox2-6
         private void ResetCondition()
         {
-            this.comboBoxEx2.SelectedIndex=-1;
-            this.comboBoxEx4.SelectedIndex=-1;
-            this.comboBoxEx6.SelectedIndex=-1;
-            this.comboBoxEx3.SelectedIndex=-1;
-            this.comboBoxEx5.SelectedIndex=-1;
+            this.comboBoxEx2.SelectedIndex = -1;
+            this.comboBoxEx4.SelectedIndex = -1;
+            this.comboBoxEx6.SelectedIndex = -1;
+            this.comboBoxEx3.SelectedIndex = -1;
+            this.comboBoxEx5.SelectedIndex = -1;
 
-            this.rb0.Checked=false;
+            this.rb0.Checked = false;
         }
 
         /// <summary>
@@ -1208,29 +1211,29 @@ namespace HUST_OutPut
         /// </summary>
         /// <param name="templateID"></param>
         /// <param name="type"></param>
-        private void readHistoryByTemplateID(string templateID,int type)
+        private void readHistoryByTemplateID(string templateID, int type)
         {
             ResetCondition();
-            
+
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
             {
                 if (element.Name.ToLower() == "history")
                 {
-                    XmlNodeList nodelist=null ;
+                    XmlNodeList nodelist = null;
                     foreach (XmlNode node in element.ChildNodes)
                         if (node.Name.ToLower() == "fixedtemplate")
                             nodelist = node.ChildNodes;
-                   
+
                     if (nodelist != null)
                     {
                         foreach (XmlNode el in nodelist)//读元素值
                         {
                             String c = el.Name.ToString();
-                            if (el.Name.ToLower() == "condition" && 
+                            if (el.Name.ToLower() == "condition" &&
                                 el.Attributes["templetID"].Value.ToString().Equals(templateID))
                             {
                                 bool hasAll = false;
@@ -1287,7 +1290,7 @@ namespace HUST_OutPut
                                     else
                                         hasAll = true;
                                 comboBoxEx5.SelectedIndex = tmpIndex;
-                                                             
+
                                 if (el.ChildNodes[5].InnerText == "0")
                                     this.checkBox1.Checked = false;
                                 else
@@ -1312,7 +1315,6 @@ namespace HUST_OutPut
                 }
             }
             UseDefaultCondition();
-
         }
 
         /// <summary>
@@ -1342,7 +1344,7 @@ namespace HUST_OutPut
                             if (el.Name.ToLower() == "condition")
                             {
                                 //return templete id with int type
-                                return  Convert.ToInt32(el.Attributes["templetID"].Value.ToString());
+                                return Convert.ToInt32(el.Attributes["templetID"].Value.ToString());
                             }
                         }
                     }
@@ -1357,10 +1359,10 @@ namespace HUST_OutPut
         /// </summary>
         private void WriteHistory()
         {
-            string templateID=comboBoxEx1.Text.Split(new char[]{'-'})[0];
+            string templateID = comboBoxEx1.Text.Split(new char[] { '-' })[0];
 
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Load(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
             //得到顶层节点列表
             XmlNodeList topM = xmldoc.DocumentElement.ChildNodes;
             foreach (XmlNode element in topM)
@@ -1386,26 +1388,25 @@ namespace HUST_OutPut
                         {
                             parentNode.RemoveChild(node);
 
-                            
                             node.ChildNodes[0].InnerText = comboBoxEx2.SelectedIndex.ToString();
-                            
+
                             node.ChildNodes[1].InnerText = comboBoxEx4.SelectedIndex.ToString();
                             node.ChildNodes[2].InnerText = comboBoxEx6.SelectedIndex.ToString();
                             node.ChildNodes[3].InnerText = comboBoxEx3.SelectedIndex.ToString();
                             node.ChildNodes[4].InnerText = comboBoxEx5.SelectedIndex.ToString();
-                            string tmpStr="1";
-                            if(!this.checkBox1.Checked)
-                                tmpStr="0";
-                            node.ChildNodes[5].InnerText=tmpStr;
-                            
-                            tmpStr="1";
-                            if(!this.checkBox2.Checked)
-                                tmpStr="0";  
+                            string tmpStr = "1";
+                            if (!this.checkBox1.Checked)
+                                tmpStr = "0";
+                            node.ChildNodes[5].InnerText = tmpStr;
+
+                            tmpStr = "1";
+                            if (!this.checkBox2.Checked)
+                                tmpStr = "0";
                             node.ChildNodes[6].InnerText = tmpStr;
-                            
-                            tmpStr="1";
-                            if(!this.rb0.Checked)
-                                tmpStr="0";  
+
+                            tmpStr = "1";
+                            if (!this.rb0.Checked)
+                                tmpStr = "0";
                             node.ChildNodes[7].InnerText = tmpStr;
                             if (node.LastChild.Name == "Decimal")
                                 node.LastChild.InnerText = textBoxX3.Text;
@@ -1476,11 +1477,11 @@ namespace HUST_OutPut
                     break;
                 }
             }
-            xmldoc.Save(Application.StartupPath + "\\TableViewConfig_"+ProS_Assm.UnitMnt.mMode+".xml");
+            xmldoc.Save(Application.StartupPath + "\\TableViewConfig_" + ProS_Assm.UnitMnt.mMode + ".xml");
         }
 
         /// <summary>
-        /// scheme changed action (comboBoxEx2) 
+        /// scheme changed action (comboBoxEx2)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1515,8 +1516,8 @@ namespace HUST_OutPut
                 if (comboBoxEx2.Text != "ALL")
                 {
                     dv.RowFilter = "Prj=" + this.comboBoxEx2.Text.Split('-')[0];
-                    if(comboBoxEx4.Text!="ALL")
-                        dv.RowFilter+=" and Yrs=" + this.comboBoxEx4.Text; ;
+                    if (comboBoxEx4.Text != "ALL")
+                        dv.RowFilter += " and Yrs=" + this.comboBoxEx4.Text; ;
                 }
                 DataTable distinctValues = dv.ToTable(true, "Hyd");
                 foreach (DataRow row in distinctValues.Rows)
@@ -1527,20 +1528,27 @@ namespace HUST_OutPut
                         case "1":
                             str += "-枯水年";
                             break;
+
                         #region added by GaoYang
+
                         case "2":
                             str += "-平水年";
                             break;
-                        case "4" :
+
+                        case "4":
                             str += "-丰水年";
                             break;
-                        case "8" :
+
+                        case "8":
                             str += "-特枯年";
                             break;
+
                         case "16":
                             str += "-特丰年";
                             break;
-                        #endregion
+
+                        #endregion added by GaoYang
+
                         default:
                             str += "-其他";
                             break;
@@ -1575,10 +1583,11 @@ namespace HUST_OutPut
         {
             UpdateFormDescription();
         }
+
         //only one all can be selected
         private bool CheckSingleAllSelected()
         {
-            bool hasAll=false;
+            bool hasAll = false;
 
             if (comboBoxEx2.Text == "ALL")
                 if (hasAll)
@@ -1612,6 +1621,7 @@ namespace HUST_OutPut
 
             return true;
         }
+
         //creat forms
         private void buttonX3_Click(object sender, EventArgs e)
         {
@@ -1622,7 +1632,7 @@ namespace HUST_OutPut
             }
             WriteHistory();
             //this.Visible = false;
-            
+
             //显示进度条
             Thread thdSub = new Thread(new ThreadStart(this.progressB));
             thdSub.Start();
@@ -1637,7 +1647,6 @@ namespace HUST_OutPut
             else
                 deciNum = int.Parse(this.textBoxX3.Text);
 
-
             TableView tableView = new TableView();
             DataTable[] mytable = selectTable();
 
@@ -1647,11 +1656,11 @@ namespace HUST_OutPut
                 foreach (DataRow row in d.Rows)
                     for (int i = 1; i < d.Columns.Count; i++)
                         //if (d.Columns[i].DataType != typeof(string))
-                            row[i] = Math.Round(decimal.Parse(row[i].ToString()),deciNum);
+                        row[i] = Math.Round(decimal.Parse(row[i].ToString()), deciNum);
             }
             //关闭进度条
-            this.myprogress.isOver = true;  
-            
+            this.myprogress.isOver = true;
+
             tableView.newTab(mytable);
             tableView.Text = textBoxX4.Text;
             //tableView.Owner = this;
@@ -1660,7 +1669,6 @@ namespace HUST_OutPut
             //tableView.ShowDialog();
             //this.Close();
             tableView.Show();
-            
         }
 
         //exit button action
@@ -1677,11 +1685,11 @@ namespace HUST_OutPut
             dlg.Filter = "Xml文件 |*.xml|所有文件|*.*";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                string filename = dlg.FileName.Split(new Char[] { '.'})[0];
-                      
-                AideFunc OpenXml=new AideFunc();
-                
-                if (OpenXml.ChkInDS(filename+".xml"))
+                string filename = dlg.FileName.Split(new Char[] { '.' })[0];
+
+                AideFunc OpenXml = new AideFunc();
+
+                if (OpenXml.ChkInDS(filename + ".xml"))
                     OpenXml.OpenInDS();
                 else
                 {
@@ -1727,9 +1735,10 @@ namespace HUST_OutPut
                 this.labelX11.Text = "单位：" + rb1.Text;
         }
     }
+
     public class TemplateInfo
     {
-        string sourceTableName = "";
+        private string sourceTableName = "";
 
         public string sumTypeId = "";
 
@@ -1738,26 +1747,33 @@ namespace HUST_OutPut
             get { return sourceTableName; }
             set { sourceTableName = value; }
         }
-        string sIDType = "0";
+
+        private string sIDType = "0";
+
         public string SysIDType
         {
             get { return sIDType; }
             set { sIDType = value; }
         }
-        string dIDType = "0";
+
+        private string dIDType = "0";
+
         public string DayIDType
         {
             get { return dIDType; }
             set { dIDType = value; }
         }
-        string unitTypeString1 = "0";
+
+        private string unitTypeString1 = "0";
+
         public string UnitTypeString1
         {
             get { return unitTypeString1; }
             set { unitTypeString1 = value; }
         }
 
-        string unitTypeString2 = "0";
+        private string unitTypeString2 = "0";
+
         public string UnitTypeString2
         {
             get { return unitTypeString2; }

@@ -59,11 +59,12 @@
             this.tabControl1.CloseButtonPosition = DevComponents.DotNetBar.eTabCloseButtonPosition.Right;
             this.tabControl1.CloseButtonVisible = true;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 25);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = -1;
-            this.tabControl1.Size = new System.Drawing.Size(804, 506);
+            this.tabControl1.Size = new System.Drawing.Size(1072, 636);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl1.Text = "tabControl1";
@@ -71,13 +72,15 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打印ToolStripMenuItem1,
             this.导出ExcelToolStripMenuItem,
             this.转置表格ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(804, 25);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1072, 28);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,20 +90,20 @@
             this.打印当前表格ToolStripMenuItem,
             this.打印所有表格ToolStripMenuItem});
             this.打印ToolStripMenuItem1.Name = "打印ToolStripMenuItem1";
-            this.打印ToolStripMenuItem1.Size = new System.Drawing.Size(44, 21);
+            this.打印ToolStripMenuItem1.Size = new System.Drawing.Size(51, 24);
             this.打印ToolStripMenuItem1.Text = "打印";
             // 
             // 打印当前表格ToolStripMenuItem
             // 
             this.打印当前表格ToolStripMenuItem.Name = "打印当前表格ToolStripMenuItem";
-            this.打印当前表格ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.打印当前表格ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.打印当前表格ToolStripMenuItem.Text = "打印当前表格";
             this.打印当前表格ToolStripMenuItem.Click += new System.EventHandler(this.Print_Click);
             // 
             // 打印所有表格ToolStripMenuItem
             // 
             this.打印所有表格ToolStripMenuItem.Name = "打印所有表格ToolStripMenuItem";
-            this.打印所有表格ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.打印所有表格ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.打印所有表格ToolStripMenuItem.Text = "打印所有表格";
             this.打印所有表格ToolStripMenuItem.Click += new System.EventHandler(this.打印所有表格ToolStripMenuItem_Click);
             // 
@@ -110,57 +113,58 @@
             this.导出当前表格ToolStripMenuItem,
             this.导出所有表格ToolStripMenuItem});
             this.导出ExcelToolStripMenuItem.Name = "导出ExcelToolStripMenuItem";
-            this.导出ExcelToolStripMenuItem.Size = new System.Drawing.Size(73, 21);
+            this.导出ExcelToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.导出ExcelToolStripMenuItem.Text = "导出Excel";
             // 
             // 导出当前表格ToolStripMenuItem
             // 
             this.导出当前表格ToolStripMenuItem.Name = "导出当前表格ToolStripMenuItem";
-            this.导出当前表格ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导出当前表格ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.导出当前表格ToolStripMenuItem.Text = "导出当前表格";
             this.导出当前表格ToolStripMenuItem.Click += new System.EventHandler(this.SaveCurrentTab_Click);
             // 
             // 导出所有表格ToolStripMenuItem
             // 
             this.导出所有表格ToolStripMenuItem.Name = "导出所有表格ToolStripMenuItem";
-            this.导出所有表格ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导出所有表格ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.导出所有表格ToolStripMenuItem.Text = "导出所有表格";
             this.导出所有表格ToolStripMenuItem.Click += new System.EventHandler(this.SaveAllTab_Click);
             // 
             // 转置表格ToolStripMenuItem
             // 
             this.转置表格ToolStripMenuItem.Name = "转置表格ToolStripMenuItem";
-            this.转置表格ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.转置表格ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.转置表格ToolStripMenuItem.Text = "转置表格";
             this.转置表格ToolStripMenuItem.Click += new System.EventHandler(this.Rotate_Click);
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.删除单元格所在行ToolStripMenuItem,
             this.删除单元格所在咧ToolStripMenuItem,
             this.合并ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 76);
             // 
             // 删除单元格所在行ToolStripMenuItem
             // 
             this.删除单元格所在行ToolStripMenuItem.Name = "删除单元格所在行ToolStripMenuItem";
-            this.删除单元格所在行ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.删除单元格所在行ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.删除单元格所在行ToolStripMenuItem.Text = "删除单元格所在行";
             this.删除单元格所在行ToolStripMenuItem.Click += new System.EventHandler(this.DeleteRow_Click);
             // 
             // 删除单元格所在咧ToolStripMenuItem
             // 
             this.删除单元格所在咧ToolStripMenuItem.Name = "删除单元格所在咧ToolStripMenuItem";
-            this.删除单元格所在咧ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.删除单元格所在咧ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.删除单元格所在咧ToolStripMenuItem.Text = "删除单元格所在列";
             this.删除单元格所在咧ToolStripMenuItem.Click += new System.EventHandler(this.DeleteColumn_Click);
             // 
             // 合并ToolStripMenuItem
             // 
             this.合并ToolStripMenuItem.Name = "合并ToolStripMenuItem";
-            this.合并ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.合并ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.合并ToolStripMenuItem.Text = "合并";
             this.合并ToolStripMenuItem.Click += new System.EventHandler(this.合并ToolStripMenuItem_Click);
             // 
@@ -171,13 +175,18 @@
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteColumn_Click);
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+            // 
             // TableView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 531);
+            this.ClientSize = new System.Drawing.Size(1072, 664);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TableView";
             this.Text = "TableView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

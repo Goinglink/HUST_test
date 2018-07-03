@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-
+﻿using System.Xml;
 
 namespace HUST_OutPut
 {
-    class XmlNodeTest
+    internal class XmlNodeTest
     {
         public static string TestAttributes()
         {
@@ -16,15 +11,14 @@ namespace HUST_OutPut
 
             XmlNode root = doc.DocumentElement;
 
-            //Create a new attribute. 
-           
+            //Create a new attribute.
+
             //Add the attribute to the document.
             XmlNode child = root.ChildNodes[0];
             if (child.Attributes["myname"] != null)
                 return "yes";
             else
                 return "no"; ;
-
         }
     }
 }

@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="LPSP_HUST, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\HUST_GTPS\HUST_Univ\bin\Debug\LPSP_HUST.dll</HintPath>
+      <HintPath>D:\Hust_Test\LPSP_OutPut\bin\Debug\LPSP_HUST.dll</HintPath>
     </Reference>
     <Reference Include="LPSP_MergeDGV">
       <HintPath>..\电力系统程序\LPSP_MergeDGV\bin\Debug\LPSP_MergeDGV.dll</HintPath>
@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="HUST_Test.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -22,7 +17,7 @@ namespace HUST_OutPut
             InitializeComponent();
         }
 
-        public ResetFile(string filePath,string srcFile,string tbName)
+        public ResetFile(string filePath, string srcFile, string tbName)
         {
             InitializeComponent();
             this.FilePath = filePath;
@@ -58,10 +53,7 @@ namespace HUST_OutPut
                             formDescription.Rows.Add(row);
                         }
                     }
-
                 }
-
-
 
                 dataGridViewX1.DataSource = formDescription;
                 dataGridViewX1.Columns[1].FillWeight = 400;
@@ -69,7 +61,6 @@ namespace HUST_OutPut
                 dataGridViewX1.Columns[2].FillWeight = 400;
                 dataGridViewX1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 dataGridViewX1.AllowUserToAddRows = false;
-
             }
             catch (Exception e)
             {
@@ -100,10 +91,8 @@ namespace HUST_OutPut
                     }
                     break;
                 }
-
             }
             this.Close();
         }
-
     }
 }

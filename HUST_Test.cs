@@ -136,8 +136,18 @@ namespace HUST_Test
                 DataRow[] rows = cfgDS.Tables["TEST"].Select("Flag = '" + flag + "'");
                 foreach (DataRow row in rows)
                 {
+<<<<<<< HEAD
                     if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
                     chart = new HUST_Univ.UniChart();
+=======
+                    if(flag=="表单")
+                      {
+                         if (row["Title"].ToString().Trim().Substring(0, row["Title"].ToString().Trim().IndexOf("-")) != ttl) continue;
+                      }
+                    else
+                        if (row["Title"].ToString().Trim().Substring(0, 4) != ttl) continue;
+                    chart = new UniChart();
+>>>>>>> e16dab60dd8ee5c3633cd4306fb91790b61f2984
                     chart.title = row["Title"].ToString().Trim();
                     string file = outPath + chart.title.Substring(0, row["Title"].ToString().Trim().IndexOf(" ")).Trim() + ".xml";
                     if (!File.Exists(file)) continue;

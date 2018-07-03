@@ -30,6 +30,7 @@ namespace HUST_OutPut
         private DataTable[] dts_myDatas;
         private String[] colorAndHatchStyle;
         private Dictionary<string, MyDrawer> myDrawers;
+        private Point[] temppoints;
 
         public void progressB()
         {
@@ -170,17 +171,17 @@ namespace HUST_OutPut
             int tmp = (int)Math.Floor(max / 100);
             return tmp * 100;
         }
-        //flag21与Yx比较的点集
-        private Point[] GeneratePoints(MyPictureBox picture, int rowIndex,int compareNumber )
+        //产生flag21与Yx比较的点集
+        private Point[] GeneratePoints(MyPictureBox picture, DataRow[] row,int compareNumber )
         {
-            DataRow row = picture.LevelLines.Rows[rowIndex];
+            //DataRow row = picture.LevelLines.Rows[rowIndex];
             Point[] points = new Point[COLUMNSCOUNT * 2];//横轴上一天有48个点需要显示
             double max = GenerateMaxValue(picture.LevelLines);
             int h = (int)Math.Floor(max);
             double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10);
             for (int i = 1; i <= COLUMNSCOUNT; i++)
             {
-                double val = Convert.ToDouble(row[i]);
+                double val = Convert.ToDouble(row[0][i]);
                 val = (val > compareNumber) ? compareNumber : val;
                 if (step == 0)
                     points[i * 2 - 2].Y = 0;
@@ -191,14 +192,14 @@ namespace HUST_OutPut
             }
             return points;
         }
-        //flag55—0的点集
+        //产生flag55—0的点集
         private Point[] GeneratePoints(MyPictureBox picture, int rowIndex)
         {
             DataRow row = picture.LevelLines.Rows[rowIndex];
             Point[] points = new Point[COLUMNSCOUNT * 2];//横轴上一天有48个点需要显示
             double max = GenerateMaxValue(picture.LevelLines);
             int h = (int)Math.Floor(max);
-            double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10);
+            double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10); //step表示画布和坐标的比例
             for (int i = 1; i <= COLUMNSCOUNT; i++)
             {
                 double val = Convert.ToDouble(row[i]);
@@ -207,11 +208,15 @@ namespace HUST_OutPut
                     points[i * 2 - 2].Y = 0;
                 else
                     points[i * 2 - 2].Y = (int)(val / step);
-
                 points[i * 2 - 1].Y = points[2 * i - 2].Y;
             }
+           // for(int i =0;i<48;i++)
+           //{
+           //   Console.WriteLine("points["+i+"].Y:"+points[i].Y*step);
+           //}
             return points;
         }
+
         #region 貌似无用代码
         private string GenerateGenIDs(List<int> types)
         {
@@ -327,7 +332,7 @@ namespace HUST_OutPut
             int brushIndex = 0;
 
             //水电
-            dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 307 });
+            //dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 307 });
             List<double> intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex]);
             if (intervals.Count > 0)
@@ -347,7 +352,7 @@ namespace HUST_OutPut
             brushIndex++;
 
             //火电
-            dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 300, 301, 302 });
+            //dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 300, 301, 302 });
             intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex]);
             if (intervals.Count > 0)
@@ -377,7 +382,7 @@ namespace HUST_OutPut
             brushIndex++;
 
             //抽蓄
-            dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 308 });
+            // dv.RowFilter = "gID in " + GenerateGenIDs(new List<int>() { 308 });
             intervals = GenerateIntervals(dv);
             DrawIntervals(intervals, picture, g, fillBrushes[brushIndex]);
             if (intervals.Count > 0)
@@ -454,7 +459,15 @@ namespace HUST_OutPut
             for (int i = 0; i <= COLUMNSCOUNT; i++)
             {
                 g.DrawLine(drawAxisPen, zeroPoint.X + (int)(i * step), zeroPoint.Y, zeroPoint.X + (int)(i * step), zeroPoint.Y - 10);
-                g.DrawString(i.ToString(), drawFont1, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3, stringFormat);
+                if(i%4==0)
+                {
+                    if(i!= COLUMNSCOUNT)
+                    {
+                        int m = i / 2;
+                        g.DrawString(m.ToString(), drawFont, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3, stringFormat);
+                    }
+                    
+                }
             }
             g.DrawLine(drawLinePen, zeroPoint.X + (int)(COLUMNSCOUNT * step), zeroPoint.Y, zeroPoint.X + (int)(COLUMNSCOUNT * step), zeroPoint.Y - 10);
 
@@ -465,7 +478,7 @@ namespace HUST_OutPut
             g.DrawLine(drawLinePen, xAxisEnd, arrow[0]);
             g.DrawLine(drawLinePen, xAxisEnd, arrow[1]);
 
-            g.DrawString("时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)+4, zeroPoint.Y + 3);
+            g.DrawString("0时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)-2, zeroPoint.Y + 3);
 
             //绘制Y轴
             double ystep = picture.drawArea.Height * 0.9 / 10.2;
@@ -543,11 +556,9 @@ namespace HUST_OutPut
         private void styleDataAnalysis()
         {
             DataRow[] rows = dt_styl.Select("Flag < 9999");
-            for(int i = 0; i < rows.Length; i++)
-            {
-                Console.WriteLine(rows[i][3]);
-            }
+
             myDrawers = new Dictionary<string, MyDrawer>();
+
             foreach (DataRow dr in rows)
             {
                 String ARGB = dr["ARGB"].ToString();
@@ -616,6 +627,7 @@ namespace HUST_OutPut
             // 初始化点集
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
             int step = (int)(picture.drawArea.Width * 0.87 / COLUMNSCOUNT);
+            Console.WriteLine("zeroPoint.Y:" + zeroPoint.Y*step);
             // List<Point[]> lineList = new List<Point[]>();
             Point[] bottomLine = new Point[COLUMNSCOUNT * 2];
             for (int i = 0; i < COLUMNSCOUNT; i++)
@@ -649,6 +661,7 @@ namespace HUST_OutPut
                         points[2 * j].Y = (int)(zeroPoint.Y - points[2 * j].Y);
                         points[2 * j + 1].Y = (int)(zeroPoint.Y - points[2 * j + 1].Y);
                     }
+
                 }
                 if (!flag.Equals("0"))
                 {
@@ -671,20 +684,21 @@ namespace HUST_OutPut
                 }
             }
             #endregion
-
+            
             #region 画线21和map线
             if(picture.genPos.Rows.Count != 0)
             {
+                DataRow[] row = dt_ldcs.Select("Flag='21'");
                 DataTable dtq1 = picture.genPos.Copy();
                 DataView dv1 = dtq1.DefaultView;
                 dv1.Sort = "Yx desc";
                 picture.genPos = dv1.ToTable();
                 for (int i = 0; i < picture.genPos.Rows.Count; i++)
                 {
-                    string flag = picture.LevelLines.Rows[i][0].ToString();
-                    int compareNumber = int.Parse(picture.LevelLines.Rows[i]["Yx"].ToString());
-                    Point[] points = GeneratePoints(picture, i,compareNumber);
-
+                    string flag = picture.genPos.Rows[i][0].ToString();
+                    int compareNumber = int.Parse(picture.genPos.Rows[i]["Yx"].ToString());
+                    Point[] points = GeneratePoints(picture, row,compareNumber);
+                    Console.WriteLine("flag:" + flag);
                     if (points != null)
                     {
                         for (int j = 0; j < COLUMNSCOUNT; j++)
@@ -707,52 +721,18 @@ namespace HUST_OutPut
                     g.DrawLine(drawPen, points[points.Length - 1], new Point(bottomLine[COLUMNSCOUNT * 2 - 1].X, zeroPoint.Y));
 
                 }
+                Console.WriteLine("6666666");
             }
 
             #endregion
-
+            
             thinPen.Dispose();
             fatPen.Dispose();
         }
+        #endregion
 
-        private void DrawSpecialLines(MyPictureBox picture, Graphics g)
+        private void AddLogoItemWithCheck(MyPictureBox picture, int brushIndex)
         {
-            Pen thinPen = new Pen(Brushes.Black, 2.0F);
-            Pen fatPen = new Pen(Brushes.Black, 1.5F);
-
-            Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
-            int step = (int)(picture.drawArea.Width * 0.87 / 24);
-
-            List<Point[]> lineList = new List<Point[]>();
-            Point[] bottomLine = new Point[48];
-            for (int i = 0; i < 24; i++)
-            {
-                bottomLine[2 * i].X = zeroPoint.X + (int)(i * step);
-                bottomLine[2 * i + 1].X = zeroPoint.X + (int)((i + 1) * step);
-                bottomLine[2 * i].Y = bottomLine[2 * i + 1].Y = zeroPoint.Y;
-            }
-            lineList.Add(bottomLine);
-            for (int j = 1; j < picture.LevelLines.Rows.Count; j++)
-            {
-                Point[] points = GeneratePoints(picture, j);
-                if (points != null)
-                {
-                    for (int i = 0; i < 24; i++)
-                    {
-                        points[2 * i].X = zeroPoint.X + (int)(i * step);
-                        points[2 * i + 1].X = zeroPoint.X + (int)((i + 1) * step);
-                        points[2 * i].Y = (int)(zeroPoint.Y - points[2 * i].Y);
-                        points[2 * i + 1].Y = (int)(zeroPoint.Y - points[2 * i + 1].Y);
-                    }
-                    lineList.Add(points);
-                }
-            }
-        }
-            #endregion
-
-            //*
-            private void AddLogoItemWithCheck(MyPictureBox picture, int brushIndex)
-            {
             bool alreadyIn = false;
             foreach (LogoItem item in picture.LogoItems)
                 if (item.name == brushDescriptions[brushIndex])
@@ -846,25 +826,22 @@ namespace HUST_OutPut
 
                 picture.LogoItems.Clear();
 
-                AddLogoItem(picture);
-
                 DrawLevelLinesAndFill(picture, g);
-
-                
-                /*if (picture.genPos.Rows.Count > 0)
+                AddLogoItem(picture);
+               /* 
+                if (picture.genPos.Rows.Count > 0)
                 {
-                    
-                    DrawGenAreas(picture, g);
+                  DrawGenAreas(picture, g);
                     DrawSelectGens(picture, g);
-                }*/
-               
+                }
+               */
                 DrawCoordinates(picture, g);
 
-                DrawSpecialLines(picture, g);
+                //DrawSpecialLines(picture, g);
 
                 DrawLogo(picture, g);
 
-                picture.drawed = true;
+                //picture.drawed = true;
                 ////// picture.Image = memImage;
             }
             catch (Exception ex)
@@ -873,39 +850,51 @@ namespace HUST_OutPut
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void AddLogoItem(MyPictureBox picture)
         {
-            for(int i = 1; i < 9; i += 2)
+            List<string> flagisshow = new List<string>();
+            for (int i = 1; i < 9; i += 2)
             {
-                if(Convert.ToInt16(dt_styl.Rows[i][dt_styl.Columns.Count - 1]) ==1|| Convert.ToInt16(dt_styl.Rows[i+1][dt_styl.Columns.Count - 1]) == 1)
+                if (Convert.ToInt16(dt_styl.Rows[i][dt_styl.Columns.Count - 1]) == 1 || Convert.ToInt16(dt_styl.Rows[i + 1][dt_styl.Columns.Count - 1]) == 1)
                 {
-                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush ,name = dt_styl.Rows[i][0].ToString(),priority = 1 ,secondBrush = myDrawers[dt_styl.Rows[i+1][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[i+1][0].ToString() });
-                }                                                                                                                                                                           
+                    flagisshow.Add(dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString());
+                    flagisshow.Add(dt_styl.Rows[i + 1][dt_styl.Columns.Count - 2].ToString());
+                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[i][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[i + 1][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[i + 1][0].ToString() });
+                }
             }
-            if (Convert.ToInt16(dt_styl.Rows[9][dt_styl.Columns.Count - 1]) == 1 || Convert.ToInt16(dt_styl.Rows[10][dt_styl.Columns.Count - 1]) == 1|| Convert.ToInt16(dt_styl.Rows[11][dt_styl.Columns.Count - 1]) == 1)
+            if (Convert.ToInt16(dt_styl.Rows[9][dt_styl.Columns.Count - 1]) == 1 || Convert.ToInt16(dt_styl.Rows[10][dt_styl.Columns.Count - 1]) == 1 || Convert.ToInt16(dt_styl.Rows[11][dt_styl.Columns.Count - 1]) == 1)
             {
-                picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[9][0].ToString(), priority = 1 ,secondBrush = myDrawers[dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString()].brush,secondName = dt_styl.Rows[10][0].ToString() });
+                flagisshow.Add(dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString());
+                flagisshow.Add(dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString());
+                picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[9][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[10][0].ToString() });
             }
             for (int i = 12; i < 16; i += 2)
             {
                 if (Convert.ToInt16(dt_styl.Rows[i][dt_styl.Columns.Count - 1]) == 1 || Convert.ToInt16(dt_styl.Rows[i + 1][dt_styl.Columns.Count - 1]) == 1)
                 {
-                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[i][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[i+1][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[i+1][0].ToString() });
+                    flagisshow.Add(dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString());
+                    flagisshow.Add(dt_styl.Rows[i + 1][dt_styl.Columns.Count - 2].ToString());
+                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[i][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[i + 1][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[i + 1][0].ToString() });
                 }
             }
-            for (int i = 20; i < 25; i ++)
+            for (int i = 20; i < 25; i++)
             {
-                if (Convert.ToInt16(dt_styl.Rows[i][dt_styl.Columns.Count - 1]) == 1 )
+                if (Convert.ToInt16(dt_styl.Rows[i][dt_styl.Columns.Count - 1]) == 1&& !flagisshow.Contains(dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()))
                 {
-                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[i][0].ToString(), priority = 1 ,secondBrush = null,secondName = null});
+                    flagisshow.Add(dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString());
+                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[i][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[i][0].ToString(), priority = 1, secondBrush = null, secondName = null });
                 }
             }
             if (picture.genPos != null && picture.genPos.Rows.Count != 0)
             {
-                for(int i = 0;i< picture.genPos.Rows.Count; i++)
+                for (int i = 0; i < picture.genPos.Rows.Count; i++)
                 {
-                    picture.LogoItems.Add(new LogoItem { brush = myDrawers[picture.genPos.Rows[i][0].ToString()].brush, name = dt_styl.Select("Flag=" + picture.genPos.Rows[i][0].ToString())[0][0].ToString(), priority = 1, secondBrush = null, secondName = null });
+                    if (!flagisshow.Contains(picture.genPos.Rows[i][0].ToString()))
+                    {
+                        flagisshow.Add(picture.genPos.Rows[i][0].ToString());
+                        picture.LogoItems.Add(new LogoItem { brush = myDrawers[picture.genPos.Rows[i][0].ToString()].brush, name = dt_styl.Select("Flag=" + picture.genPos.Rows[i][0].ToString())[0][0].ToString(), priority = 1, secondBrush = null, secondName = null });
+                    }
+                    
                 }
             }
         }
@@ -983,7 +972,7 @@ namespace HUST_OutPut
             g.DrawLine(pen, picture.logoPos.Left, picture.logoPos.Top + vacant + titleFont.Height + 3,
                 picture.logoPos.Right, picture.logoPos.Top + vacant + titleFont.Height + 3);
             Point startPoint = new Point(picture.logoPos.Left, picture.logoPos.Top + vacant + titleFont.Height + 3);
-
+            //Console.WriteLine(" picture.LogoItems.Count:" +picture.LogoItems.Count);
             for (int i = 0; i < picture.LogoItems.Count; i++)
             {
                 Point point = new Point(startPoint.X + 5 + (i % 2) * itemWidth,
@@ -997,7 +986,7 @@ namespace HUST_OutPut
                     }
                     else
                     {
-                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height*2);
+                        g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y, 40, drawFont.Height * 2);
                     }
                     g.DrawString(WrapLogoString(picture.LogoItems[i].name), drawFont, drawBrush, point.X + 45, point.Y);
                     if (picture.LogoItems[i].secondName != null)
@@ -1006,7 +995,6 @@ namespace HUST_OutPut
                     }
                 }
                 else
-                if(i==0)
                 {
                     g.FillRectangle(picture.LogoItems[i].brush, point.X, point.Y + drawFont.Height, 40, drawFont.Height);
                     g.DrawLine(framePen, point.X, point.Y + drawFont.Height, point.X + 40, point.Y + drawFont.Height);
@@ -1234,18 +1222,17 @@ namespace HUST_OutPut
             imagePic.LogoItems.Clear();
 
             g.Clear(Color.White);
-            AddLogoItem(imagePic);
             DrawLevelLinesAndFill(imagePic, g);
-            
+            /*
             if (imagePic.genPos.Rows.Count > 0)
             {
                 DrawGenAreas(imagePic, g);
                 DrawSelectGens(imagePic, g);
             }
-            
+            */
             DrawCoordinates(imagePic, g);
 
-            DrawSpecialLines(picBox, g);
+            //DrawSpecialLines(picBox, g);
 
             DrawLogo(imagePic, g);
 
@@ -1380,7 +1367,7 @@ namespace HUST_OutPut
             //Rectangle destRect = new Rectangle(x, y, width, height);
             Graphics g = e.Graphics;
             imagePic.LogoItems.Clear();
-            AddLogoItem(imagePic);
+
             DrawLevelLinesAndFill(imagePic, g);
             /*
             if (imagePic.genPos.Rows.Count > 0)
@@ -1430,7 +1417,7 @@ namespace HUST_OutPut
         public string secondName;
         public int priority;
     }
-    
+
     public class MyPictureBox : PictureBox
     {
         public DataTable LevelLines { get; set; }

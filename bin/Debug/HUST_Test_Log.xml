@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/3 18:59:26">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_Test.HUST_Test.btnPos_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 75</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/3 18:53:44">
     <LogContent>
       <ErrorModule>System.Data</ErrorModule>

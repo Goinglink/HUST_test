@@ -30,6 +30,7 @@ namespace HUST_OutPut
         private DataTable[] dts_myDatas;
         private String[] colorAndHatchStyle;
         private Dictionary<string, MyDrawer> myDrawers;
+        private Point[] temppoints;
 
         public void progressB()
         {
@@ -170,17 +171,17 @@ namespace HUST_OutPut
             int tmp = (int)Math.Floor(max / 100);
             return tmp * 100;
         }
-        //flag21与Yx比较的点集
-        private Point[] GeneratePoints(MyPictureBox picture, int rowIndex,int compareNumber )
+        //产生flag21与Yx比较的点集
+        private Point[] GeneratePoints(MyPictureBox picture, DataRow[] row,int compareNumber )
         {
-            DataRow row = picture.LevelLines.Rows[rowIndex];
+            //DataRow row = picture.LevelLines.Rows[rowIndex];
             Point[] points = new Point[COLUMNSCOUNT * 2];//横轴上一天有48个点需要显示
             double max = GenerateMaxValue(picture.LevelLines);
             int h = (int)Math.Floor(max);
             double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10);
             for (int i = 1; i <= COLUMNSCOUNT; i++)
             {
-                double val = Convert.ToDouble(row[i]);
+                double val = Convert.ToDouble(row[0][i]);
                 val = (val > compareNumber) ? compareNumber : val;
                 if (step == 0)
                     points[i * 2 - 2].Y = 0;
@@ -191,14 +192,14 @@ namespace HUST_OutPut
             }
             return points;
         }
-        //flag55—0的点集
+        //产生flag55—0的点集
         private Point[] GeneratePoints(MyPictureBox picture, int rowIndex)
         {
             DataRow row = picture.LevelLines.Rows[rowIndex];
             Point[] points = new Point[COLUMNSCOUNT * 2];//横轴上一天有48个点需要显示
             double max = GenerateMaxValue(picture.LevelLines);
             int h = (int)Math.Floor(max);
-            double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10);
+            double step = h / (picture.drawArea.Height * 0.9 / 10.2 * 10); //step表示画布和坐标的比例
             for (int i = 1; i <= COLUMNSCOUNT; i++)
             {
                 double val = Convert.ToDouble(row[i]);
@@ -207,9 +208,12 @@ namespace HUST_OutPut
                     points[i * 2 - 2].Y = 0;
                 else
                     points[i * 2 - 2].Y = (int)(val / step);
-
                 points[i * 2 - 1].Y = points[2 * i - 2].Y;
             }
+           // for(int i =0;i<48;i++)
+           //{
+           //   Console.WriteLine("points["+i+"].Y:"+points[i].Y*step);
+           //}
             return points;
         }
 
@@ -455,7 +459,15 @@ namespace HUST_OutPut
             for (int i = 0; i <= COLUMNSCOUNT; i++)
             {
                 g.DrawLine(drawAxisPen, zeroPoint.X + (int)(i * step), zeroPoint.Y, zeroPoint.X + (int)(i * step), zeroPoint.Y - 10);
-                g.DrawString(i.ToString(), drawFont1, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3, stringFormat);
+                if(i%4==0)
+                {
+                    if(i!= COLUMNSCOUNT)
+                    {
+                        int m = i / 2;
+                        g.DrawString(m.ToString(), drawFont, drawBrush, zeroPoint.X + (int)(i * step), zeroPoint.Y + 3, stringFormat);
+                    }
+                    
+                }
             }
             g.DrawLine(drawLinePen, zeroPoint.X + (int)(COLUMNSCOUNT * step), zeroPoint.Y, zeroPoint.X + (int)(COLUMNSCOUNT * step), zeroPoint.Y - 10);
 
@@ -466,7 +478,7 @@ namespace HUST_OutPut
             g.DrawLine(drawLinePen, xAxisEnd, arrow[0]);
             g.DrawLine(drawLinePen, xAxisEnd, arrow[1]);
 
-            g.DrawString("时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)+4, zeroPoint.Y + 3);
+            g.DrawString("0时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)-2, zeroPoint.Y + 3);
 
             //绘制Y轴
             double ystep = picture.drawArea.Height * 0.9 / 10.2;
@@ -615,6 +627,7 @@ namespace HUST_OutPut
             // 初始化点集
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
             int step = (int)(picture.drawArea.Width * 0.87 / COLUMNSCOUNT);
+            Console.WriteLine("zeroPoint.Y:" + zeroPoint.Y*step);
             // List<Point[]> lineList = new List<Point[]>();
             Point[] bottomLine = new Point[COLUMNSCOUNT * 2];
             for (int i = 0; i < COLUMNSCOUNT; i++)
@@ -648,6 +661,7 @@ namespace HUST_OutPut
                         points[2 * j].Y = (int)(zeroPoint.Y - points[2 * j].Y);
                         points[2 * j + 1].Y = (int)(zeroPoint.Y - points[2 * j + 1].Y);
                     }
+
                 }
                 if (!flag.Equals("0"))
                 {
@@ -670,22 +684,21 @@ namespace HUST_OutPut
                 }
             }
             #endregion
-
+            
             #region 画线21和map线
             if(picture.genPos.Rows.Count != 0)
             {
-                
+                DataRow[] row = dt_ldcs.Select("Flag='21'");
                 DataTable dtq1 = picture.genPos.Copy();
                 DataView dv1 = dtq1.DefaultView;
                 dv1.Sort = "Yx desc";
                 picture.genPos = dv1.ToTable();
                 for (int i = 0; i < picture.genPos.Rows.Count; i++)
                 {
-                    string flag = picture.LevelLines.Rows[i][0].ToString();
-                    Console.WriteLine("flag"+flag);
-                    int compareNumber = int.Parse(picture.LevelLines.Rows[i]["Yx"].ToString());
-                    Point[] points = GeneratePoints(picture, i,compareNumber);
-
+                    string flag = picture.genPos.Rows[i][0].ToString();
+                    int compareNumber = int.Parse(picture.genPos.Rows[i]["Yx"].ToString());
+                    Point[] points = GeneratePoints(picture, row,compareNumber);
+                    Console.WriteLine("flag:" + flag);
                     if (points != null)
                     {
                         for (int j = 0; j < COLUMNSCOUNT; j++)
@@ -708,16 +721,16 @@ namespace HUST_OutPut
                     g.DrawLine(drawPen, points[points.Length - 1], new Point(bottomLine[COLUMNSCOUNT * 2 - 1].X, zeroPoint.Y));
 
                 }
+                Console.WriteLine("6666666");
             }
 
             #endregion
-
+            
             thinPen.Dispose();
             fatPen.Dispose();
         }
         #endregion
 
-        //*
         private void AddLogoItemWithCheck(MyPictureBox picture, int brushIndex)
         {
             bool alreadyIn = false;

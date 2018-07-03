@@ -1,5 +1,388 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/3 16:55:07">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 177
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 692
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 821</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:44:01">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 692
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 821</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:43:59">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 692
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 821</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:43:57">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 692
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 821</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:35:59">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 695
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 824</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 16:34:49">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 695
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 824</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 15:47:24">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 15:47:23">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 15:47:11">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:53:44">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:53:07">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:53:05">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:53:02">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:51:37">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 5 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:51:36">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 5 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:51:27">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 5 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:49:42">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 817</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:48:19">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.GeneratePoints(MyPictureBox picture, Int32 rowIndex, Int32 compareNumber) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 176
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 687
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:47:13">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 System.Drawing.Graphics.FillRectangle(Brush brush, Rectangle rect)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 703
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:46:39">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>TValue get_Item(TKey)</ErrorMethod>
+      <ErrorMessage>给定关键字不在字典中。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 703
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:44:16">
+    <LogContent>
+      <ErrorModule>System.Drawing</ErrorModule>
+      <ErrorMethod>Void FillRectangle(System.Drawing.Brush, Int32, Int32, Int32, Int32)</ErrorMethod>
+      <ErrorMessage>值不能为 null。
+参数名: brush</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Drawing.Graphics.FillRectangle(Brush brush, Int32 x, Int32 y, Int32 width, Int32 height)
+   在 System.Drawing.Graphics.FillRectangle(Brush brush, Rectangle rect)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 703
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:41:21">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 684
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:40:45">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 684
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:40:24">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>NodePath GetNodeByIndex(Int32)</ErrorMethod>
+      <ErrorMessage>在位置 4 处没有任何行。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   在 System.Data.DataRowCollection.get_Item(Int32 index)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 684
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:39:09">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 683
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 813</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:36:50">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 683
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 E:\text\LPSP_OutPut\FigureView.cs:行号 813</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/3 11:12:14">
     <LogContent>
       <ErrorModule>System.Data</ErrorModule>

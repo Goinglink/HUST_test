@@ -212,6 +212,7 @@ namespace HUST_OutPut
             }
             return points;
         }
+
         #region 貌似无用代码
         private string GenerateGenIDs(List<int> types)
         {
@@ -673,6 +674,7 @@ namespace HUST_OutPut
             #region 画线21和map线
             if(picture.genPos.Rows.Count != 0)
             {
+                
                 DataTable dtq1 = picture.genPos.Copy();
                 DataView dv1 = dtq1.DefaultView;
                 dv1.Sort = "Yx desc";
@@ -680,6 +682,7 @@ namespace HUST_OutPut
                 for (int i = 0; i < picture.genPos.Rows.Count; i++)
                 {
                     string flag = picture.LevelLines.Rows[i][0].ToString();
+                    Console.WriteLine("flag"+flag);
                     int compareNumber = int.Parse(picture.LevelLines.Rows[i]["Yx"].ToString());
                     Point[] points = GeneratePoints(picture, i,compareNumber);
 

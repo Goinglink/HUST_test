@@ -1,5 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/3 11:12:14">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 686
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 816</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:07:20">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-3 SubB系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 815</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:05:46">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 815</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 11:05:31">
+    <LogContent>
+      <ErrorModule>System.Data</ErrorModule>
+      <ErrorMethod>System.Data.DataColumn GetDataColumn(System.String)</ErrorMethod>
+      <ErrorMessage>列“Yx”不属于表 LDCS*图A-2 SubA系统 2010年枯水年2月2日 电站工作位置图*（曲线生成：负荷0/新能源0；发电序位：分区平衡1/火电1/水电0/调峰弃电3）*单位：MW*11。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 685
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\同步\HUST_Test\LPSP_OutPut\FigureView.cs:行号 815</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/2 21:28:32">
     <LogContent>
       <ErrorModule>System.Data</ErrorModule>

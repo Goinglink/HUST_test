@@ -1,5 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/4 20:17:22">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DrawLevelLinesAndFill(HUST_OutPut.MyPictureBox, System.Drawing.Graphics)</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 680
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 837</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 20:15:46">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DrawLevelLinesAndFill(HUST_OutPut.MyPictureBox, System.Drawing.Graphics)</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 682
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 835</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 20:14:36">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DrawLevelLinesAndFill(HUST_OutPut.MyPictureBox, System.Drawing.Graphics)</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 681
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 837</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 20:14:07">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DrawLevelLinesAndFill(HUST_OutPut.MyPictureBox, System.Drawing.Graphics)</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 681
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 837</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 20:12:45">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DrawLevelLinesAndFill(HUST_OutPut.MyPictureBox, System.Drawing.Graphics)</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.FigureView.DrawLevelLinesAndFill(MyPictureBox picture, Graphics g) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 682
+   在 HUST_OutPut.FigureView.pictureBox_Paint(Object sender, PaintEventArgs e) 位置 D:\项目\项目1\HUST_Test(7.4)备份\同步1\LPSP_OutPut\FigureView.cs:行号 835</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/3 20:40:08">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>Void ThrowArgumentOutOfRangeException(System.ExceptionArgument, System.ExceptionResource)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 HUST_Test.HUST_Test.btnPos_Click(Object sender, EventArgs e) 位置 D:\项目\项目1\同步1\HUST_Test.cs:行号 75</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/3 18:59:26">
     <LogContent>
       <ErrorModule>mscorlib</ErrorModule>

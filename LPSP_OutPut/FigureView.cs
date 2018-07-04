@@ -30,8 +30,7 @@ namespace HUST_OutPut
         private DataTable[] dts_myDatas;
         private String[] colorAndHatchStyle;
         private Dictionary<string, MyDrawer> myDrawers;
-        private Point[] temppoints;
-
+     
         public void progressB()
         {
             this.myprogress = new progress();
@@ -438,6 +437,7 @@ namespace HUST_OutPut
             Pen coordinatePen = new Pen(Brushes.Black, 3.5F);
 
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
+            //Console.WriteLine("zeroPoint:" + zeroPoint);
             Point xAxisEnd = new Point(picture.drawArea.Right, zeroPoint.Y);
             Point yAxisEnd = new Point(zeroPoint.X, picture.drawArea.Top);
 
@@ -458,7 +458,7 @@ namespace HUST_OutPut
             int step = (int)(picture.drawArea.Width * 0.87 / COLUMNSCOUNT);//原为0.87
             for (int i = 0; i <= COLUMNSCOUNT; i++)
             {
-                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(i * step), zeroPoint.Y, zeroPoint.X + (int)(i * step), zeroPoint.Y - 10);
+                g.DrawLine(drawAxisPen, zeroPoint.X + (int)(i * step), zeroPoint.Y, zeroPoint.X + (int)(i * step), zeroPoint.Y - 5);//X轴上的辅助标尺线长度减半——2018.7.4
                 if(i%4==0)
                 {
                     if(i!= COLUMNSCOUNT)
@@ -477,8 +477,8 @@ namespace HUST_OutPut
             };
             g.DrawLine(drawLinePen, xAxisEnd, arrow[0]);
             g.DrawLine(drawLinePen, xAxisEnd, arrow[1]);
-
-            g.DrawString("0时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)-2, zeroPoint.Y + 3);
+            //X轴下的“时”放在箭头附近——2018.7.4
+            g.DrawString("时", drawFont, drawBrush, zeroPoint.X + (int)(COLUMNSCOUNT * step)+16, zeroPoint.Y + 3);
 
             //绘制Y轴
             double ystep = picture.drawArea.Height * 0.9 / 10.2;
@@ -627,7 +627,7 @@ namespace HUST_OutPut
             // 初始化点集
             Point zeroPoint = new Point(picture.drawArea.Left + (int)(picture.drawArea.Width * 0.1), picture.drawArea.Top + (int)(picture.drawArea.Height * 0.9));
             int step = (int)(picture.drawArea.Width * 0.87 / COLUMNSCOUNT);
-            Console.WriteLine("zeroPoint.Y:" + zeroPoint.Y*step);
+           // Console.WriteLine("zeroPoint.Y:" + zeroPoint.Y);
             // List<Point[]> lineList = new List<Point[]>();
             Point[] bottomLine = new Point[COLUMNSCOUNT * 2];
             for (int i = 0; i < COLUMNSCOUNT; i++)
@@ -673,14 +673,22 @@ namespace HUST_OutPut
                     Pen drawPen = null;
                     drawPen = thinPen;
                     g.DrawLines(drawPen, points);
-                    g.DrawLine(drawPen, points[points.Length - 1], new Point(bottomLine[COLUMNSCOUNT * 2 - 1].X, zeroPoint.Y));
+                    g.DrawLine(drawPen, points[points.Length虚线封闭 - 1], new Point(bottomLine[COLUMNSCOUNT * 2 - 1].X, zeroPoint.Y));
                 }
                  else
-                {
-                    DashStyle ds = fatPen.DashStyle;
-                    fatPen.DashStyle = DashStyle.Dot;
-                    g.DrawLines(fatPen, points);
-                    fatPen.DashStyle = ds;
+                {   //虚线封闭——2018.7.4
+                    Point[] extrapoint = new Point[2];
+                    extrapoint[0].X = points[95].X;
+                    extrapoint[0].Y = points[95].Y;
+                    extrapoint[1].X = points[95].X;
+                    extrapoint[1].Y = zeroPoint.Y;
+                    //O号虚线的粗细thinPen,原来为fatPen——2018.7.4
+                    DashStyle ds = thinPen.DashStyle;
+                    thinPen.DashStyle = DashStyle.Dot;
+                    g.DrawLines(thinPen, points);
+                    g.DrawLines(thinPen, extrapoint);
+                    thinPen.DashStyle = ds;
+
                 }
             }
             #endregion
@@ -698,7 +706,7 @@ namespace HUST_OutPut
                     string flag = picture.genPos.Rows[i][0].ToString();
                     int compareNumber = int.Parse(picture.genPos.Rows[i]["Yx"].ToString());
                     Point[] points = GeneratePoints(picture, row,compareNumber);
-                    Console.WriteLine("flag:" + flag);
+                    //Console.WriteLine("flag:" + flag);
                     if (points != null)
                     {
                         for (int j = 0; j < COLUMNSCOUNT; j++)
@@ -721,7 +729,7 @@ namespace HUST_OutPut
                     g.DrawLine(drawPen, points[points.Length - 1], new Point(bottomLine[COLUMNSCOUNT * 2 - 1].X, zeroPoint.Y));
 
                 }
-                Console.WriteLine("6666666");
+                //Console.WriteLine("6666666");
             }
 
             #endregion
@@ -866,6 +874,7 @@ namespace HUST_OutPut
             {
                 flagisshow.Add(dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString());
                 flagisshow.Add(dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString());
+                flagisshow.Add(dt_styl.Rows[11][dt_styl.Columns.Count - 2].ToString());
                 picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[9][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[10][0].ToString() });
             }
             for (int i = 12; i < 16; i += 2)

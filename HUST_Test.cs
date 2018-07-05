@@ -41,7 +41,7 @@ namespace HUST_Test
                 // 生成表单输出结果集List<UniChart> charts
                 if (!GetListUniCharts("表单", cmbSheet.Text.Trim())) return;
                 // 下面添加 <表单输出程序（输出结果图表存储路径：outPath；输出数据集：List<UniChart> charts）>
-                DataTable[] dt = new DataTable[charts.Count];//需要将dataset数据集转化为datatable来处理数据
+                /*DataTable[] dt = new DataTable[charts.Count];//需要将dataset数据集转化为datatable来处理数据
                 int i = 0;//定义datatable索引初始值
                 foreach (HUST_Univ.UniChart uc in charts)
                 {
@@ -52,10 +52,10 @@ namespace HUST_Test
                     string allStr = uc.title + "*" + uc.remark + "*" + uc.unit + "*" + uc.page;//将每张表的标题、备注、单位等信息传入到datatable里面供调用
                     dt[i].TableName = allStr;
                     i++;
-                }
+                }*/
                 HUST_OutPut.TableView tableview = new HUST_OutPut.TableView();
                 tableview.Text = "输出表单数据结构";
-                tableview.newTab(dt);
+                tableview.newTab(charts);
                 tableview.Owner = this;
                 tableview.StartPosition = FormStartPosition.CenterScreen;
                 tableview.parentForm = this;

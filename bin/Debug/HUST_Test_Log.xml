@@ -1,5 +1,327 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HUST_Test-ErrorLog>
+  <Log logType="Exception" occurTime="2018/7/5 10:24:36">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 51
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 295
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/5 10:24:15">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 51
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 295
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/5 10:23:55">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 51
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 295
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/5 10:22:46">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 51
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 295
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/5 10:21:18">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 50
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 294
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/5 10:20:51">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>索引超出了数组界限。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 50
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 294
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:33:18">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:33:05">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:32:51">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:31:56">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:31:53">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:31:49">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 74
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 291
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:31:04">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 126
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 290
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:31:02">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 126
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 290
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:30:15">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 126
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 290
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:21:47">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 123
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 287
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 19:21:32">
+    <LogContent>
+      <ErrorModule>mscorlib</ErrorModule>
+      <ErrorMethod>System.Object get_Item(Int32)</ErrorMethod>
+      <ErrorMessage>索引超出范围。必须为非负值并小于集合大小。
+参数名: index</ErrorMessage>
+      <Data />
+      <StackTrace>   在 System.Collections.ArrayList.get_Item(Int32 index)
+   在 System.Windows.Forms.DataGridViewCellCollection.get_Item(Int32 index)
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 123
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 287
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 17:09:34">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 72
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 282
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 17:09:27">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void newTab(System.Data.DataTable, System.Collections.Generic.List`1[HUST_OutPut.MergeLink])</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 72
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 282
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 17:05:46">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DisableDataColumnsSort(System.Windows.Forms.DataGridView)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.DisableDataColumnsSort(DataGridView dgv) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 410
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 69
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 282
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 17:05:27">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DisableDataColumnsSort(System.Windows.Forms.DataGridView)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.DisableDataColumnsSort(DataGridView dgv) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 410
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 69
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 282
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
+  <Log logType="Exception" occurTime="2018/7/4 17:04:20">
+    <LogContent>
+      <ErrorModule>HUST_OutPut</ErrorModule>
+      <ErrorMethod>Void DisableDataColumnsSort(System.Windows.Forms.DataGridView)</ErrorMethod>
+      <ErrorMessage>未将对象引用设置到对象的实例。</ErrorMessage>
+      <Data />
+      <StackTrace>   在 HUST_OutPut.TableView.DisableDataColumnsSort(DataGridView dgv) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 410
+   在 HUST_OutPut.TableView.newTab(DataTable dd, List`1 listMerge) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 69
+   在 HUST_OutPut.TableView.newTab(List`1 charts) 位置 E:\text\LPSP_OutPut\TableView.cs:行号 282
+   在 HUST_Test.HUST_Test.btnSheet_Click(Object sender, EventArgs e) 位置 E:\text\HUST_Test.cs:行号 58</StackTrace>
+      <InnerException />
+      <OSVersion>Microsoft Windows NT 6.2.9200.0</OSVersion>
+    </LogContent>
+  </Log>
   <Log logType="Exception" occurTime="2018/7/3 18:59:26">
     <LogContent>
       <ErrorModule>mscorlib</ErrorModule>

@@ -26,6 +26,14 @@ namespace HUST_OutPut
         public Form parentForm;
         private progress myprogress;
         DataGridView dgv = null;
+        private string[] stateofTable;      //记录当前各表水平或竖直状态
+        private DataGridViewCellStyle cellStyleofVertical;    //分别代表表格水平和竖直时单元格风格
+        private DataGridViewCellStyle cellStyleofHorizontal = new DataGridViewCellStyle()
+        {
+            Alignment = DataGridViewContentAlignment.TopLeft,
+            Font = new Font("宋体", 5),
+            WrapMode = DataGridViewTriState.True
+        };
         public void progressB()
         {
             this.myprogress = new progress();
@@ -39,6 +47,7 @@ namespace HUST_OutPut
         public void newTab(System.Data.DataTable dd,List<MergeLink> listMerge=null)
         {
             string[] arrStr = dd.TableName.Split('*');
+            stateofTable[Convert.ToInt16(arrStr[0][3]) - 49] = arrStr[3];
             string[] tableName=arrStr[0].Split(' ');//将title分割来获取表名
             TabItem tp = this.tabControl1.CreateTab(tableName[0]);
             for (int i = 0; i < arrStr.Length-1; i++)
@@ -59,6 +68,69 @@ namespace HUST_OutPut
             this.listMerge = listMerge;//保存合并序列
 
             dgvSet(tcp, dd, arrStr);
+            cellStyleofVertical = ((DataGridView)tp.AttachedControl.Controls[0]).DefaultCellStyle;
+            //若page[0]为0；则更改默认状态为水平
+            if (Convert.ToInt16(arrStr[3]) / 10 == 0)
+            {
+                DataGridView newDgv = null;
+                foreach (Control ctl in tp.AttachedControl.Controls)
+                {
+                    DataGridView dgv = (DataGridView)ctl;
+                    newDgv = RotateDataGridView(dgv);
+                    newDgv.DefaultCellStyle = cellStyleofHorizontal;
+                    newDgv.ColumnHeadersDefaultCellStyle = cellStyleofHorizontal;
+                }
+                tp.AttachedControl.Controls.Clear();
+                tp.AttachedControl.Controls.Add(newDgv);
+
+                this.tabControl1.Refresh();
+
+                //禁用列排序
+                DisableDataColumnsSort(newDgv);
+
+                //调整单元格宽度
+                int n = newDgv.Columns.Count;
+                int m = newDgv.Rows.Count;
+                DataTable dt = newDgv.DataSource as DataTable;
+                newDgv.ColumnHeadersHeight = Convert.ToInt32(newDgv.Font.Size * 2.1) + 4;
+                for (int i = 0; i < m; ++i)
+                {
+                    newDgv.Rows[i].Height = Convert.ToInt32(newDgv.Font.Size * 2.1);
+                }
+
+                if (newDgv.Columns.Contains("名  称"))
+                {
+                    newDgv.Columns.Remove("名  称");
+                    DataGridViewColumn col = new DataGridViewTextBoxColumn();
+                    col.Name = "名  称";
+                    col.DataPropertyName = "名  称";
+                    newDgv.Columns.Insert(0, col);
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                }
+                for (int i = 0; i < n; ++i)
+                {
+                    int k = newDgv.Columns[i].HeaderText.Length;
+                    for (int g = 0; g < m - 1; g++)
+                    {
+                        if (Convert.ToString(newDgv.Rows[g].Cells[i].Value).Trim().Length > k)
+                            k = Convert.ToString(newDgv.Rows[g].Cells[i].Value).Trim().Length;
+                    }
+
+                    if (i == 0)
+                    {
+                        newDgv.Columns[i].Width = Convert.ToInt32(k * Convert.ToInt32(newDgv.Font.Size) * 1.5);
+                        //MessageBox.Show(Convert.ToString(dgv.Font.Size * 8));
+                    }
+                    else
+                    {
+                        if (k < 5) k = 5;
+                        newDgv.Columns[i].Width = Convert.ToInt32(k * Convert.ToInt32(newDgv.Font.Size) * 0.8);
+                        newDgv.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+                    }
+                }
+                
+                
+            }
         }
         /*
          * 将原newTab函数中负责DataGridView的配置工作部分单独写为函数 编写by孙凯 2015.4.26
@@ -203,7 +275,28 @@ namespace HUST_OutPut
             }
         }
 
-        public void newTab(System.Data.DataTable[] d)
+        public void newTab(List<HUST_Univ.UniChart> charts)
+        {
+            DataTable[] dt = new DataTable[charts.Count];//需要将dataset数据集转化为datatable来处理数据
+            stateofTable = new string[charts.Count];
+            int i = 0;//定义datatable索引初始值
+            foreach (HUST_Univ.UniChart uc in charts)
+            {
+                string[] titleName = uc.title.Split(' ');
+                //if (!titleName[0].Contains(cmbSheet.SelectedItem.ToString())) continue;
+                dt[i] = uc.chart.Tables[0];
+                //dt[i].TableName = titleName[0];
+                string allStr = uc.title + "*" + uc.remark + "*" + uc.unit + "*" + uc.page;//将每张表的标题、备注、单位等信息传入到datatable里面供调用
+                dt[i].TableName = allStr;
+                i++;
+            }
+            foreach (System.Data.DataTable dd in dt)
+            {
+                newTab(dd);
+            }
+
+        }
+        public void newTab(DataTable[] d)
         {
             foreach (System.Data.DataTable dd in d)
             {
@@ -650,17 +743,35 @@ namespace HUST_OutPut
 
             return newDgv;
         }
-
+        /// <summary>
+        /// 旋转表格，并根据相应状态更改单元格风格
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Rotate_Click(object sender, EventArgs e)
         {            
             {                          
                 foreach (TabItem ti in this.tabControl1.Tabs)
                 {
+                    string[] toolofti = ti.Tooltip.Split('\n');
                     DataGridView newDgv = null;
                     foreach (Control ctl in ti.AttachedControl.Controls)
                     {
                         DataGridView dgv = (DataGridView)ctl;
                         newDgv = RotateDataGridView(dgv);
+                    }
+                    Console.WriteLine(stateofTable[Convert.ToInt16(toolofti[0][3]) - 49]);
+                    if (stateofTable[Convert.ToInt16(toolofti[0][3]) - 49][0] == '0')
+                    {
+                        newDgv.DefaultCellStyle = cellStyleofVertical;
+                        newDgv.ColumnHeadersDefaultCellStyle = cellStyleofVertical;
+                        stateofTable[Convert.ToInt16(toolofti[0][3]) - 49] =  new string(new char[] { '1', stateofTable[Convert.ToInt16(toolofti[0][3]) - 49][1] });
+                    }
+                    else
+                    {
+                        newDgv.DefaultCellStyle = cellStyleofHorizontal;
+                        newDgv.ColumnHeadersDefaultCellStyle = cellStyleofHorizontal;
+                        stateofTable[Convert.ToInt16(toolofti[0][3]) - 49] = new string(new char[] { '0', stateofTable[Convert.ToInt16(toolofti[0][3]) - 49][1] });
                     }
                     ti.AttachedControl.Controls.Clear();
                     ti.AttachedControl.Controls.Add(newDgv);

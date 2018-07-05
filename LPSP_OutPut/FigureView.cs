@@ -866,6 +866,7 @@ namespace HUST_OutPut
             {
                 flagisshow.Add(dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString());
                 flagisshow.Add(dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString());
+                flagisshow.Add(dt_styl.Rows[11][dt_styl.Columns.Count - 2].ToString());
                 picture.LogoItems.Add(new LogoItem { brush = myDrawers[dt_styl.Rows[9][dt_styl.Columns.Count - 2].ToString()].brush, name = dt_styl.Rows[9][0].ToString(), priority = 1, secondBrush = myDrawers[dt_styl.Rows[10][dt_styl.Columns.Count - 2].ToString()].brush, secondName = dt_styl.Rows[10][0].ToString() });
             }
             for (int i = 12; i < 16; i += 2)
